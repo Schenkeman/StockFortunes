@@ -8,25 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		0134E761C1BE49DF4E83A308 /* Pods_StockFortunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */; };
+		F2018AF325DBFF180018D973 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2018AF225DBFF180018D973 /* CellModel.swift */; };
+		F2018AF725DC01A80018D973 /* FinhubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2018AF625DC01A80018D973 /* FinhubService.swift */; };
 		F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286CDF325DBB4A700DC3DF9 /* AppDelegate.swift */; };
 		F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286CDF525DBB4A700DC3DF9 /* SceneDelegate.swift */; };
-		F286CDF825DBB4A700DC3DF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286CDF725DBB4A700DC3DF9 /* ViewController.swift */; };
+		F286CDF825DBB4A700DC3DF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */; };
 		F286CDFB25DBB4A700DC3DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F286CDF925DBB4A700DC3DF9 /* Main.storyboard */; };
 		F286CDFD25DBB4A900DC3DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F286CDFC25DBB4A900DC3DF9 /* Assets.xcassets */; };
 		F286CE0025DBB4A900DC3DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F286CDFE25DBB4A900DC3DF9 /* LaunchScreen.storyboard */; };
+		F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */; };
+		F2B3216125DC3EC9002CAA14 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3216025DC3EC9002CAA14 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B62AEABFAEB6E89CE09B3B6 /* Pods-StockFortunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockFortunes.release.xcconfig"; path = "Target Support Files/Pods-StockFortunes/Pods-StockFortunes.release.xcconfig"; sourceTree = "<group>"; };
 		A820EB83294F09D31BEC1B36 /* Pods-StockFortunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockFortunes.debug.xcconfig"; path = "Target Support Files/Pods-StockFortunes/Pods-StockFortunes.debug.xcconfig"; sourceTree = "<group>"; };
+		F2018AF225DBFF180018D973 /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		F2018AF625DC01A80018D973 /* FinhubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinhubService.swift; sourceTree = "<group>"; };
 		F286CDF025DBB4A700DC3DF9 /* StockFortunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockFortunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F286CDF325DBB4A700DC3DF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F286CDF525DBB4A700DC3DF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F286CDF725DBB4A700DC3DF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F286CDFA25DBB4A700DC3DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F286CDFC25DBB4A900DC3DF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F286CDFF25DBB4A900DC3DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F286CE0125DBB4A900DC3DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F2B3216025DC3EC9002CAA14 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockFortunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,6 +67,40 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F2018AEF25DBFC0A0018D973 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				F2B3215A25DC3A79002CAA14 /* ViewModel */,
+				F2018AF125DBFDAF0018D973 /* Model */,
+				F2018AF025DBFDAA0018D973 /* View */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		F2018AF025DBFDAA0018D973 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F2018AF125DBFDAF0018D973 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2018AF225DBFF180018D973 /* CellModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2018AF525DC017B0018D973 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F2018AF625DC01A80018D973 /* FinhubService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		F286CDE725DBB4A600DC3DF9 = {
 			isa = PBXGroup;
 			children = (
@@ -80,15 +122,33 @@
 		F286CDF225DBB4A700DC3DF9 /* StockFortunes */ = {
 			isa = PBXGroup;
 			children = (
+				F2B3215F25DC3EAD002CAA14 /* Utils */,
+				F2018AF525DC017B0018D973 /* API */,
+				F2018AEF25DBFC0A0018D973 /* MainScreen */,
 				F286CDF325DBB4A700DC3DF9 /* AppDelegate.swift */,
 				F286CDF525DBB4A700DC3DF9 /* SceneDelegate.swift */,
-				F286CDF725DBB4A700DC3DF9 /* ViewController.swift */,
 				F286CDF925DBB4A700DC3DF9 /* Main.storyboard */,
 				F286CDFC25DBB4A900DC3DF9 /* Assets.xcassets */,
 				F286CDFE25DBB4A900DC3DF9 /* LaunchScreen.storyboard */,
 				F286CE0125DBB4A900DC3DF9 /* Info.plist */,
 			);
 			path = StockFortunes;
+			sourceTree = "<group>";
+		};
+		F2B3215A25DC3A79002CAA14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F2B3215F25DC3EAD002CAA14 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F2B3216025DC3EC9002CAA14 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +162,7 @@
 				F286CDEC25DBB4A700DC3DF9 /* Sources */,
 				F286CDED25DBB4A700DC3DF9 /* Frameworks */,
 				F286CDEE25DBB4A700DC3DF9 /* Resources */,
+				597BA15C1659EA619378A104 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -158,6 +219,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		597BA15C1659EA619378A104 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StockFortunes/Pods-StockFortunes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StockFortunes/Pods-StockFortunes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StockFortunes/Pods-StockFortunes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		601429ADCC98DD6E8A640DAD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,9 +265,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F286CDF825DBB4A700DC3DF9 /* ViewController.swift in Sources */,
+				F286CDF825DBB4A700DC3DF9 /* MainViewController.swift in Sources */,
 				F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */,
+				F2018AF725DC01A80018D973 /* FinhubService.swift in Sources */,
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
+				F2018AF325DBFF180018D973 /* CellModel.swift in Sources */,
+				F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */,
+				F2B3216125DC3EC9002CAA14 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

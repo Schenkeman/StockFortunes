@@ -6,5 +6,6 @@ target 'StockFortunes' do
   use_frameworks!
 
   # Pods for StockFortunes
+pod 'JGProgressHUD', '~>2.0.3'
 
 end
