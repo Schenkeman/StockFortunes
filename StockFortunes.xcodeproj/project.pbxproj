@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		F286CE0025DBB4A900DC3DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F286CDFE25DBB4A900DC3DF9 /* LaunchScreen.storyboard */; };
 		F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */; };
 		F2B3216125DC3EC9002CAA14 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3216025DC3EC9002CAA14 /* Extensions.swift */; };
+		F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217225DC5623002CAA14 /* StockCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		F286CE0125DBB4A900DC3DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F2B3216025DC3EC9002CAA14 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F2B3217225DC5623002CAA14 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockFortunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
+				F2B3217225DC5623002CAA14 /* StockCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
 				F2018AF325DBFF180018D973 /* CellModel.swift in Sources */,
 				F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */,
+				F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */,
 				F2B3216125DC3EC9002CAA14 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
