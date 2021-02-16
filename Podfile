@@ -9,3 +9,11 @@ target 'StockFortunes' do
 pod 'JGProgressHUD', '~>2.0.3'
 
 end
+
+post_install do |pi|
+    pi.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+end
