@@ -13,7 +13,7 @@ protocol MainScreenViewModelProtocol {
 
 final class MainScreenViewModel: MainScreenViewModelProtocol {
     func initialFetch() {
-        FinhubService.fetch()
+//        FinhubService.fetch()
     }
     
     
