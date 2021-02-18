@@ -9,15 +9,34 @@ import Foundation
 
 struct FinhubService {
     
+    enum RequestEndpoint {
+        case peers
+    }
     
-    static func fetch() {
-        let string = "https://finnhub.io/api/v1/quote?symbol=AAPL&token=sandbox_c0lsj8f48v6r1vcseilg"
-        let url = URL(string: string)!
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            print(String(data: data, encoding: .utf8)!)
-            
+    enum RequestToken {
+        case apiKey
+        case sandbox
+    }
+    
+    mutating func configureRequest(endPoint: RequestEndpoint, token: RequestToken) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "finnhub.io"
+        components.path = "/api/v1/stock"
+        
+        switch endPoint {
+        case .peers:
+            components.queryItems?.append(URLQueryItem(name: "query", value: "swift ios"))
+        default:
+            <#code#>
         }
-        task.resume()
+        
+        let queryItemToken = URLQueryItem(name: "token", value: "12345")
+        
+        
+        
     }
 }
+
+
+

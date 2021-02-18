@@ -19,6 +19,7 @@
 		F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */; };
 		F2B3216125DC3EC9002CAA14 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3216025DC3EC9002CAA14 /* Extensions.swift */; };
 		F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217225DC5623002CAA14 /* StockCell.swift */; };
+		F2B3217825DD315B002CAA14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217725DD315B002CAA14 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		F2B3215B25DC3A8E002CAA14 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F2B3216025DC3EC9002CAA14 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F2B3217225DC5623002CAA14 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		F2B3217725DD315B002CAA14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockFortunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 			children = (
 				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
 				F2B3217225DC5623002CAA14 /* StockCell.swift */,
+				F2B3217725DD315B002CAA14 /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				F286CDF825DBB4A700DC3DF9 /* MainViewController.swift in Sources */,
 				F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */,
 				F2018AF725DC01A80018D973 /* FinhubService.swift in Sources */,
+				F2B3217825DD315B002CAA14 /* ViewController.swift in Sources */,
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
 				F2018AF325DBFF180018D973 /* CellModel.swift in Sources */,
 				F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */,

@@ -9,7 +9,7 @@ import Foundation
 
 struct CellModel {
     let logo: String?
-    let ticker: String?
+    static var ticker: String?
     let title: String?
     
     let currency: String

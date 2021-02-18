@@ -15,9 +15,38 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         tableView.register(StockCell.self, forCellReuseIdentifier: reuseIdentifier)
+        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.title = "February"
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchBar.placeholder = "Find company or ticker"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        let searchBar = searchController.searchBar
+//        FinhubService.fetch()
+        
     }
     
-    let searchViewController = UISearchController(searchResultsController: nil)
+    
+    //MARK:- SearchController Setup
+    
+    var filteredStocks: [CellModel] = []
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    
+//    func filterContentForSearchText(_ searchText: String,
+//                                    name: CellModel.ticker = nil) {
+//        filteredStocks = stocks.filter { (cell: CellModel) -> Bool in
+//        return candy.name.lowercased().contains(searchText.lowercased())
+//      }
+//
+//      tableView.reloadData()
+//    }
+
     
     
     private let tableView = UITableView()
