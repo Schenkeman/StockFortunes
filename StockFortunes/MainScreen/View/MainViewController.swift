@@ -25,6 +25,16 @@ class MainViewController: UIViewController {
         definesPresentationContext = true
         let searchBar = searchController.searchBar
 //        FinhubService.fetch()
+        Services.getPeers(symbol: "AAPL") { result in
+            switch result {
+            case Result.success(let response):
+                print(response)
+                break
+            case Result.failure(let error):
+                // Handle error
+                break
+            }
+        }
         
     }
     
