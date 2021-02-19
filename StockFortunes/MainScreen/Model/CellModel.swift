@@ -1,5 +1,5 @@
 //
-//  CellData.swift
+//  QuoteCellModel.swift
 //  StockFortunes
 //
 //  Created by Vladislav Shinkevich on 2/16/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CellModel {
+struct QuoteCellModel: Codable {
     let logo: String?
     static var ticker: String?
     let title: String?
@@ -16,7 +16,7 @@ struct CellModel {
     let currentPrice: Double
     let diffPrice: Double
     
-    var favourite: Bool
+    var favourite: Bool = false
     
     
 }

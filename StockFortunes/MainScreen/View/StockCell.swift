@@ -9,7 +9,7 @@ import UIKit
 
 class StockCell: UITableViewCell {
     
-    var stockData: CellModel? {
+    var stockData: QuoteCellModel? {
         didSet {
             configureUI()
         }

@@ -24,24 +24,18 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         let searchBar = searchController.searchBar
-//        FinhubService.fetch()
-        Services.getPeers(symbol: "AAPL") { result in
-            switch result {
-            case Result.success(let response):
-                print(response)
-                break
-            case Result.failure(let error):
-                // Handle error
-                break
-            }
+        NetworkManager().getStockQuotes(symbols: "AAPL") { (models, error) in
+//            print(models)
         }
+
+        
         
     }
     
     
     //MARK:- SearchController Setup
     
-    var filteredStocks: [CellModel] = []
+    var filteredStocks: [QuoteCellModel] = []
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
