@@ -24,8 +24,9 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         let searchBar = searchController.searchBar
-        NetworkManager().getStockQuotes(symbols: "AAPL") { (models, error) in
-//            print(models)
+        NetworkManager().getPeersQuotes(symbols: "AAPL") { (peers, string) in
+            print(peers!)
+            
         }
 
         

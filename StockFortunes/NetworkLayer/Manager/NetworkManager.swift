@@ -22,13 +22,19 @@ enum Result<String>{
     case failure(String)
 }
 
+enum ServiceApiKey: String {
+    case finhubSandbox = "sandbox_c0lsj8f48v6r1vcseilg"
+    case finhubAPI = "c0lsj8f48v6r1vcseil0"
+    case mboubAPI = "TArxUzv0sspX2SgYxlMud5GWOVXg3cBUUSDCbtz3N7fICh9HihZtVJFBDU9o"
+}
+
 struct NetworkManager {
     static let environment : NetworkEnvironment = .production
-    static let serviceAPIKey = "TArxUzv0sspX2SgYxlMud5GWOVXg3cBUUSDCbtz3N7fICh9HihZtVJFBDU9o"
-    let router = Router<MboumApi>()
+    let mboumRouter = Router<MboumApi>()
+    let finhubRouter = Router<FinhubApi>()
     
     func getStockQuotes(symbols: String, completion: @escaping (_ quote: QuoteCellModel?,_ error: String?)->()){
-        router.request(.quotes(symbols: symbols)) { data, response, error in
+        mboumRouter.request(.quotes(symbols: symbols)) { data, response, error in
             
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -46,7 +52,39 @@ struct NetworkManager {
                         print(responseData)
                         let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                         print(jsonData)
-                        let apiResponse = try JSONDecoder().decode(QuoteCellModel.self, from: responseData) 
+                        let apiResponse = try JSONDecoder().decode(QuoteCellModel.self, from: responseData)
+                        completion(apiResponse,nil)
+                    }catch {
+                        print(error)
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
+    
+    func getPeersQuotes(symbols: String, completion: @escaping (_ peers: [String]?,_ error: String?)->()){
+        finhubRouter.request(.peers(symbols: symbols)) { data, response, error in
+            
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    do {
+                        print(responseData)
+                        let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+                        print(jsonData)
+                        let apiResponse = try JSONDecoder().decode(PeersList.PeersList.self, from: responseData)
                         completion(apiResponse,nil)
                     }catch {
                         print(error)
