@@ -9,7 +9,15 @@ import UIKit
 
 private let reuseIdentifier = "StockCell"
 
+//protocol MainViewControllerProtocol: class {
+//    func fetchInitialPeers(symbol: String)
+//    var manager: NetworkManager? {get set}
+//}
+
 class MainViewController: UIViewController {
+    
+    var manager: NetworkManager?
+    var viewModel: MainScreenViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +32,11 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         let searchBar = searchController.searchBar
-        NetworkManager().getPeersQuotes(symbols: "AAPL") { (peers, string) in
-            print(peers!)
-            
-        }
-
-        
-        
+        viewModel = MainScreenViewModel()
+        viewModel!.fetchInitialPeers(listener: { (n) in
+            print(n[0].currentPrice!)
+        })
     }
-    
     
     //MARK:- SearchController Setup
     
@@ -52,8 +56,6 @@ class MainViewController: UIViewController {
 //      tableView.reloadData()
 //    }
 
-    
-    
     private let tableView = UITableView()
 
     func configureUI() {
@@ -71,14 +73,17 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-}
-
-extension MainViewController: UITableViewDelegate {
+    
+    
     
 }
 
 
 //MARK:- UITableViewControllerDelegates
+
+extension MainViewController: UITableViewDelegate {
+    
+}
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
