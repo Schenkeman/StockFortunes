@@ -9,7 +9,7 @@ import UIKit
 
 class StockCell: UITableViewCell {
     
-    var stockData: QuoteCellModel? {
+    var quoteCellModel: QuoteCellModel! {
         didSet {
             configureUI()
         }
@@ -82,6 +82,7 @@ class StockCell: UITableViewCell {
         ticker.font = UIFont.systemFont(ofSize: 16)
         ticker.textColor = .black
         ticker.text = "AAPL"
+        ticker.textAlignment = .left
         return ticker
     }()
     
@@ -91,29 +92,37 @@ class StockCell: UITableViewCell {
         title.font = UIFont.systemFont(ofSize: 16)
         title.textColor = .black
         title.text = "Apple Inc."
+        title.textAlignment = .left
         return title
     }()
     
     private let currentPriceLabel: UILabel = {
-        let ticker = UILabel()
-        ticker.backgroundColor = .clear
-        ticker.font = UIFont.systemFont(ofSize: 16)
-        ticker.textColor = .black
-        ticker.text = "$145.34"
-        return ticker
+        let currentPrice = UILabel()
+        currentPrice.backgroundColor = .clear
+        currentPrice.font = UIFont.systemFont(ofSize: 16)
+        currentPrice.textColor = .black
+        currentPrice.text = "$145.34"
+        currentPrice.textAlignment = .right
+        return currentPrice
     }()
     
     private let diffPriceLabel: UILabel = {
-        let title = UILabel()
-        title.backgroundColor = .clear
-        title.font = UIFont.systemFont(ofSize: 16)
-        title.textColor = .black
-        title.text = "+$0.24 (1.23%)"
-        return title
+        let diffPrice = UILabel()
+        diffPrice.backgroundColor = .clear
+        diffPrice.font = UIFont.systemFont(ofSize: 16)
+        diffPrice.textColor = .black
+        diffPrice.text = "+$0.24 (1.23%)"
+        diffPrice.textAlignment = .right
+        return diffPrice
     }()
     
     
     func configureUI() {
+        
+        tickerLabel.text = quoteCellModel.ticker!
+        titleLabel.text = quoteCellModel.title!
+        currentPriceLabel.text = String(format: "%.2f", quoteCellModel.currentPrice!)
+        diffPriceLabel.text = String(format: "%.2f", quoteCellModel.diffPrice!)
         
     }
 }

@@ -9,12 +9,14 @@ import Foundation
 
 enum NetworkEnvironment {
     case qa
+    case dev
     case production
     case staging
 }
 
 public enum MboumApi {
     case quotes(symbols: String)
+    case request
 }
 
 extension MboumApi: EndPointType {
@@ -22,6 +24,7 @@ extension MboumApi: EndPointType {
     var environmentBaseURL : String {
         switch NetworkManager.environment {
         case .production: return "https://mboum.com/api/v1/"
+        case .dev: return ""
         case .qa: return ""
         case .staging: return ""
         }
@@ -36,6 +39,8 @@ extension MboumApi: EndPointType {
         switch self {
         case .quotes:
             return "qu/quote"
+        case .request:
+            return ""
         }
     }
     
@@ -62,6 +67,7 @@ extension MboumApi: EndPointType {
 
 public enum FinhubApi {
     case peers(symbols: String)
+    case request
     
 }
 
@@ -70,6 +76,7 @@ extension FinhubApi: EndPointType {
     var environmentBaseURL : String {
         switch NetworkManager.environment {
         case .production: return "https://finnhub.io/api/v1/"
+        case .dev: return ""
         case .qa: return ""
         case .staging: return ""
         }
@@ -84,6 +91,8 @@ extension FinhubApi: EndPointType {
         switch self {
         case .peers:
             return "stock/peers"
+        case .request:
+            return ""
         }
     }
     

@@ -16,9 +16,20 @@ private let reuseIdentifier = "StockCell"
 
 class MainViewController: UIViewController {
     
+    var viewModel: MainScreenViewModelProtocol? {
+        didSet {
+            quoteCells = viewModel!.quoteCellModels
+        }
+    }
     var manager: NetworkManager?
-    var viewModel: MainScreenViewModel?
-
+    var quoteCells: [QuoteCellModel] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -32,10 +43,17 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         let searchBar = searchController.searchBar
-        viewModel = MainScreenViewModel()
-        viewModel!.fetchInitialPeers(listener: { (n) in
-            print(n[0].currentPrice!)
-        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            
+            let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_testing", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+            let cellModels = try! JSONDecoder().decode([QuoteCellModel].self, from: data)
+            self.viewModel?.quoteCellModels = cellModels
+            
+        }
+        
+        //        viewModel?.fetchInitialPeers(listener: { (n) in
+        //            self.viewModel = MainScreenViewModel(quoteCellModels: n)
+        //        })
     }
     
     //MARK:- SearchController Setup
@@ -43,21 +61,21 @@ class MainViewController: UIViewController {
     var filteredStocks: [QuoteCellModel] = []
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
     
     
-//    func filterContentForSearchText(_ searchText: String,
-//                                    name: CellModel.ticker = nil) {
-//        filteredStocks = stocks.filter { (cell: CellModel) -> Bool in
-//        return candy.name.lowercased().contains(searchText.lowercased())
-//      }
-//
-//      tableView.reloadData()
-//    }
-
+    //    func filterContentForSearchText(_ searchText: String,
+    //                                    name: CellModel.ticker = nil) {
+    //        filteredStocks = stocks.filter { (cell: CellModel) -> Bool in
+    //        return candy.name.lowercased().contains(searchText.lowercased())
+    //      }
+    //
+    //      tableView.reloadData()
+    //    }
+    
     private let tableView = UITableView()
-
+    
     func configureUI() {
         view.backgroundColor = .white
         configureTableView()
@@ -73,9 +91,6 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    
-    
 }
 
 
@@ -87,13 +102,14 @@ extension MainViewController: UITableViewDelegate {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return quoteCells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! StockCell
-//        cell.textLabel?.text = "Cell cell"
+        //        cell.textLabel?.text = "Cell cell"
         cell.chooseColorTint(n: indexPath.row)
+        cell.quoteCellModel = quoteCells[indexPath.row]
         return cell
     }
 }
@@ -101,8 +117,8 @@ extension MainViewController: UITableViewDataSource {
 //MARK:- UISearchControllerDelegates
 
 extension MainViewController: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    
-  }
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
 }
 

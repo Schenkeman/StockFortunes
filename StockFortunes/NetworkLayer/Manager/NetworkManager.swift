@@ -98,6 +98,12 @@ struct NetworkManager {
         }
     }
     
+//    func getFakeData<T:Decodable>(jsonName: String, decodableClass: T, completion: @escaping (Decodable) -> ()) {
+//        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: jsonName, ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+//        let model = try! JSONDecoder().decode([decodableClass].self as! T.Type, from: data)
+//        completion(model)
+//    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success
