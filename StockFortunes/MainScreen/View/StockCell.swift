@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Nuke
+
 
 class StockCell: UITableViewCell {
     
-    var quoteCellModel: QuoteCellModel! {
+    var quoteCellModel: QuoteDataModel! {
         didSet {
             configureUI()
         }
@@ -55,11 +57,7 @@ class StockCell: UITableViewCell {
     var backgroundTintColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
     func chooseColorTint(n: Int) {
         let n = Int(n)
-        if n % 2 == 0 {
-            backgroundTintView.backgroundColor = backgroundTintColor 
-        } else {
-            backgroundTintView.backgroundColor = .white
-        }
+        backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
     }
     var backgroundTintView: UIView = {
         let bgtv = UIView()
@@ -70,9 +68,9 @@ class StockCell: UITableViewCell {
     
     private let logoImage: UIImageView = {
         let logo = UIImageView()
-        logo.contentMode = .scaleAspectFill
+        logo.contentMode = .scaleAspectFit
         logo.clipsToBounds = true
-        logo.backgroundColor = .lightGray
+        logo.backgroundColor = .white
         return logo
     }()
     
@@ -119,10 +117,12 @@ class StockCell: UITableViewCell {
     
     func configureUI() {
         
-        tickerLabel.text = quoteCellModel.ticker!
+        tickerLabel.text = quoteCellModel.ticker ?? "KOKO"
         titleLabel.text = quoteCellModel.title!
         currentPriceLabel.text = String(format: "%.2f", quoteCellModel.currentPrice!)
         diffPriceLabel.text = String(format: "%.2f", quoteCellModel.diffPrice!)
+        let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: quoteCellModel.ticker!))")!
+        Nuke.loadImage(with: logoURL, into: logoImage)
         
     }
 }

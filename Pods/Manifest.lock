@@ -1,16 +1,20 @@
 PODS:
   - JGProgressHUD (2.0.4)
+  - Nuke (9.2.4)
 
 DEPENDENCIES:
   - JGProgressHUD (~> 2.0.3)
+  - Nuke (~> 9.0)
 
 SPEC REPOS:
   trunk:
     - JGProgressHUD
+    - Nuke
 
 SPEC CHECKSUMS:
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
+  Nuke: 44439f7a92e665a4f927ecd73cb51f91d93b0e0c
 
-PODFILE CHECKSUM: 4e530a9bd60915ce0f0f2e7af3663049a968b535
+PODFILE CHECKSUM: 5e3748bdbb24ad42419c6ecb64bd174ccdaa6f49
 
 COCOAPODS: 1.9.3

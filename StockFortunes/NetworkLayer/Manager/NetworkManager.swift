@@ -33,7 +33,7 @@ struct NetworkManager {
     let mboumRouter = Router<MboumApi>()
     let finhubRouter = Router<FinhubApi>()
     
-    func getStockQuotes(symbols: [String], completion: @escaping (_ quote: [QuoteCellModel]?,_ error: String?)->()){
+    func getStockQuotes(symbols: [String], completion: @escaping (_ quote: [QuoteDataModel]?,_ error: String?)->()){
         let stringSymbols = symbols.joined(separator: ",")
         mboumRouter.request(.quotes(symbols: stringSymbols)) { data, response, error in
             
@@ -53,7 +53,7 @@ struct NetworkManager {
                         print(responseData)
                         let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                         print(jsonData)
-                        let apiResponse = try JSONDecoder().decode([QuoteCellModel].self, from: responseData)
+                        let apiResponse = try JSONDecoder().decode([QuoteDataModel].self, from: responseData)
                         completion(apiResponse,nil)
                     }catch {
                         print(error)

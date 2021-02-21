@@ -8,25 +8,26 @@
 import Foundation
 
 protocol MainScreenViewModelProtocol {
-    typealias Listener = ([QuoteCellModel]) -> ()
-    var quoteCellModels: [QuoteCellModel] { get set }
+    typealias Listener = ([QuoteDataModel]) -> ()
+    var quoteCellModels: [QuoteDataModel] { get set }
     var listener: Listener? { get set }
-    init(quoteCellModels: [QuoteCellModel])
+    init(quoteCellModels: [QuoteDataModel])
 }
 
 final class MainScreenViewModel: MainScreenViewModelProtocol {
     
     var listener: Listener?
 //    var manager: NetworkManager = NetworkManager()
-    var quoteCellModels: [QuoteCellModel] {
+    var quoteCellModels: [QuoteDataModel] {
         didSet {
             listener?(quoteCellModels)
         }
     }
-    var peersListModel: PeersList?
     
-    required init(quoteCellModels: [QuoteCellModel]) {
+    
+    required init(quoteCellModels: [QuoteDataModel]) {
         self.quoteCellModels = quoteCellModels
+        
     }
     
 //    func fetchInitialPeers(symbol: String = "AAPL", listener: Listener?) {

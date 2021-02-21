@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-StockFortunes/Pods-StockFortunes-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework

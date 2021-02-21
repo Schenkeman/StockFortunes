@@ -22,13 +22,11 @@ class MainViewController: UIViewController {
         }
     }
     var manager: NetworkManager?
-    var quoteCells: [QuoteCellModel] = [] {
+    var quoteCells: [QuoteDataModel] = [] {
         didSet {
             tableView.reloadData()
         }
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +41,13 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         let searchBar = searchController.searchBar
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            
-            let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_testing", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-            let cellModels = try! JSONDecoder().decode([QuoteCellModel].self, from: data)
-            self.viewModel?.quoteCellModels = cellModels
-            
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            
+//            let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_testing", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+//            let cellModels = try! JSONDecoder().decode([QuoteCellModel].self, from: data)
+//            self.viewModel?.quoteCellModels = cellModels
+//            
+//        }
         
         //        viewModel?.fetchInitialPeers(listener: { (n) in
         //            self.viewModel = MainScreenViewModel(quoteCellModels: n)
@@ -58,7 +56,7 @@ class MainViewController: UIViewController {
     
     //MARK:- SearchController Setup
     
-    var filteredStocks: [QuoteCellModel] = []
+    var filteredStocks: [QuoteDataModel] = []
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -97,7 +95,12 @@ class MainViewController: UIViewController {
 //MARK:- UITableViewControllerDelegates
 
 extension MainViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataCell = quoteCells[indexPath.row]
+        let dvc = DetailViewController(quoteDataModel: dataCell)
+        navigationController?.pushViewController(dvc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDataSource {
@@ -107,12 +110,13 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! StockCell
-        //        cell.textLabel?.text = "Cell cell"
         cell.chooseColorTint(n: indexPath.row)
         cell.quoteCellModel = quoteCells[indexPath.row]
         return cell
     }
 }
+
+
 
 //MARK:- UISearchControllerDelegates
 

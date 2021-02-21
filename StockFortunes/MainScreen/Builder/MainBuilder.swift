@@ -9,20 +9,26 @@ import UIKit
 
 
 protocol ModuleBuilder {
-    typealias Listener = ([QuoteCellModel]) -> ()
+    typealias Listener = ([QuoteDataModel]) -> ()
     func build() -> UIViewController
-    func fetchInitialPeers(symbol: String) -> [QuoteCellModel]
+    func fetchInitialQuotes(symbol: String) -> [QuoteDataModel]
 }
 
 class MainBuilder: ModuleBuilder {
-    func fetchInitialPeers(symbol: String = "AAPL") -> [QuoteCellModel] {
-        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_1", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-        let cellModels = try! JSONDecoder().decode([QuoteCellModel].self, from: data)
+//    func fetchInitialPeers(symbol: String = "AAPL") -> [String] {
+//        let dataPeers = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "PeersList", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+//        let peersList = try! JSONDecoder().decode(PeersList.PeersList.self, from: dataPeers)
+//        return peersList
+//    }
+    
+    func fetchInitialQuotes(symbol: String = "AAPL") -> [QuoteDataModel] {
+        let dataQuote = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_1", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+        let cellModels = try! JSONDecoder().decode([QuoteDataModel].self, from: dataQuote)
         return cellModels
     }
     
     func build() -> UIViewController {
-        let cellModels = fetchInitialPeers()
+        let cellModels = fetchInitialQuotes()
         let viewModel = MainScreenViewModel(quoteCellModels: cellModels)
         let mainvc = MainViewController()
         mainvc.viewModel = viewModel
