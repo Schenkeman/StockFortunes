@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleBuilder {
     typealias Listener = ([QuoteDataModel]) -> ()
-    func build() -> UIViewController
+    func build() -> UICollectionViewController
     func fetchInitialQuotes(symbol: String) -> [QuoteDataModel]
 }
 
@@ -27,10 +27,12 @@ class MainBuilder: ModuleBuilder {
         return cellModels
     }
     
-    func build() -> UIViewController {
+    func build() -> UICollectionViewController {
         let cellModels = fetchInitialQuotes()
         let viewModel = MainScreenViewModel(quoteCellModels: cellModels)
-        let mainvc = MainViewController()
+//        let layout = StickyHeaderLayout.init()
+        let layout = UICollectionViewFlowLayout.init()
+        let mainvc = MainViewController.init(collectionViewLayout: layout)
         mainvc.viewModel = viewModel
         return mainvc
     }

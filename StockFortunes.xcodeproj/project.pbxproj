@@ -43,6 +43,11 @@
 		F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217725DD315B002CAA14 /* MainBuilder.swift */; };
 		F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C9989A25E2579800810D2F /* Codable+Extensions.swift */; };
 		F2C998A325E26B0700810D2F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A225E26B0700810D2F /* DetailViewController.swift */; };
+		F2C998A725E27AC200810D2F /* NavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */; };
+		F2C998AA25E3B47300810D2F /* MainViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A925E3B47300810D2F /* MainViewHeader.swift */; };
+		F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */; };
+		F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */; };
+		F2C998B925E57D6E00810D2F /* HeaderFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +90,11 @@
 		F2B3217725DD315B002CAA14 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		F2C9989A25E2579800810D2F /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		F2C998A225E26B0700810D2F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtension.swift; sourceTree = "<group>"; };
+		F2C998A925E3B47300810D2F /* MainViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHeader.swift; sourceTree = "<group>"; };
+		F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderViewModel.swift; sourceTree = "<group>"; };
+		F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFilterCell.swift; sourceTree = "<group>"; };
+		F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFilterView.swift; sourceTree = "<group>"; };
 		F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockFortunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,6 +143,10 @@
 			children = (
 				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
 				F2B3217225DC5623002CAA14 /* StockCell.swift */,
+				F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */,
+				F2C998A925E3B47300810D2F /* MainViewHeader.swift */,
+				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
+				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,6 +156,7 @@
 			children = (
 				F2018AF225DBFF180018D973 /* QuoteDataModel.swift */,
 				F27550B625DFD0B500427C99 /* PeersModel.swift */,
+				F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,25 +451,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2754F4425DE936600427C99 /* String+Extensions.swift in Sources */,
+				F2C998B925E57D6E00810D2F /* HeaderFilterView.swift in Sources */,
 				F2754F3425DE893700427C99 /* Constants.swift in Sources */,
 				F2C998A325E26B0700810D2F /* DetailViewController.swift in Sources */,
 				F286CDF825DBB4A700DC3DF9 /* MainViewController.swift in Sources */,
 				F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */,
 				F275508325DF945B00427C99 /* ServiceEndPoint.swift in Sources */,
 				F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */,
+				F2C998A725E27AC200810D2F /* NavigationBarExtension.swift in Sources */,
 				F275509A25DFA41000427C99 /* JSONParameterEncoder.swift in Sources */,
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
 				F275509E25DFA48F00427C99 /* NetworkManager.swift in Sources */,
+				F2C998AA25E3B47300810D2F /* MainViewHeader.swift in Sources */,
 				F2018AF325DBFF180018D973 /* QuoteDataModel.swift in Sources */,
 				F2B3215C25DC3A8E002CAA14 /* MainViewModel.swift in Sources */,
 				F275509725DFA3C700427C99 /* URLParameterEncoding.swift in Sources */,
 				F275508F25DF98D300427C99 /* HTTPTask.swift in Sources */,
 				F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */,
 				F27550A125DFAA9700427C99 /* Router.swift in Sources */,
+				F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */,
 				F27550A425DFAB0000427C99 /* NetworkLogger.swift in Sources */,
 				F2754F4125DE90F300427C99 /* ErrorKey.swift in Sources */,
 				F275509325DFA39C00427C99 /* ParameterEncoding.swift in Sources */,
 				F275508C25DF98B600427C99 /* HTTPMethod.swift in Sources */,
+				F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */,
 				F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */,
 				F2B3216125DC3EC9002CAA14 /* UIView+Extensions.swift in Sources */,
 				F275508925DF989800427C99 /* EndPointType.swift in Sources */,

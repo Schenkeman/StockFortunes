@@ -8,13 +8,13 @@
 import UIKit
 
 private let reuseIdentifier = "StockCell"
+private let headerIdentidier = "Header"
 
-//protocol MainViewControllerProtocol: class {
-//    func fetchInitialPeers(symbol: String)
-//    var manager: NetworkManager? {get set}
-//}
-
-class MainViewController: UIViewController {
+class MainViewController: UICollectionViewController, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        return
+    }
+    
     
     var viewModel: MainScreenViewModelProtocol? {
         didSet {
@@ -24,105 +24,112 @@ class MainViewController: UIViewController {
     var manager: NetworkManager?
     var quoteCells: [QuoteDataModel] = [] {
         didSet {
-            tableView.reloadData()
+            collectionView.reloadData()
         }
     }
+    
+    let searchBar = UISearchBar()
+    
+    let containerView: UIView = {
+        let cv = UIView()
+        cv.backgroundColor = .yellow
+        return cv
+    }()
+    
+    let headerFilterView: HeaderFilterView = {
+        let hfv = HeaderFilterView()
+        return hfv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        tableView.register(StockCell.self, forCellReuseIdentifier: reuseIdentifier)
-        navigationItem.hidesSearchBarWhenScrolling = true
-        navigationItem.largeTitleDisplayMode = .always
-        navigationItem.title = "February"
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
-        searchController.searchBar.placeholder = "Find company or ticker"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        let searchBar = searchController.searchBar
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            
-//            let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "QuoteList_testing", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-//            let cellModels = try! JSONDecoder().decode([QuoteCellModel].self, from: data)
-//            self.viewModel?.quoteCellModels = cellModels
-//            
-//        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        collectionView.frame = CGRect(x: 0, y: 184, width: view.bounds.width, height: view.bounds.height - 184)
+        collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
-        //        viewModel?.fetchInitialPeers(listener: { (n) in
-        //            self.viewModel = MainScreenViewModel(quoteCellModels: n)
-        //        })
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.barStyle = .default
+//        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.barStyle = .black
     }
-    
-    //MARK:- SearchController Setup
-    
-    var filteredStocks: [QuoteDataModel] = []
-    let searchController = UISearchController(searchResultsController: nil)
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    
-    //    func filterContentForSearchText(_ searchText: String,
-    //                                    name: CellModel.ticker = nil) {
-    //        filteredStocks = stocks.filter { (cell: CellModel) -> Bool in
-    //        return candy.name.lowercased().contains(searchText.lowercased())
-    //      }
-    //
-    //      tableView.reloadData()
-    //    }
-    
-    private let tableView = UITableView()
+ 
     
     func configureUI() {
         view.backgroundColor = .white
-        configureTableView()
+        navigationItem.title = "February"
+        self.navigationItem.largeTitleDisplayMode = .always
+//        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.register(StockCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        collectionView.register(MainViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:  headerIdentidier)
+        collectionView.backgroundColor = .white
+        view.addSubview(containerView)
+        containerView.backgroundColor = .white
+        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
+//        searchBar.sizeToFit()
+//        navigationItem.titleView = searchBar
+        let searchController = UISearchController(searchResultsController: nil)
+          searchController.searchResultsUpdater = self
+          searchController.obscuresBackgroundDuringPresentation = false
+          navigationItem.searchController = searchController
+          definesPresentationContext = true
+        containerView.addSubview(headerFilterView)
+        headerFilterView.addConstraintsToFillView(containerView)
+        
         
     }
     
-    func configureTableView() {
-        view.addSubview(tableView)
-        tableView.frame = view.frame
-        tableView.rowHeight = 90
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.tableFooterView = UIView()
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
+    
 }
 
 
 //MARK:- UITableViewControllerDelegates
 
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dataCell = quoteCells[indexPath.row]
-        let dvc = DetailViewController(quoteDataModel: dataCell)
-        navigationController?.pushViewController(dvc, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension MainViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MainViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return quoteCells.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! StockCell
-        cell.chooseColorTint(n: indexPath.row)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StockCell
         cell.quoteCellModel = quoteCells[indexPath.row]
+        cell.chooseColorTint(n: indexPath.row)
         return cell
     }
 }
 
-
-
-//MARK:- UISearchControllerDelegates
-
-extension MainViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: view.frame.width, height: 150)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 90)
     }
 }
+
+//MARK:- UICollectionViewDelegate
+
+extension MainViewController {
+//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentidier, for: indexPath) as! MainViewHeader
+//        return header
+//    }
+    
+    
+    
+   
+}
+
+extension MainViewController {
+    
+}
+
+//MARK:- ProfileHeaderDelegate
+
+
+
+
 

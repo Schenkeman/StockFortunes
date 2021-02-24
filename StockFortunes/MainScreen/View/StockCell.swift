@@ -9,7 +9,7 @@ import UIKit
 import Nuke
 
 
-class StockCell: UITableViewCell {
+class StockCell: UICollectionViewCell {
     
     var quoteCellModel: QuoteDataModel! {
         didSet {
@@ -17,8 +17,8 @@ class StockCell: UITableViewCell {
         }
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         addSubview(backgroundTintView)
         backgroundTintView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 16, paddingBottom: 5, paddingRight: 16)
@@ -122,7 +122,7 @@ class StockCell: UITableViewCell {
         currentPriceLabel.text = String(format: "%.2f", quoteCellModel.currentPrice!)
         diffPriceLabel.text = String(format: "%.2f", quoteCellModel.diffPrice!)
         let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: quoteCellModel.ticker!))")!
-        Nuke.loadImage(with: logoURL, into: logoImage)
+//        Nuke.loadImage(with: logoURL, into: logoImage)
         
     }
 }
