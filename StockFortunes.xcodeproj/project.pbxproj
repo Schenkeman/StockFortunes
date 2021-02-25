@@ -143,10 +143,10 @@
 			children = (
 				F2C998A625E27AC200810D2F /* MainNavigationController.swift */,
 				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
+				F2C998A925E3B47300810D2F /* MainViewHeader.swift */,
 				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
 				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
 				F2B3217225DC5623002CAA14 /* StockCell.swift */,
-				F2C998A925E3B47300810D2F /* MainViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

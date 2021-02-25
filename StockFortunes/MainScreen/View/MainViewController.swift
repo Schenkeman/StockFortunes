@@ -12,22 +12,37 @@ private let headerIdentidier = "Header"
 
 class MainViewController: UICollectionViewController {
     
-    
     var viewModel: MainScreenViewModelProtocol? {
         didSet {
             quoteCells = viewModel!.quoteCellModels
+            collectionView.reloadData()
         }
     }
     var manager: NetworkManager?
-    var quoteCells: [QuoteDataModel] = [] {
+    //    private var quoteCells: [QuoteDataModel] = [] {
+    //        didSet {
+    //            collectionView.reloadData()
+    //        }
+    //    }
+    private var selectedFilter: HeaderFilterOptions = .stocks {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    let containerView: UIView = {
-        let cv = UIView()
-        return cv
+    private var quoteCells: [QuoteDataModel] = []
+    private var favouriteQuoteCells: [QuoteDataModel] = []
+    
+    private var currentQuoteCells: [QuoteDataModel] {
+        switch selectedFilter {
+        case .stocks: return quoteCells
+        case .favourites: return favouriteQuoteCells
+        }
+    }
+    
+    let containerView: MainViewHeader = {
+        let mvh = MainViewHeader()
+        return mvh
     }()
     
     let headerFilterView: HeaderFilterView = {
@@ -39,6 +54,7 @@ class MainViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        headerFilterView.delegate = self
         configureUI()
     }
     
@@ -58,20 +74,22 @@ class MainViewController: UICollectionViewController {
         containerView.addSubview(headerFilterView)
         headerFilterView.addConstraintsToFillView(containerView)
         collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        
     }
 }
+
 
 
 //MARK:- UITableViewControllerDelegates
 
 extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return quoteCells.count
+        return currentQuoteCells.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StockCell
-        cell.quoteCellModel = quoteCells[indexPath.row]
+        cell.quoteCellModel = currentQuoteCells[indexPath.row]
         cell.chooseColorTint(n: indexPath.row)
         return cell
     }
@@ -94,6 +112,12 @@ extension MainViewController: UISearchResultsUpdating {
     }
 }
 
+extension MainViewController: HeaderFilterViewDelegate {
+    func filterView(_ view: HeaderFilterView, didSelect indexPath: IndexPath) {
+        guard let filter = HeaderFilterOptions(rawValue: indexPath.row) else { return }
+        self.selectedFilter = filter
+    }
+}
 
 
 
