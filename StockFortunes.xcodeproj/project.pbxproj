@@ -43,7 +43,7 @@
 		F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217725DD315B002CAA14 /* MainBuilder.swift */; };
 		F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C9989A25E2579800810D2F /* Codable+Extensions.swift */; };
 		F2C998A325E26B0700810D2F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A225E26B0700810D2F /* DetailViewController.swift */; };
-		F2C998A725E27AC200810D2F /* NavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */; };
+		F2C998A725E27AC200810D2F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A625E27AC200810D2F /* MainNavigationController.swift */; };
 		F2C998AA25E3B47300810D2F /* MainViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998A925E3B47300810D2F /* MainViewHeader.swift */; };
 		F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */; };
 		F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */; };
@@ -90,7 +90,7 @@
 		F2B3217725DD315B002CAA14 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		F2C9989A25E2579800810D2F /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		F2C998A225E26B0700810D2F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtension.swift; sourceTree = "<group>"; };
+		F2C998A625E27AC200810D2F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F2C998A925E3B47300810D2F /* MainViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHeader.swift; sourceTree = "<group>"; };
 		F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderViewModel.swift; sourceTree = "<group>"; };
 		F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFilterCell.swift; sourceTree = "<group>"; };
@@ -141,12 +141,12 @@
 		F2018AF025DBFDAA0018D973 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F2C998A625E27AC200810D2F /* MainNavigationController.swift */,
 				F286CDF725DBB4A700DC3DF9 /* MainViewController.swift */,
-				F2B3217225DC5623002CAA14 /* StockCell.swift */,
-				F2C998A625E27AC200810D2F /* NavigationBarExtension.swift */,
-				F2C998A925E3B47300810D2F /* MainViewHeader.swift */,
-				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
 				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
+				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
+				F2B3217225DC5623002CAA14 /* StockCell.swift */,
+				F2C998A925E3B47300810D2F /* MainViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -458,7 +458,7 @@
 				F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */,
 				F275508325DF945B00427C99 /* ServiceEndPoint.swift in Sources */,
 				F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */,
-				F2C998A725E27AC200810D2F /* NavigationBarExtension.swift in Sources */,
+				F2C998A725E27AC200810D2F /* MainNavigationController.swift in Sources */,
 				F275509A25DFA41000427C99 /* JSONParameterEncoder.swift in Sources */,
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
 				F275509E25DFA48F00427C99 /* NetworkManager.swift in Sources */,

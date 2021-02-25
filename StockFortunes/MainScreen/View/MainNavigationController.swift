@@ -1,5 +1,5 @@
 //
-//  NavigationBarExtension.swift
+//  MainNavigationController.swift
 //  StockFortunes
 //
 //  Created by Vladislav Shinkevich on 2/21/21.

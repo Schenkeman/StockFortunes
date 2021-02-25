@@ -10,10 +10,7 @@ import UIKit
 private let reuseIdentifier = "StockCell"
 private let headerIdentidier = "Header"
 
-class MainViewController: UICollectionViewController, UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        return
-    }
+class MainViewController: UICollectionViewController {
     
     
     var viewModel: MainScreenViewModelProtocol? {
@@ -28,11 +25,8 @@ class MainViewController: UICollectionViewController, UISearchResultsUpdating {
         }
     }
     
-    let searchBar = UISearchBar()
-    
     let containerView: UIView = {
         let cv = UIView()
-        cv.backgroundColor = .yellow
         return cv
     }()
     
@@ -41,47 +35,30 @@ class MainViewController: UICollectionViewController, UISearchResultsUpdating {
         return hfv
     }()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        collectionView.frame = CGRect(x: 0, y: 184, width: view.bounds.width, height: view.bounds.height - 184)
-        collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-        
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.barStyle = .default
-//        navigationController?.navigationBar.isHidden = true
-//        navigationController?.navigationBar.barStyle = .black
-    }
- 
     
     func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "February"
-        self.navigationItem.largeTitleDisplayMode = .always
-//        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(StockCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-//        collectionView.register(MainViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:  headerIdentidier)
         collectionView.backgroundColor = .white
         view.addSubview(containerView)
         containerView.backgroundColor = .white
         containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
-//        searchBar.sizeToFit()
-//        navigationItem.titleView = searchBar
-        let searchController = UISearchController(searchResultsController: nil)
-          searchController.searchResultsUpdater = self
-          searchController.obscuresBackgroundDuringPresentation = false
-          navigationItem.searchController = searchController
-          definesPresentationContext = true
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         containerView.addSubview(headerFilterView)
         headerFilterView.addConstraintsToFillView(containerView)
-        
-        
+        collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
     }
-    
-    
 }
 
 
@@ -100,34 +77,22 @@ extension MainViewController {
     }
 }
 
+//MARK:- UICollectionViewDelegateFlowLayout
+
 extension MainViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: view.frame.width, height: 150)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 90)
     }
 }
 
-//MARK:- UICollectionViewDelegate
+//MARK:- UISearchResultsUpdating
 
-extension MainViewController {
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentidier, for: indexPath) as! MainViewHeader
-//        return header
-//    }
-    
-    
-    
-   
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        return
+    }
 }
-
-extension MainViewController {
-    
-}
-
-//MARK:- ProfileHeaderDelegate
 
 
 
