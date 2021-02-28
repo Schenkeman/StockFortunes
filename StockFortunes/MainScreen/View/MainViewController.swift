@@ -40,6 +40,10 @@ class MainViewController: UICollectionViewController {
         }
     }
     
+    let now = Date()
+    let dateFormatter = DateFormatter()
+    
+    
     let containerView: MainViewHeader = {
         let mvh = MainViewHeader()
         return mvh
@@ -51,11 +55,14 @@ class MainViewController: UICollectionViewController {
     }()
     
     let searchController = UISearchController(searchResultsController: nil)
+    let bottomSheet = BottomSheet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         headerFilterView.delegate = self
         configureUI()
+        setupLongGestureRecognizerOnCollection()
+        //        setupDoubleTapGestureRecognizerOnCollection()
     }
     
     func configureUI() {
@@ -75,7 +82,37 @@ class MainViewController: UICollectionViewController {
         headerFilterView.addConstraintsToFillView(containerView)
         collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
+        dateFormatter.dateFormat = "MMMM"
+        let nameOfMonth = dateFormatter.string(from: now)
+        dateFormatter.dateFormat = "dd"
+        let day = dateFormatter.string(from: now)
+        navigationItem.title = "\(nameOfMonth.uppercased()) \(day)"
     }
+    
+    fileprivate func handleFavourite(cellItem: Int) {
+        
+        switch quoteCells[cellItem].favourite {
+        case false:
+            quoteCells[cellItem].favourite = true
+            quoteCells[cellItem].timeAddedToFavourite = Date()
+        //            favouriteQuoteCells.append(quoteCells[cellItem])
+        default:
+            quoteCells[cellItem].favourite = false
+            
+        }
+        favouriteQuoteCells = []
+        for q in quoteCells {
+            if q.favourite == true {
+                favouriteQuoteCells.append(q)
+            }
+        }
+        favouriteQuoteCells.sort { (a, b) -> Bool in
+            guard let time1 = a.timeAddedToFavourite, let time2 = b.timeAddedToFavourite else { return false}
+            return time1 < time2
+        }
+        
+    }
+    
 }
 
 
@@ -92,6 +129,13 @@ extension MainViewController {
         cell.quoteCellModel = currentQuoteCells[indexPath.row]
         cell.chooseColorTint(n: indexPath.row)
         return cell
+    }
+}
+
+extension MainViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let currentCell = currentQuoteCells[indexPath.row]
+        navigationController?.pushViewController(QuoteViewController(quoteDataModel: currentCell), animated: true)
     }
 }
 
@@ -119,6 +163,31 @@ extension MainViewController: HeaderFilterViewDelegate {
     }
 }
 
-
-
-
+extension MainViewController: UIGestureRecognizerDelegate {
+    private func setupLongGestureRecognizerOnCollection() {
+        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPressedGesture.minimumPressDuration = 0.35
+        longPressedGesture.delegate = self
+        longPressedGesture.delaysTouchesBegan = true
+        collectionView?.addGestureRecognizer(longPressedGesture)
+    }
+    
+    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        var p = gestureRecognizer.location(in: collectionView)
+        if let indexPath = collectionView?.indexPathForItem(at: p) {
+            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        if (gestureRecognizer.state == .began) {
+                print("Long press at item: \(indexPath.row)")
+                handleFavourite(cellItem: indexPath.row)
+                UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .beginFromCurrentState, animations: {
+                    cell.transform = CGAffineTransform.init(scaleX: 1.1, y: 1.1)
+                }, completion: nil)
+            
+        } else if (gestureRecognizer.state == .ended) {
+                UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 6, options: .beginFromCurrentState, animations: {
+                    cell.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                }, completion: nil)
+        }
+        }
+    }
+}

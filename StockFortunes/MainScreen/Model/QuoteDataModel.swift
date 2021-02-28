@@ -17,6 +17,7 @@ struct QuoteDataModel {
     var changePercent: Double? = 0.0
     
     var favourite: Bool = false
+    var timeAddedToFavourite: Date?
     
 }
 

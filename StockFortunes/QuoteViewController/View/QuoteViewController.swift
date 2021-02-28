@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  QuoteViewController.swift
 //  StockFortunes
 //
 //  Created by Vladislav Shinkevich on 2/21/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class QuoteViewController: UIViewController {
     
     let quoteDataModel: QuoteDataModel
     
