@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-enum HeaderFilterOptions: Int, CaseIterable {
+enum HeaderType: String {
+    case mainViewHeader
+    case quoteViewHeader
+}
+
+enum MainHeaderViewOptions: Int, CaseIterable {
     case stocks
     case favourites
     
@@ -19,6 +24,21 @@ enum HeaderFilterOptions: Int, CaseIterable {
         }
     }
 }
+
+enum QuoteHeaderViewOptions: Int, CaseIterable {
+    case chart
+    case summary
+    case news
+    
+    var description: String {
+        switch self {
+        case .chart: return "Chart"
+        case .summary: return "Summary"
+        case .news: return "News"
+        }
+    }
+}
+
 
 struct HeaderFilterViewModel {
     

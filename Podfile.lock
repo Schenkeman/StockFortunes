@@ -1,20 +1,24 @@
 PODS:
+  - CorePlot (2.3)
   - JGProgressHUD (2.0.4)
   - Nuke (9.2.4)
 
 DEPENDENCIES:
+  - CorePlot (~> 2.3)
   - JGProgressHUD (~> 2.0.3)
   - Nuke (~> 9.0)
 
 SPEC REPOS:
   trunk:
+    - CorePlot
     - JGProgressHUD
     - Nuke
 
 SPEC CHECKSUMS:
+  CorePlot: 6bfe6d30d215beec3cfd18ee43e434620119bc1e
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   Nuke: 44439f7a92e665a4f927ecd73cb51f91d93b0e0c
 
-PODFILE CHECKSUM: 5e3748bdbb24ad42419c6ecb64bd174ccdaa6f49
+PODFILE CHECKSUM: c2e8eba3ea3bc471de8669fa1dedee371e92de5d
 
 COCOAPODS: 1.9.3

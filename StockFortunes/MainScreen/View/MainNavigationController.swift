@@ -10,18 +10,16 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
     
-    let searchBarController = UISearchController(searchResultsController: nil)
+//    let searchBarController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         
         navigationBar.barTintColor = .white
         navigationBar.shadowImage = UIImage()
+//        navigationBar.isTranslucent = false
 
     }
-    override func viewWillAppear(_ animated: Bool) {
-    
-    }
-
 }
+
 
 

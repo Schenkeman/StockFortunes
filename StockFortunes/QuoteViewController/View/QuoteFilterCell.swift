@@ -1,18 +1,18 @@
 //
-//  HeaderFilterCell.swift
+//  QuoteFilterCell.swift
 //  StockFortunes
 //
-//  Created by Vladislav Shinkevich on 2/23/21.
+//  Created by Vladislav Shinkevich on 3/1/21.
 //
 
 import Foundation
 import UIKit
 
-class HeaderFilterCell: UICollectionViewCell {
+class QuoteFilterCell: UICollectionViewCell {
     //MARK:- Properties
 
   
-    var option: MainHeaderViewOptions! {
+    var option: QuoteHeaderViewOptions! {
         didSet {
             titleLabel.text = option.description
         }

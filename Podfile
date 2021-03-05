@@ -8,6 +8,7 @@ target 'StockFortunes' do
   # Pods for StockFortunes
 pod 'JGProgressHUD', '~>2.0.3'
 pod 'Nuke', '~> 9.0'
+pod 'CorePlot', '~> 2.3'
 
 end
 

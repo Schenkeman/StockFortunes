@@ -1,23 +1,23 @@
 //
-//  HeaderFilterView.swift
+//  QuoteHeaderViewFilter.swift
 //  StockFortunes
 //
-//  Created by Vladislav Shinkevich on 2/23/21.
+//  Created by Vladislav Shinkevich on 3/1/21.
 //
 
 import Foundation
 import UIKit
 
-private let reuseIdentifier = "MainViewHeaderCell"
+private let reuseIdentifier = "QuoteHeaderViewCell"
 
-protocol HeaderFilterViewDelegate: class {
-    func filterView(_ view: UIView, didSelect indexPath: IndexPath)
+protocol QuoteHeaderViewDelegate: class {
+    func filterView(_ view: QuoteHeaderView, didSelect indexPath: IndexPath)
 }
 
-class HeaderFilterView: UIView {
+class QuoteHeaderView: UIView {
     
     //MARK:- Properties
-    weak var delegate: HeaderFilterViewDelegate?
+    weak var delegate: QuoteHeaderViewDelegate?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,7 +37,7 @@ class HeaderFilterView: UIView {
     //MARK:- Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        collectionView.register(HeaderFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(QuoteFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         let selectedIndexPath = IndexPath(row: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .left)
@@ -48,7 +48,7 @@ class HeaderFilterView: UIView {
     
     override func layoutSubviews() {
         addSubview(underlineView)
-        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 2, height: 2)
+        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
     }
     
     required init?(coder: NSCoder) {
@@ -56,19 +56,19 @@ class HeaderFilterView: UIView {
     }
 }
 
-extension HeaderFilterView: UICollectionViewDataSource {
+extension QuoteHeaderView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MainHeaderViewOptions.allCases.count
+        return QuoteHeaderViewOptions.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HeaderFilterCell
-        let option = MainHeaderViewOptions(rawValue: indexPath.row)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteFilterCell
+        let option = QuoteHeaderViewOptions(rawValue: indexPath.row)
         cell.option = option
         return cell
     }
 }
-extension HeaderFilterView: UICollectionViewDelegate {
+extension QuoteHeaderView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         let xPosition = cell?.frame.origin.x ?? 0
@@ -79,9 +79,9 @@ extension HeaderFilterView: UICollectionViewDelegate {
     }
 }
 
-extension HeaderFilterView: UICollectionViewDelegateFlowLayout {
+extension QuoteHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = CGFloat(MainHeaderViewOptions.allCases.count)
+        let count = CGFloat(QuoteHeaderViewOptions.allCases.count)
         return CGSize(width: frame.width / count, height: frame.height)
     }
     

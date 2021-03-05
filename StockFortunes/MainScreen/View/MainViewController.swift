@@ -24,7 +24,7 @@ class MainViewController: UICollectionViewController {
     //            collectionView.reloadData()
     //        }
     //    }
-    private var selectedFilter: HeaderFilterOptions = .stocks {
+    private var selectedFilter: MainHeaderViewOptions = .stocks {
         didSet {
             collectionView.reloadData()
         }
@@ -55,14 +55,15 @@ class MainViewController: UICollectionViewController {
     }()
     
     let searchController = UISearchController(searchResultsController: nil)
-    let bottomSheet = BottomSheet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         headerFilterView.delegate = self
         configureUI()
         setupLongGestureRecognizerOnCollection()
+        view.backgroundColor = .white
         //        setupDoubleTapGestureRecognizerOnCollection()
+        
     }
     
     func configureUI() {
@@ -112,7 +113,6 @@ class MainViewController: UICollectionViewController {
         }
         
     }
-    
 }
 
 
@@ -135,7 +135,10 @@ extension MainViewController {
 extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = currentQuoteCells[indexPath.row]
-        navigationController?.pushViewController(QuoteViewController(quoteDataModel: currentCell), animated: true)
+//        navigationController?.pushViewController(QuoteNavigationController(rootViewController: ChartViewController()), animated: true)
+        navigationController?.pushViewController(QuoteContainerViewController(), animated: true)
+        
+        
     }
 }
 
@@ -157,8 +160,8 @@ extension MainViewController: UISearchResultsUpdating {
 }
 
 extension MainViewController: HeaderFilterViewDelegate {
-    func filterView(_ view: HeaderFilterView, didSelect indexPath: IndexPath) {
-        guard let filter = HeaderFilterOptions(rawValue: indexPath.row) else { return }
+    func filterView(_ view: UIView, didSelect indexPath: IndexPath) {
+        guard let filter = MainHeaderViewOptions(rawValue: indexPath.row) else { return }
         self.selectedFilter = filter
     }
 }
