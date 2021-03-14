@@ -34,6 +34,12 @@ class QuoteHeaderView: UIView {
         return uv
     }()
     
+    private let bcgUnderlineView: UIView = {
+        let buv = UIView()
+        buv.backgroundColor = .systemGray
+        return buv
+    }()
+    
     //MARK:- Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,9 +50,14 @@ class QuoteHeaderView: UIView {
         
         addSubview(collectionView)
         collectionView.addConstraintsToFillView(self)
+        
+        
+        
     }
     
     override func layoutSubviews() {
+        addSubview(bcgUnderlineView)
+        bcgUnderlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width, height: 0.5)
         addSubview(underlineView)
         underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width / 3, height: 2)
     }

@@ -1,24 +1,26 @@
 PODS:
-  - CorePlot (2.3)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - JGProgressHUD (2.0.4)
   - Nuke (9.2.4)
 
 DEPENDENCIES:
-  - CorePlot (~> 2.3)
+  - Charts
   - JGProgressHUD (~> 2.0.3)
   - Nuke (~> 9.0)
 
 SPEC REPOS:
   trunk:
-    - CorePlot
+    - Charts
     - JGProgressHUD
     - Nuke
 
 SPEC CHECKSUMS:
-  CorePlot: 6bfe6d30d215beec3cfd18ee43e434620119bc1e
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   Nuke: 44439f7a92e665a4f927ecd73cb51f91d93b0e0c
 
-PODFILE CHECKSUM: c2e8eba3ea3bc471de8669fa1dedee371e92de5d
+PODFILE CHECKSUM: 01dc8a20f77cd00db48e1314244a765e1f1a2c56
 
 COCOAPODS: 1.9.3

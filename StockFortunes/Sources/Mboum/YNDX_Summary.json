@@ -1,0 +1,175 @@
+{
+    "address1": "Schiphol Boulevard 165",
+    "city": "Schiphol",
+    "zip": "1118 BG",
+    "country": "Netherlands",
+    "phone": "31 20 206 6970",
+    "website": "http://ir.yandex.com",
+    "industry": "Internet Content & Information",
+    "sector": "Communication Services",
+    "longBusinessSummary": "Yandex N.V., an Internet and technology company, provides Internet search engine in Russia and internationally. The company offers search, location-based, personalized, and mobile services that enable users to find information, and communicate and connect over the Internet from desktops and mobile devices. It provides geolocation services, such as Yandex.Maps, Yandex.Navigator, Yandex.Auto, and Yandex.Routing; Yandex.Mail that provides access to email accounts; Yandex.Disk, a cloud-based storage service; Yandex.News, an online news aggregation service; Yandex.Weather hyperlocal weather information services; Yandex Browser for desktops and mobile platforms; and Yandex Search Apps. The company also provides Yandex.Direct, an auction-based advertising placement platform; Yandex Advertising Network service; Yandex.Radar, a market analytics tool; mobile advertising products; Yandex.Metrica, a web analytics system; Yandex.Market, an e-commerce gateway service; Yandex.Station, a smart speaker; Alice, an assistant. It offers Yandex.Taxi, a ride-sharing service; Auto.ru for used and new cars, commercial vehicles, and spare parts; Yandex.Realty, a real estate classifieds platform; Yandex.Jobs, a job search Website; and Yandex.Travel, a travel aggregator service. Further, it offers KinoPoisk, a Russian language source for movies, TV series, celebrity content, and entertainment news; Yandex.Music, a music streaming service; Yandex.Afisha to buy tickets to cinemas, theaters, and concerts online; Yandex Plus; Yandex.Studio; and Yandex.TV Program that provides up to date schedule of broadcast, cable and digital TV channels, as well as an option to view certain TV channels online. Additionally, it offers Yandex Zen, a personal recommendation service; Yandex.Cloud that allows companies to host and develop apps and services, and store and manage data; and Yandex.Drive, a free-floating car-sharing service. The company was incorporated in 2004 and is based in Schiphol, the Netherlands.",
+    "fullTimeEmployees": 11864,
+    "companyOfficers": [
+        {
+            "maxAge": 1,
+            "name": "Mr. Arkady  Volozh",
+            "age": 55,
+            "title": "Founder, CEO & Exec. Director",
+            "yearBorn": 1965,
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Ms. Elena  Kolmanovskaya",
+            "title": "Co-Founder & Consultant",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Gregory  Abovsky",
+            "age": 43,
+            "title": "CFO & COO",
+            "yearBorn": 1977,
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Ms. Yulia  Gerasimova",
+            "title": "Head of Investor Relations",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Dmitriy  Stepanov",
+            "title": "Chief Marketing Officer",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Vadim  Marchuk",
+            "title": "VP of Corp. Devel.",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Ms. Elena  Bunina",
+            "title": "Director of HR & Educational Programs",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Dmitry  Ivanov",
+            "title": "Head of Yandex.Zen",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Arkady  Borkovsky",
+            "title": "Chief Technology Officer of Yandex Labs",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        },
+        {
+            "maxAge": 1,
+            "name": "Mr. Artem  Savinovsky",
+            "title": "Head of Media Services",
+            "exercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            },
+            "unexercisedValue": {
+                "raw": 0,
+                "fmt": null,
+                "longFmt": "0"
+            }
+        }
+    ],
+    "auditRisk": 7,
+    "boardRisk": 9,
+    "compensationRisk": 10,
+    "shareHolderRightsRisk": 10,
+    "overallRisk": 10,
+    "governanceEpochDate": 1606953600,
+    "maxAge": 86400
+}

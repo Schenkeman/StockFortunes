@@ -135,8 +135,10 @@ extension MainViewController {
 extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = currentQuoteCells[indexPath.row]
-//        navigationController?.pushViewController(QuoteNavigationController(rootViewController: ChartViewController()), animated: true)
-        navigationController?.pushViewController(QuoteContainerViewController(), animated: true)
+        let quoteController = QuoteContainerViewController()
+        quoteController.ticker = currentCell.ticker
+        quoteController.companyName = currentCell.title
+        navigationController?.pushViewController(quoteController, animated: true)
         
         
     }

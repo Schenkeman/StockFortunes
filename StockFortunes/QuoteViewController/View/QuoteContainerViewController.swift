@@ -11,7 +11,10 @@ class QuoteContainerViewController: UIViewController {
     
     var chartViewController: UIViewController!
     var summaryViewController: UIViewController!
-    var newsViewController: UIViewController! 
+    var newsViewController: UIViewController!
+    
+    var ticker: String!
+    var companyName: String!
     
     var activeVC: UIViewController!
     
@@ -30,14 +33,15 @@ class QuoteContainerViewController: UIViewController {
         case .summary:
             removeInactiveViewController(inactiveViewController: activeVC)
             if summaryViewController == nil {
-                summaryViewController = SummaryViewController()
+                summaryViewController = SummaryViewController(ticker: ticker, companyName: companyName)
             }
             activeVC = summaryViewController
             updateActiveViewController()
         case .news:
             removeInactiveViewController(inactiveViewController: activeVC)
             if newsViewController == nil {
-                newsViewController = NewsViewController()
+                let layout = CustomFlowLayout()
+                newsViewController = NewsViewController(ticker: ticker, collectionViewLayout: layout)
             }
             activeVC = newsViewController
             updateActiveViewController()
@@ -52,15 +56,23 @@ class QuoteContainerViewController: UIViewController {
             }
         }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         headerView.delegate = self
-        chartViewController = ChartViewController()
+        chartViewController = ChartViewController(ticker: ticker)
         activeVC = chartViewController
         configureHeaderView()
         updateActiveViewController()
         view.backgroundColor = .white
+        navigationItem.title = ticker
+        
+       
+        
     }
+    
+    
     
 //    init() {
 //        super.init(nibName: nil, bundle: nil)
