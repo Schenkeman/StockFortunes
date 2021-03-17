@@ -1,0 +1,93 @@
+[
+    {
+        "ask": 140.99,
+        "askSize": 8,
+        "averageDailyVolume10Day": 5491042,
+        "averageDailyVolume3Month": 5780550,
+        "bid": 140.53,
+        "bidSize": 10,
+        "bookValue": 6.756,
+        "currency": "USD",
+        "dividendDate": {
+            "date": "2021-04-01 00:00:00.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "earningsTimestamp": {
+            "date": "2021-03-18 23:00:00.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "earningsTimestampStart": {
+            "date": "2021-03-18 23:00:00.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "earningsTimestampEnd": {
+            "date": "2021-03-18 23:00:00.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "epsForward": 3.89,
+        "epsTrailingTwelveMonths": 1.774,
+        "exchange": "NYQ",
+        "exchangeDataDelayedBy": 0,
+        "exchangeTimezoneName": "America/New_York",
+        "exchangeTimezoneShortName": "EDT",
+        "fiftyDayAverage": 138.25323,
+        "fiftyDayAverageChange": 2.196762,
+        "fiftyDayAverageChangePercent": 0.015889408,
+        "fiftyTwoWeekHigh": 147.95,
+        "fiftyTwoWeekHighChange": -7.5,
+        "fiftyTwoWeekHighChangePercent": -0.050692804,
+        "fiftyTwoWeekLow": 60,
+        "fiftyTwoWeekLowChange": 80.45,
+        "fiftyTwoWeekLowChangePercent": 1.3408333,
+        "financialCurrency": "USD",
+        "forwardPE": 36.105396,
+        "fullExchangeName": "NYSE",
+        "gmtOffSetMilliseconds": -14400000,
+        "language": "en-US",
+        "longName": "NIKE, Inc.",
+        "market": "us_market",
+        "marketCap": 221418012672,
+        "marketState": "CLOSED",
+        "messageBoardId": "finmb_291981",
+        "postMarketChange": 0.44000244,
+        "postMarketChangePercent": 0.3132805,
+        "postMarketPrice": 140.89,
+        "postMarketTime": {
+            "date": "2021-03-13 00:59:28.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "priceHint": 2,
+        "priceToBook": 20.788927,
+        "quoteSourceName": "Delayed Quote",
+        "quoteType": "EQUITY",
+        "regularMarketChange": -0.740005,
+        "regularMarketChangePercent": -0.52412,
+        "regularMarketDayHigh": 140.91,
+        "regularMarketDayLow": 138.6,
+        "regularMarketOpen": 140,
+        "regularMarketPreviousClose": 141.19,
+        "regularMarketPrice": 140.45,
+        "regularMarketTime": {
+            "date": "2021-03-12 21:00:02.000000",
+            "timezone_type": 1,
+            "timezone": "+00:00"
+        },
+        "regularMarketVolume": 4143150,
+        "sharesOutstanding": 1271480064,
+        "shortName": "Nike, Inc.",
+        "sourceInterval": 15,
+        "symbol": "NKE",
+        "tradeable": false,
+        "trailingAnnualDividendRate": 1.01,
+        "trailingAnnualDividendYield": 0.007153481,
+        "trailingPE": 79.171364,
+        "twoHundredDayAverage": 132.18825,
+        "twoHundredDayAverageChange": 8.261749,
+        "twoHundredDayAverageChangePercent": 0.062499877
+    }
+]
