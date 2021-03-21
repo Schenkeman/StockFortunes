@@ -52,26 +52,38 @@ class ChartViewController: UIViewController {
     }
     
     var selectedEpochType: EpochType! = .day {
+        
         didSet {
+            
             switch selectedEpochType {
             case .day:
+                xValueLabel.text = "Current Day"
+                yValueLabel.text = "Stock's value in USD"
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 pointsViewModel.dataCurrentEpoch = .day
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
             case .week:
+                xValueLabel.text = "1 Week"
+                yValueLabel.text = "Stock's value in USD"
                 dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .week
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .week)
             case .month:
+                xValueLabel.text = "1 Month"
+                yValueLabel.text = "Stock's value in USD"
                 dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .month
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .month)
             case .sixMonth:
-                dateFormatter.dateFormat = "MMM d"
+                xValueLabel.text = "6 Months"
+                yValueLabel.text = "Stock's value in USD"
+                dateFormatter.dateFormat = "YY MMM d"
                 pointsViewModel.dataCurrentEpoch = .sixMonth
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .sixMonth)
             case .oneYear:
-                dateFormatter.dateFormat = "MMM d"
+                xValueLabel.text = "1 Year"
+                yValueLabel.text = "Stock's value in USD"
+                dateFormatter.dateFormat = "YYYY MMM d"
                 pointsViewModel.dataCurrentEpoch = .oneYear
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .oneYear)
             case .none:
@@ -98,7 +110,7 @@ class ChartViewController: UIViewController {
         label.backgroundColor = .clear
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .gray
-        label.text = "Date"
+        label.text = "Current Day"
         
         label.textAlignment = .center
         return label
@@ -115,7 +127,7 @@ class ChartViewController: UIViewController {
         return label
     }()
     
-        
+    
     func configureButtonsCollection() {
         buttonsCollection = EpochCollectionView(frame: .zero)
         view.addSubview(buttonsCollection)
