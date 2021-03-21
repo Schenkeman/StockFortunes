@@ -8,8 +8,13 @@
 import Foundation
 
 
-struct CoordinatesModel: Decodable {
+struct PointsModel: Decodable {
     let items: [String: ItemModel]
+    let meta: Meta
+}
+
+struct Meta: Decodable {
+    var dataGranularity: String
 }
 
 struct ItemModel {

@@ -5,33 +5,17 @@
         "exchangeName": "NMS",
         "instrumentType": "EQUITY",
         "firstTradeDate": 345479400,
-        "regularMarketTime": 1615313220,
-        "gmtoffset": -18000,
-        "timezone": "EST",
+        "regularMarketTime": 1616184003,
+        "gmtoffset": -14400,
+        "timezone": "EDT",
         "exchangeTimezoneName": "America/New_York",
-        "regularMarketPrice": 121.325,
-        "chartPreviousClose": 25.28,
+        "regularMarketPrice": 119.99,
+        "chartPreviousClose": 26.48,
         "priceHint": 2,
         "dataGranularity": "1wk",
         "range": ""
     },
     "items": {
-        "1457326800": {
-            "date": "07-03-2016",
-            "open": 25.33,
-            "high": 25.57,
-            "low": 25.04,
-            "close": 25.57,
-            "adjclose": 23.78
-        },
-        "1457928000": {
-            "date": "14-03-2016",
-            "open": 25.48,
-            "high": 26.63,
-            "low": 25.44,
-            "close": 26.48,
-            "adjclose": 24.63
-        },
         "1458532800": {
             "date": "21-03-2016",
             "open": 26.48,
@@ -2107,18 +2091,26 @@
         "1615179600": {
             "date": "08-03-2021",
             "open": 120.93,
-            "high": 121,
+            "high": 123.21,
             "low": 116.21,
-            "close": 116.36,
-            "adjclose": 116.36
+            "close": 121.03,
+            "adjclose": 121.03
         },
-        "1615313220": {
-            "date": "09-03-2021",
-            "open": 119.03,
-            "high": 121.56,
-            "low": 118.79,
-            "close": 121.32,
-            "adjclose": 121.32
+        "1615780800": {
+            "date": "15-03-2021",
+            "open": 121.41,
+            "high": 127.22,
+            "low": 119.68,
+            "close": 119.99,
+            "adjclose": 119.99
+        },
+        "1616184003": {
+            "date": "19-03-2021",
+            "open": 119.9,
+            "high": 121.43,
+            "low": 119.68,
+            "close": 119.99,
+            "adjclose": 119.99
         }
     },
     "events": {

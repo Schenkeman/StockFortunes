@@ -78,7 +78,6 @@ class StocksListViewController: UICollectionViewController {
         containerView.addSubview(headerFilterView)
         
         view.backgroundColor = .white
-        navigationItem.title = "February"
         collectionView.register(StockCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .clear
         

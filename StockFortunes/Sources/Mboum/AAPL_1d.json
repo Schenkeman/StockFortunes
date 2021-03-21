@@ -5,97 +5,17 @@
         "exchangeName": "NMS",
         "instrumentType": "EQUITY",
         "firstTradeDate": 345479400,
-        "regularMarketTime": 1614978002,
-        "gmtoffset": -18000,
-        "timezone": "EST",
+        "regularMarketTime": 1616184003,
+        "gmtoffset": -14400,
+        "timezone": "EDT",
         "exchangeTimezoneName": "America/New_York",
-        "regularMarketPrice": 121.42,
-        "chartPreviousClose": 25.753,
+        "regularMarketPrice": 119.99,
+        "chartPreviousClose": 26.48,
         "priceHint": 2,
         "dataGranularity": "1d",
         "range": ""
     },
     "items": {
-        "1457361000": {
-            "date": "07-03-2016",
-            "open": 25.6,
-            "high": 25.71,
-            "low": 25.24,
-            "close": 25.47,
-            "adjclose": 23.69
-        },
-        "1457447400": {
-            "date": "08-03-2016",
-            "open": 25.19,
-            "high": 25.44,
-            "low": 25.1,
-            "close": 25.26,
-            "adjclose": 23.49
-        },
-        "1457533800": {
-            "date": "09-03-2016",
-            "open": 25.33,
-            "high": 25.4,
-            "low": 25.07,
-            "close": 25.28,
-            "adjclose": 23.51
-        },
-        "1457620200": {
-            "date": "10-03-2016",
-            "open": 25.35,
-            "high": 25.56,
-            "low": 25.04,
-            "close": 25.29,
-            "adjclose": 23.52
-        },
-        "1457706600": {
-            "date": "11-03-2016",
-            "open": 25.56,
-            "high": 25.57,
-            "low": 25.38,
-            "close": 25.57,
-            "adjclose": 23.78
-        },
-        "1457962200": {
-            "date": "14-03-2016",
-            "open": 25.48,
-            "high": 25.73,
-            "low": 25.44,
-            "close": 25.63,
-            "adjclose": 23.84
-        },
-        "1458048600": {
-            "date": "15-03-2016",
-            "open": 25.99,
-            "high": 26.3,
-            "low": 25.96,
-            "close": 26.15,
-            "adjclose": 24.32
-        },
-        "1458135000": {
-            "date": "16-03-2016",
-            "open": 26.15,
-            "high": 26.58,
-            "low": 26.15,
-            "close": 26.49,
-            "adjclose": 24.64
-        },
-        "1458221400": {
-            "date": "17-03-2016",
-            "open": 26.38,
-            "high": 26.62,
-            "low": 26.24,
-            "close": 26.45,
-            "adjclose": 24.6
-        },
-        "1458307800": {
-            "date": "18-03-2016",
-            "open": 26.58,
-            "high": 26.63,
-            "low": 26.3,
-            "close": 26.48,
-            "adjclose": 24.63
-        },
         "1458567000": {
             "date": "21-03-2016",
             "open": 26.48,
@@ -10087,6 +10007,86 @@
             "low": 117.57,
             "close": 121.42,
             "adjclose": 121.42
+        },
+        "1615213800": {
+            "date": "08-03-2021",
+            "open": 120.93,
+            "high": 121,
+            "low": 116.21,
+            "close": 116.36,
+            "adjclose": 116.36
+        },
+        "1615300200": {
+            "date": "09-03-2021",
+            "open": 119.03,
+            "high": 122.06,
+            "low": 118.79,
+            "close": 121.09,
+            "adjclose": 121.09
+        },
+        "1615386600": {
+            "date": "10-03-2021",
+            "open": 121.69,
+            "high": 122.17,
+            "low": 119.45,
+            "close": 119.98,
+            "adjclose": 119.98
+        },
+        "1615473000": {
+            "date": "11-03-2021",
+            "open": 122.54,
+            "high": 123.21,
+            "low": 121.26,
+            "close": 121.96,
+            "adjclose": 121.96
+        },
+        "1615559400": {
+            "date": "12-03-2021",
+            "open": 120.4,
+            "high": 121.17,
+            "low": 119.16,
+            "close": 121.03,
+            "adjclose": 121.03
+        },
+        "1615815000": {
+            "date": "15-03-2021",
+            "open": 121.41,
+            "high": 124,
+            "low": 120.42,
+            "close": 123.99,
+            "adjclose": 123.99
+        },
+        "1615901400": {
+            "date": "16-03-2021",
+            "open": 125.7,
+            "high": 127.22,
+            "low": 124.72,
+            "close": 125.57,
+            "adjclose": 125.57
+        },
+        "1615987800": {
+            "date": "17-03-2021",
+            "open": 124.05,
+            "high": 125.86,
+            "low": 122.34,
+            "close": 124.76,
+            "adjclose": 124.76
+        },
+        "1616074200": {
+            "date": "18-03-2021",
+            "open": 122.88,
+            "high": 123.18,
+            "low": 120.32,
+            "close": 120.53,
+            "adjclose": 120.53
+        },
+        "1616160600": {
+            "date": "19-03-2021",
+            "open": 119.9,
+            "high": 121.43,
+            "low": 119.68,
+            "close": 119.99,
+            "adjclose": 119.99
         }
     },
     "events": {

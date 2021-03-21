@@ -10,20 +10,18 @@ import Charts
 
 class ChartViewController: UIViewController {
     
-    var coordinateViewModel: CoordinateViewModel!
-    var coordinatesModel: CoordinatesModel? {
-        didSet {
-            coordinateViewModel.selectedItemsModel = coordinatesModel
-        }
-    }
+    var pointsViewModel: PointsViewModel!
     
     var buttonsCollection: EpochCollectionView!
     var ticker: String!
+    var labelCount: Int!
     
     init(ticker: String) {
         super.init(nibName: nil, bundle: nil)
         self.ticker = ticker
-        coordinateViewModel = CoordinateViewModel()
+        let pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
+        pointsViewModel = PointsViewModel(pointsModel: pointsModel)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -33,24 +31,50 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        coordinateViewModel.listener = { [weak self] data in
+        pointsViewModel.listener = { [weak self] data in
             guard let self = self else { return }
             self.lineChartView.data = data
+            self.configureGraphViewByType(count: self.labelCount)
         }
-        coordinatesModel = fetchCoordinates(file: ticker, epoch: .day)
-        lineChartView.data = coordinateViewModel.chartData
+        labelCount = pointsViewModel.itemsCount
+        lineChartView.data = pointsViewModel.chartData
+        lineChartView.xAxis.valueFormatter = pointsViewModel.xValuesNumberFormatter!
         configureHostView()
+        configureGraphViewByType(count: labelCount)
         configureButtonsCollection()
         buttonsCollection.delegate = self
+        
     }
-    var selectedEpochRequest: EpochTypeRequest = .day {
-        didSet {
-            coordinatesModel = fetchCoordinates(file: ticker, epoch: selectedEpochRequest)
-        }
-    }
+
+    
+    // D - 1h 1 month worth of 5m|15m|30m|1h -- 1h
+    // W - 1d 5 years of 1d|1wk -- 1d
+    // M - 7d 5 years of 1d|1wk -- 1wk
+    // 6M - 1m 10 years of 1mo|3mo -- 1mo
+    // 1Y - 4m 10 years of 1mo|3mo -- 3mo
+    // 10Y - 2y 10 years of 1mo|3mo -- 3mo
+    
     var selectedEpochType: EpochType! = .day {
         didSet {
-            selectEpochType(type: selectedEpochType)
+            switch selectedEpochType {
+            case .day:
+                pointsViewModel.dataCurrentEpoch = .day
+                pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
+            case .week:
+                pointsViewModel.dataCurrentEpoch = .week
+                pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .week)
+            case .month:
+                pointsViewModel.dataCurrentEpoch = .month
+                pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .month)
+            case .sixMonth:
+                pointsViewModel.dataCurrentEpoch = .sixMonth
+                pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .sixMonth)
+            case .oneYear:
+                pointsViewModel.dataCurrentEpoch = .oneYear
+                pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .oneYear)
+            case .none:
+                return
+            }
         }
     }
     
@@ -67,45 +91,14 @@ class ChartViewController: UIViewController {
         xAxis.labelPosition = .bottom
         return lcv
     }()
-    
-    func fetchCoordinates(file: String, epoch: EpochTypeRequest) -> CoordinatesModel {
-        coordinateViewModel.selectedEpoch = epoch
-        let dataCoordinate = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_\(epoch.description)", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-        let coordinatesModels = try! JSONDecoder().decode(CoordinatesModel.self, from: dataCoordinate)
-        return coordinatesModels
-    }
-    
+        
     func configureButtonsCollection() {
         buttonsCollection = EpochCollectionView(frame: .zero)
         view.addSubview(buttonsCollection)
         buttonsCollection.anchor(top: lineChartView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 16, paddingLeft: 32, paddingRight: 32, height: 50)
-        lineChartView.xAxis.valueFormatter = coordinateViewModel.xValuesNumberFormatter!
+        
     }
     
-    func selectEpochType(type: EpochType) {
-        var count = 7
-        let itemsCount = coordinateViewModel.filteredItems.count
-        count = itemsCount > count ? 7 : itemsCount
-        switch type {
-        case .day:
-            selectedEpochRequest = .day
-            coordinatesModel = fetchCoordinates(file: ticker, epoch: selectedEpochRequest)
-//            configureGraphViewByType(count: count)
-        case .week:
-            selectedEpochRequest = .week
-            coordinatesModel = fetchCoordinates(file: ticker, epoch: selectedEpochRequest)
-//            configureGraphViewByType(count: count)
-        case .month:
-            configureGraphViewByType(count: count)
-        case .sixMonth:
-            configureGraphViewByType(count: count)
-        case .oneYear:
-            configureGraphViewByType(count: count)
-        case .tenYears:
-            configureGraphViewByType(count: count)
-        }
-    }
-    //    let hostView = HostedGraphView()
     
     private func configureHostView() {
         view.addSubview(lineChartView)
@@ -114,8 +107,8 @@ class ChartViewController: UIViewController {
     }
     
     private func configureGraphViewByType(count: Int) {
-        lineChartView.xAxis.setLabelCount(count, force: false)
-        lineChartView.leftAxis.setLabelCount(count, force: false)
+        lineChartView.xAxis.setLabelCount(count, force: true)
+        lineChartView.leftAxis.setLabelCount(count, force: true)
     }
     
 }

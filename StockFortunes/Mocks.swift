@@ -22,14 +22,20 @@ class MockServer {
     }
     
     static func fetchSummary(file: String) -> SummaryModel {
-        let dataCoordinate = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_Summary", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-        let summaryModel = try! JSONDecoder().decode(SummaryModel.self, from: dataCoordinate)
+        let summaryData = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_Summary", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+        let summaryModel = try! JSONDecoder().decode(SummaryModel.self, from: summaryData)
         return summaryModel
     }
     
     static func fetchNews(file: String) -> NewsModel {
-        let dataNews = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_News", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-        let newsModel = try! JSONDecoder().decode(NewsModel.self, from: dataNews)
+        let newsData = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_News", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+        let newsModel = try! JSONDecoder().decode(NewsModel.self, from: newsData)
         return newsModel
+    }
+    
+    static func fetchPoints(file: String, epoch: EpochTypeRequest) -> PointsModel {
+        let pointsData = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "\(file)_\(epoch.description)", ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
+        let pointsModel = try! JSONDecoder().decode(PointsModel.self, from: pointsData)
+        return pointsModel
     }
 }
