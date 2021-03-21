@@ -10,11 +10,14 @@ import Charts
 
 class ChartViewController: UIViewController {
     
-    var pointsViewModel: PointsViewModel!
-    
-    var buttonsCollection: EpochCollectionView!
     var ticker: String!
     var labelCount: Int!
+    
+    var pointsViewModel: PointsViewModel!
+    var buttonsCollection: EpochCollectionView!
+    
+    var dateFormatter = DateFormatter()
+    
     
     init(ticker: String) {
         super.init(nibName: nil, bundle: nil)
@@ -27,49 +30,48 @@ class ChartViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    1 month worth of 5m|15m|30m|1h, 5 years of 1d|1wk and 10 years of 1mo|3mo time
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         pointsViewModel.listener = { [weak self] data in
             guard let self = self else { return }
             self.lineChartView.data = data
-            self.configureGraphViewByType(count: self.labelCount)
+            self.setLabelsCount(count: self.labelCount)
         }
         labelCount = pointsViewModel.itemsCount
         lineChartView.data = pointsViewModel.chartData
         lineChartView.xAxis.valueFormatter = pointsViewModel.xValuesNumberFormatter!
-        configureHostView()
-        configureGraphViewByType(count: labelCount)
+        lineChartView.delegate = self
+        configureLineChartView()
+        setLabelsCount(count: labelCount)
         configureButtonsCollection()
+        setDateFormatter()
         buttonsCollection.delegate = self
         
     }
-
-    
-    // D - 1h 1 month worth of 5m|15m|30m|1h -- 1h
-    // W - 1d 5 years of 1d|1wk -- 1d
-    // M - 7d 5 years of 1d|1wk -- 1wk
-    // 6M - 1m 10 years of 1mo|3mo -- 1mo
-    // 1Y - 4m 10 years of 1mo|3mo -- 3mo
-    // 10Y - 2y 10 years of 1mo|3mo -- 3mo
     
     var selectedEpochType: EpochType! = .day {
         didSet {
             switch selectedEpochType {
             case .day:
+                dateFormatter.dateFormat = "MMM d, h:mm a"
                 pointsViewModel.dataCurrentEpoch = .day
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
             case .week:
+                dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .week
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .week)
             case .month:
+                dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .month
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .month)
             case .sixMonth:
+                dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .sixMonth
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .sixMonth)
             case .oneYear:
+                dateFormatter.dateFormat = "MMM d"
                 pointsViewModel.dataCurrentEpoch = .oneYear
                 pointsViewModel.pointsModel = MockServer.fetchPoints(file: ticker, epoch: .oneYear)
             case .none:
@@ -91,6 +93,28 @@ class ChartViewController: UIViewController {
         xAxis.labelPosition = .bottom
         return lcv
     }()
+    let xValueLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray
+        label.text = "Date"
+        
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let yValueLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .black
+        label.text = "Stock's value in USD"
+        
+        label.textAlignment = .center
+        return label
+    }()
+    
         
     func configureButtonsCollection() {
         buttonsCollection = EpochCollectionView(frame: .zero)
@@ -99,22 +123,31 @@ class ChartViewController: UIViewController {
         
     }
     
-    
-    private func configureHostView() {
+    private func configureLineChartView() {
+        let stack = UIStackView(arrangedSubviews: [xValueLabel, yValueLabel])
+        view.addSubview(stack)
         view.addSubview(lineChartView)
-        lineChartView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 50, paddingLeft: 32, paddingBottom: 150, paddingRight: 32)
-        
+        stack.spacing = 8
+        stack.axis = .vertical
+        stack.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 30, paddingLeft: 16, paddingRight: 16)
+        xValueLabel.centerX(inView: view)
+        lineChartView.anchor(top: yValueLabel.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 30, paddingLeft: 32, paddingBottom: 150, paddingRight: 32)
     }
     
-    private func configureGraphViewByType(count: Int) {
+    private func setLabelsCount(count: Int) {
         lineChartView.xAxis.setLabelCount(count, force: true)
         lineChartView.leftAxis.setLabelCount(count, force: true)
     }
     
+    private func setDateFormatter() {
+        dateFormatter.timeZone = TimeZone(abbreviation: "EDT")
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+    }
 }
 extension ChartViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print(entry)
+        xValueLabel.text = "\(dateFormatter.string(from: Date(timeIntervalSince1970: entry.x)))"
+        yValueLabel.text = "\(entry.y)"
     }
 }
 
@@ -124,8 +157,4 @@ extension ChartViewController: EpochCollectionViewDelegate {
         self.selectedEpochType = epochType
     }
 }
-
-
-
-
 

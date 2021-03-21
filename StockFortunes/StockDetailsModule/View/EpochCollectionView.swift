@@ -35,7 +35,7 @@ class EpochCollectionView: UIView {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .red
+        cv.backgroundColor = .clear
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -66,13 +66,30 @@ extension EpochCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 40, height: 40)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let cellCount = CGFloat(EpochType.allCases.count)
+        if cellCount > 0 {
+            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+            let cellWidth = flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing
+            
+            let totalCellWidth = cellWidth * cellCount + 20.00 * (cellCount-1)
+            let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+
+            if (totalCellWidth < contentWidth) {
+                let padding = (contentWidth - totalCellWidth) / 2.0
+                return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+            } else {
+                return UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
+            }
+        }
+        return UIEdgeInsets.zero
+    }
 }
 
 extension EpochCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! EpochButtonCell
         delegate?.filterView(self, didSelect: indexPath)
-//        print(cell.epochType.description)
     }
 }
 

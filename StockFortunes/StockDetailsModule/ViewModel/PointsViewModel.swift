@@ -155,11 +155,18 @@ class PointsViewModel {
     }
     
     func setData() {
-        let set1 = LineChartDataSet(entries: chartValues, label: nil)
-        set1.drawCirclesEnabled = false
-        set1.setColor(.black)
-        set1.highlightColor = .red
-        let data = LineChartData(dataSet: set1)
+        let dataSet = LineChartDataSet(entries: chartValues, label: nil)
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawValuesEnabled = false
+        dataSet.setColor(.black)
+        dataSet.highlightColor = .red
+        dataSet.lineWidth = 2
+        dataSet.fill = Fill(color: .lightGray)
+        dataSet.fillAlpha = 0.5
+        dataSet.drawFilledEnabled = true
+        dataSet.highlightLineWidth = 1
+        dataSet.drawHorizontalHighlightIndicatorEnabled = false
+        let data = LineChartData(dataSet: dataSet)
         chartData = data
     }
     
