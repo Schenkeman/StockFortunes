@@ -59,7 +59,7 @@ class SummaryViewController: UIViewController {
         let logo = UIImageView()
         logo.contentMode = .scaleAspectFit
         logo.clipsToBounds = true
-        logo.backgroundColor = .green
+        logo.backgroundColor = .purple
         return logo
     }()
     

@@ -20,7 +20,7 @@ class MainBuilder: ModuleBuilder {
         let viewModel = StocksListViewModel(stockModels: stockModels)
         let layout = UICollectionViewFlowLayout()
         let mainvc = StocksListViewController.init(collectionViewLayout: layout)
-        mainvc.stockModels = stockModels
+        mainvc.mainStockCells = stockModels
         return mainvc
     }
 }

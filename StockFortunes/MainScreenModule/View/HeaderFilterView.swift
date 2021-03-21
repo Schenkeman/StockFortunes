@@ -76,6 +76,7 @@ extension HeaderFilterView: UICollectionViewDelegate {
             self.underlineView.frame.origin.x = xPosition
         }
         delegate?.filterView(self, didSelect: indexPath)
+        
     }
 }
 

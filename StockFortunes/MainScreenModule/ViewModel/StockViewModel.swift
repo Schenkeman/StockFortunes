@@ -35,7 +35,7 @@ final class StockViewModel {
     var diffPrice: Double
     var changePercent: Double
     
-    var favourite: Bool = false
+    var favourite: Bool
     var timeAddedToFavourite: Date?
     
     init(stockModel: StockModel) {
@@ -44,5 +44,6 @@ final class StockViewModel {
         self.currentPrice = stockModel.currentPrice
         self.diffPrice = stockModel.diffPrice
         self.changePercent = stockModel.changePercent
+        self.favourite = stockModel.favourite
     }
 }

@@ -16,6 +16,8 @@ class StockCell: UICollectionViewCell {
     var stockViewModel: StockViewModel! {
         didSet {
             configure()
+            configureFavouriteIcon()
+            configureColorOfLabel()
         }
     }
     
@@ -24,6 +26,7 @@ class StockCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -36,14 +39,14 @@ class StockCell: UICollectionViewCell {
         let logo = UIImageView()
         logo.contentMode = .scaleAspectFit
         logo.clipsToBounds = true
-        logo.backgroundColor = .white
+        logo.backgroundColor = .purple
         return logo
     }()
     
     private let tickerLabel: UILabel = {
         let ticker = UILabel()
         ticker.backgroundColor = .clear
-        ticker.font = UIFont.systemFont(ofSize: 16)
+        ticker.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         ticker.textColor = .black
         ticker.text = "AAPL"
         ticker.textAlignment = .left
@@ -63,7 +66,7 @@ class StockCell: UICollectionViewCell {
     private let currentPriceLabel: UILabel = {
         let currentPrice = UILabel()
         currentPrice.backgroundColor = .clear
-        currentPrice.font = UIFont.systemFont(ofSize: 16)
+        currentPrice.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         currentPrice.textColor = .black
         currentPrice.text = "$145.34"
         currentPrice.textAlignment = .right
@@ -80,6 +83,13 @@ class StockCell: UICollectionViewCell {
         return diffPrice
     }()
     
+    let favouriteIcon: UIView = {
+        let image = UIImage(named: "starFilled.png")?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: image!)
+        imageView.tintColor = .lightGray
+        return imageView
+    }()
+    
     private var backgroundTintColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
     
     private var backgroundTintView: UIView = {
@@ -93,8 +103,10 @@ class StockCell: UICollectionViewCell {
         tickerLabel.text = stockViewModel.ticker
         titleLabel.text = stockViewModel.title
         let stringFormat = "%.2f"
-        currentPriceLabel.text = String(format: stringFormat, stockViewModel.currentPrice)
-        diffPriceLabel.text = String(format: stringFormat, stockViewModel.diffPrice)
+        currentPriceLabel.text = "$\(String(format: stringFormat, stockViewModel.currentPrice))"
+        let diffValue = String(format: stringFormat, stockViewModel.diffPrice)
+        let diffPercent = String(format: stringFormat, stockViewModel.changePercent)
+        diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
         let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
         //        Nuke.loadImage(with: logoURL, into: logoImage)
     }
@@ -104,9 +116,28 @@ class StockCell: UICollectionViewCell {
         backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
     }
     
+    func configureFavouriteIcon() {
+        if stockViewModel.favourite == true {
+            self.favouriteIcon.tintColor = .orange
+        } else {
+            self.favouriteIcon.tintColor = .lightGray
+        }
+    }
+    
+    func configureColorOfLabel() {
+        if stockViewModel.diffPrice < 0 {
+            diffPriceLabel.textColor = .red
+        } else if stockViewModel.diffPrice == 0.0 {
+            diffPriceLabel.textColor = .black
+        } else {
+            diffPriceLabel.textColor = .systemGreen
+        }
+    }
+    
     private func configureUI() {
         addSubview(backgroundTintView)
         addSubview(logoImage)
+        addSubview(favouriteIcon)
         
         backgroundTintView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 16, paddingBottom: 5, paddingRight: 16)
         backgroundTintView.layer.cornerRadius = 60 / 4
@@ -131,5 +162,7 @@ class StockCell: UICollectionViewCell {
         leftStack.anchor(top: backgroundTintView.topAnchor, left: logoImage.rightAnchor, bottom: backgroundTintView.bottomAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 15, width: 150)
         
         rightStack.anchor(top: backgroundTintView.topAnchor, left: rightStack.leftAnchor, bottom: backgroundTintView.bottomAnchor, right: backgroundTintView.rightAnchor, paddingTop: 15, paddingBottom: 15, paddingRight: 15)
+        
+        favouriteIcon.anchor(top: topAnchor, left: leftStack.rightAnchor, paddingTop: 25, paddingLeft: -95, width: 15, height: 15)
     }
 }

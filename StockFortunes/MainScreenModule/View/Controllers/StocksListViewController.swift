@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 private let reuseIdentifier = "StockCell"
 private let headerIdentidier = "Header"
@@ -19,6 +20,12 @@ class StocksListViewController: UICollectionViewController {
             collectionView.reloadData()
         }
     }
+    private var currentStockCells: [StockModel] {
+        switch selectedFilter {
+        case .stocks: return mainStockCells
+        case .favourites: return favouriteStockCells
+        }
+    }
     
     private var searchController: UISearchController!
     private var searchBarIsEmpty: Bool {
@@ -29,38 +36,25 @@ class StocksListViewController: UICollectionViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     
-    var stockModels: [StockModel]! {
+    var mainStockCells: [StockModel]! {
         didSet {
-            collectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.collectionView.reloadData()
+            }
         }
     }
-    private var favouriteStockCells: [StockModel] = []
+    private var favouriteStockCells: [StockModel]!
     private var filteredStockCells: [StockModel] = []
-    private var currentStockCells: [StockModel] {
-        switch selectedFilter {
-        case .stocks: return stockModels
-        case .favourites: return favouriteStockCells
-        }
-    }
-    
-    let containerView: MainViewHeader = {
-        let mvh = MainViewHeader()
-        return mvh
-    }()
-    
-    let headerFilterView: HeaderFilterView = {
-        let hfv = HeaderFilterView()
-        return hfv
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController = UISearchController(searchResultsController: nil)
         headerFilterView.delegate = self
-        configureUI()
         setUpNavDate()
-        configureSearchController()
+        configureUI()
         setupLongGestureRecognizerOnCollection()
+        configureSearchController()
+        favouriteStockCells = configureFavouriteCells()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,21 +67,22 @@ class StocksListViewController: UICollectionViewController {
         navigationController!.navigationBar.shadowImage = UIImage()
     }
     
+    let headerFilterView: HeaderFilterView = {
+        let hfv = HeaderFilterView()
+        return hfv
+    }()
+    
     func configureUI() {
-        view.addSubview(containerView)
-        containerView.addSubview(headerFilterView)
-        
+        view.addSubview(headerFilterView)
         view.backgroundColor = .white
         collectionView.register(StockCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .clear
         
-        containerView.backgroundColor = .clear
-        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
+        headerFilterView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
         
         definesPresentationContext = true
         
-        headerFilterView.addConstraintsToFillView(containerView)
-        collectionView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        collectionView.anchor(top: headerFilterView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
     }
     
     func setUpNavDate() {
@@ -107,31 +102,71 @@ class StocksListViewController: UICollectionViewController {
         searchController.searchBar.delegate = self
     }
     
-    fileprivate func handleFavourite(cellItem: Int) {
-        var quoteDataCells: [StockModel]
+    fileprivate func handleFavouriteTap(cellItem: Int) {
+        
+        var stockDataCells: [StockModel]
+        // If you're filtering
         if isFiltering {
-            quoteDataCells = filteredStockCells
+            stockDataCells = filteredStockCells
+            switch stockDataCells[cellItem].favourite {
+            // Stock is not favourite
+            case false:
+                // Stock is not in main list
+                if !mainStockCells.contains(where: { (mainCell) in
+                    return mainCell.ticker == stockDataCells[cellItem].ticker
+                }) {
+                    stockDataCells[cellItem].favourite = true
+                    stockDataCells[cellItem].timeAddedToFavourite = Date()
+                    mainStockCells.append(stockDataCells[cellItem])
+                // Stock is in main list
+                } else {
+                    let index = mainStockCells.firstIndex { (mainCell) in
+                        return mainCell.ticker == stockDataCells[cellItem].ticker
+                    }
+                    stockDataCells[cellItem].favourite = true
+                    mainStockCells[index!].favourite = true
+                }
+                filteredStockCells = stockDataCells
+            // Stock is favourite
+            case true:
+                let index = mainStockCells.firstIndex { (mainCell) in
+                    return mainCell.ticker == stockDataCells[cellItem].ticker
+                }
+                stockDataCells[cellItem].favourite = false
+                mainStockCells[index!].favourite = false
+                filteredStockCells = stockDataCells
+            }
+        // You're not filtering
         } else {
-            quoteDataCells = stockModels
-        }
-        switch stockModels[cellItem].favourite {
-        case false:
-            stockModels[cellItem].favourite = true
-            stockModels[cellItem].timeAddedToFavourite = Date()
-        //            favouriteQuoteCells.append(quoteCells[cellItem])
-        default:
-            stockModels[cellItem].favourite = false
-        }
-        favouriteStockCells = []
-        for q in stockModels {
-            if q.favourite == true {
-                favouriteStockCells.append(q)
+            switch selectedFilter {
+            case .stocks:
+                switch mainStockCells[cellItem].favourite {
+                case false:
+                    mainStockCells[cellItem].favourite = true
+                    mainStockCells[cellItem].timeAddedToFavourite = Date()
+                case true:
+                    mainStockCells[cellItem].favourite = false
+                }
+            case .favourites:
+                let index = mainStockCells.firstIndex { (mainCell) in
+                    return mainCell.ticker == favouriteStockCells[cellItem].ticker
+                }
+                mainStockCells[index!].favourite = false
             }
         }
-        favouriteStockCells.sort { (a, b) -> Bool in
+        favouriteStockCells = configureFavouriteCells()
+    }
+    
+    func configureFavouriteCells() -> [StockModel] {
+        var favourites: [StockModel]
+        favourites = mainStockCells.filter { stockCell in
+            return stockCell.favourite == true
+        }
+        favourites.sort { (a, b) -> Bool in
             guard let time1 = a.timeAddedToFavourite, let time2 = b.timeAddedToFavourite else { return false}
             return time1 < time2
         }
+        return favourites
     }
 }
 
@@ -163,7 +198,7 @@ extension StocksListViewController {
 
 extension StocksListViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let currentCell = currentStockCells[indexPath.row]
+        //        let currentCell = currentStockCells[indexPath.row]
         var quoteData: StockModel
         if isFiltering {
             quoteData = filteredStockCells[indexPath.row]
@@ -209,11 +244,14 @@ extension StocksListViewController: UISearchResultsUpdating {
     }
 }
 
+//MARK:- HeaderFilterViewDelegate
+
 extension StocksListViewController: HeaderFilterViewDelegate {
     func filterView(_ view: UIView, didSelect indexPath: IndexPath) {
         guard let filter = MainHeaderViewOptions(rawValue: indexPath.row) else { return }
         self.selectedFilter = filter
     }
+    
 }
 
 //MARK:- UIGestureRecognizerDelegate
@@ -233,11 +271,10 @@ extension StocksListViewController: UIGestureRecognizerDelegate {
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             if (gestureRecognizer.state == .began) {
                 print("Long press at item: \(indexPath.row)")
-                handleFavourite(cellItem: indexPath.row)
+                handleFavouriteTap(cellItem: indexPath.row)
                 UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .beginFromCurrentState, animations: {
                     cell.transform = CGAffineTransform.init(scaleX: 1.1, y: 1.1)
                 }, completion: nil)
-                
             } else if (gestureRecognizer.state == .ended) {
                 UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 6, options: .beginFromCurrentState, animations: {
                     cell.transform = CGAffineTransform.init(scaleX: 1, y: 1)
