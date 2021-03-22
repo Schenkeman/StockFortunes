@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0134E761C1BE49DF4E83A308 /* Pods_StockFortunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */; };
 		F2018AF325DBFF180018D973 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2018AF225DBFF180018D973 /* StockModel.swift */; };
+		F210E7F52609186E000B615A /* SaveLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210E7F42609186E000B615A /* SaveLoadData.swift */; };
 		F2563F2225FE338A008A34EA /* nke_Search.json in Resources */ = {isa = PBXBuildFile; fileRef = F2563F2125FE338A008A34EA /* nke_Search.json */; };
 		F2563F2625FE5586008A34EA /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2563F2525FE5586008A34EA /* Mocks.swift */; };
 		F262E2EA2605392A00FBFBAB /* AAPL_1mo.json in Resources */ = {isa = PBXBuildFile; fileRef = F262E2E92605392A00FBFBAB /* AAPL_1mo.json */; };
@@ -77,6 +78,7 @@
 		3B62AEABFAEB6E89CE09B3B6 /* Pods-StockFortunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockFortunes.release.xcconfig"; path = "Target Support Files/Pods-StockFortunes/Pods-StockFortunes.release.xcconfig"; sourceTree = "<group>"; };
 		A820EB83294F09D31BEC1B36 /* Pods-StockFortunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockFortunes.debug.xcconfig"; path = "Target Support Files/Pods-StockFortunes/Pods-StockFortunes.debug.xcconfig"; sourceTree = "<group>"; };
 		F2018AF225DBFF180018D973 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
+		F210E7F42609186E000B615A /* SaveLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadData.swift; sourceTree = "<group>"; };
 		F2563F2125FE338A008A34EA /* nke_Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nke_Search.json; sourceTree = "<group>"; };
 		F2563F2525FE5586008A34EA /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		F262E2E92605392A00FBFBAB /* AAPL_1mo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AAPL_1mo.json; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				F2018AEF25DBFC0A0018D973 /* MainScreenModule */,
 				F2C998A025E26AD700810D2F /* StockDetailsModule */,
 				F286CDF325DBB4A700DC3DF9 /* AppDelegate.swift */,
+				F210E7F42609186E000B615A /* SaveLoadData.swift */,
 				F286CDF525DBB4A700DC3DF9 /* SceneDelegate.swift */,
 				F286CDF925DBB4A700DC3DF9 /* Main.storyboard */,
 				F286CDFC25DBB4A900DC3DF9 /* Assets.xcassets */,
@@ -605,6 +608,7 @@
 				F27550A125DFAA9700427C99 /* Router.swift in Sources */,
 				F2F6629D25F4DD1300B2F947 /* EpochButtonCell.swift in Sources */,
 				F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */,
+				F210E7F52609186E000B615A /* SaveLoadData.swift in Sources */,
 				F2941CB626027F12007E4F0A /* PointsViewModel.swift in Sources */,
 				F27550A425DFAB0000427C99 /* NetworkLogger.swift in Sources */,
 				F2754F4125DE90F300427C99 /* ErrorKey.swift in Sources */,
