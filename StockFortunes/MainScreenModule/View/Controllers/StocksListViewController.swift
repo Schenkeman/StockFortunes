@@ -7,6 +7,9 @@
 
 import UIKit
 import Foundation
+import RealmSwift
+import JGProgressHUD
+
 
 private let reuseIdentifier = "StockCell"
 private let headerIdentidier = "Header"
@@ -14,6 +17,18 @@ private let headerIdentidier = "Header"
 class StocksListViewController: UICollectionViewController {
     
     //MARK:- Properties
+    var tickers: [String]! = []
+    var items: Results<Stock>! {
+        didSet {
+            for item in items {
+                tickers.append(item.ticker)
+            }
+            guard let tickers = tickers else { return }
+            handleFetchStocks()
+        }
+    }
+    
+    var networkManager: NetworkManager!
     
     private var selectedFilter: MainHeaderViewOptions = .stocks {
         didSet {
@@ -36,7 +51,7 @@ class StocksListViewController: UICollectionViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     
-    var mainStockCells: [StockModel]! {
+    var mainStockCells: [StockModel]! = [] {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.collectionView.reloadData()
@@ -49,13 +64,14 @@ class StocksListViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController = UISearchController(searchResultsController: nil)
+        configureSearchController()
         headerFilterView.delegate = self
         setUpNavDate()
         configureUI()
         setupLongGestureRecognizerOnCollection()
-        configureSearchController()
         favouriteStockCells = configureFavouriteCells()
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -102,6 +118,17 @@ class StocksListViewController: UICollectionViewController {
         searchController.searchBar.delegate = self
     }
     
+    private func handleFetchStocks() {
+//        let hud = JGProgressHUD(style: .dark)
+//        hud.show(in: view)
+//        networkManager.fetchStocks(symbols: tickers) { [weak self] (stockModel, error) in
+//            guard let self = self else { return }
+//            self.mainStockCells = stockModel
+//        }
+//        hud.dismiss()
+        mainStockCells = MockServer.fetchInitialStocks()
+    }
+    
     fileprivate func handleFavouriteTap(cellItem: Int) {
         
         var stockDataCells: [StockModel]
@@ -118,7 +145,9 @@ class StocksListViewController: UICollectionViewController {
                     stockDataCells[cellItem].favourite = true
                     stockDataCells[cellItem].timeAddedToFavourite = Date()
                     mainStockCells.append(stockDataCells[cellItem])
-                // Stock is in main list
+                    StocksDB.addStock(stockData: stockDataCells[cellItem], index: cellItem)
+                    print(StocksDB.realm.objects(Stock.self).count)
+                    // Stock is in main list
                 } else {
                     let index = mainStockCells.firstIndex { (mainCell) in
                         return mainCell.ticker == stockDataCells[cellItem].ticker
@@ -136,7 +165,7 @@ class StocksListViewController: UICollectionViewController {
                 mainStockCells[index!].favourite = false
                 filteredStockCells = stockDataCells
             }
-        // You're not filtering
+            // You're not filtering
         } else {
             switch selectedFilter {
             case .stocks:
@@ -144,8 +173,11 @@ class StocksListViewController: UICollectionViewController {
                 case false:
                     mainStockCells[cellItem].favourite = true
                     mainStockCells[cellItem].timeAddedToFavourite = Date()
+//                    StocksDB.addStock(stockData: mainStockCells[cellItem], index: cellItem)
+//                    print(StocksDB.realm.objects(Stock.self).count)
                 case true:
                     mainStockCells[cellItem].favourite = false
+//                    StocksDB.removeStock(index: cellItem)
                 }
             case .favourites:
                 let index = mainStockCells.firstIndex { (mainCell) in

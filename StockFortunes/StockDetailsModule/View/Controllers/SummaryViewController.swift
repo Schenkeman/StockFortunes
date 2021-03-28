@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SummaryViewController: UIViewController {
     
@@ -35,6 +36,7 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureLogo()
         configure()
         configureUI()
         configureTextView()
@@ -58,8 +60,8 @@ class SummaryViewController: UIViewController {
     private let logoImage: UIImageView = {
         let logo = UIImageView()
         logo.contentMode = .scaleAspectFit
-        logo.clipsToBounds = true
-        logo.backgroundColor = .purple
+        logo.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        logo.backgroundColor = .blue
         return logo
     }()
     
@@ -176,5 +178,10 @@ class SummaryViewController: UIViewController {
         websiteLabel.anchor(top: summaryTextView.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 16, paddingLeft: 13, paddingRight: 16)
     
         websiteLabel.font = UIFont.systemFont(ofSize: 16)
+            
+    }
+    
+    private func configureLogo() {
+            self.logoImage.sd_setImage(with: URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: self.ticker!)))"), placeholderImage: nil)
     }
 }

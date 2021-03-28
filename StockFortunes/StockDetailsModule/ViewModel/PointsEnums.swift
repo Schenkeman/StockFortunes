@@ -15,7 +15,7 @@ enum DataGranularityEnum: String {
     case mo3 = "3mo"
 }
 
-enum EpochTypeRequest: Int, CaseIterable {
+public enum EpochTypeRequest: Int, CaseIterable {
     case day
     case week
     case month

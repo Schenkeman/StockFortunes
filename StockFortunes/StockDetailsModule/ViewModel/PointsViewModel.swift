@@ -83,7 +83,7 @@ class PointsViewModel {
                 for key in sortedKeys {
                     let itemDateDouble = Double(key)!
                     let keyDate = Date(timeIntervalSince1970: itemDateDouble)
-                    if dayInt == calendar.component(.day, from: keyDate) {
+                    if dayInt == calendar.component(.day, from: keyDate) && weakInt == calendar.component(.weekOfMonth, from: keyDate) && monthInt == calendar.component(.month, from: keyDate) {
                         guard let itemClose = pointsModel.items[key]?.closeItem else { return }
                         let entry = ChartDataEntry(x: itemDateDouble, y: itemClose)
                         chartValues.append(entry)

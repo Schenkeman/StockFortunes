@@ -7,8 +7,16 @@
 
 import UIKit
 import Charts
+import JGProgressHUD
 
 class ChartViewController: UIViewController {
+    
+    let networkManager = NetworkManager()
+    var points: PointsModel! {
+        didSet {
+            setDataForPoints()
+        }
+    }
     
     var ticker: String!
     var labelCount: Int!
@@ -17,13 +25,14 @@ class ChartViewController: UIViewController {
     var buttonsCollection: EpochCollectionView!
     
     var dateFormatter = DateFormatter()
+    let hud = JGProgressHUD(style: .dark)
     
     
     init(ticker: String) {
         super.init(nibName: nil, bundle: nil)
         self.ticker = ticker
-        let pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
-        pointsViewModel = PointsViewModel(pointsModel: pointsModel)
+        //        let pointsModel = MockServer.fetchPoints(file: ticker, epoch: .day)
+        //        pointsViewModel = PointsViewModel(pointsModel: pointsModel)
         
     }
     
@@ -34,27 +43,17 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        pointsViewModel.listener = { [weak self] data in
-            guard let self = self else { return }
-            self.lineChartView.data = data
-            self.setLabelsCount(count: self.labelCount)
-        }
-        labelCount = pointsViewModel.itemsCount
-        lineChartView.data = pointsViewModel.chartData
-        lineChartView.xAxis.valueFormatter = pointsViewModel.xValuesNumberFormatter!
+        
+        handleFetchPoints(ticker: ticker, epochType: .day)
         lineChartView.delegate = self
         configureLineChartView()
-        setLabelsCount(count: labelCount)
         configureButtonsCollection()
         setDateFormatter()
         buttonsCollection.delegate = self
-        
     }
     
     var selectedEpochType: EpochType! = .day {
-        
         didSet {
-            
             switch selectedEpochType {
             case .day:
                 xValueLabel.text = "Current Day"
@@ -155,7 +154,35 @@ class ChartViewController: UIViewController {
         dateFormatter.timeZone = TimeZone(abbreviation: "EDT")
         dateFormatter.dateFormat = "MMM d, h:mm a"
     }
+    
+    
+    private func handleFetchPoints(ticker: String, epochType: EpochTypeRequest)  {
+        
+        hud.show(in: view)
+        //        networkManager.fetchChartData(ticker: ticker, epochType: epochType) { [weak self] (pointsModel, error) in
+        //            guard let self = self, let pointsModel = pointsModel else { return }
+        //            self.points = pointsModel
+        //        }
+        points = MockServer.fetchPoints(file: ticker, epoch: epochType)
+        hud.dismiss()
+    }
+    
+    private func setDataForPoints() {
+        pointsViewModel = PointsViewModel(pointsModel: points)
+        labelCount = pointsViewModel.itemsCount
+        lineChartView.data = pointsViewModel.chartData
+        setLabelsCount(count: labelCount)
+        lineChartView.xAxis.valueFormatter = pointsViewModel.xValuesNumberFormatter!
+        pointsViewModel.listener = { [weak self] data in
+            guard let self = self else { return }
+            self.lineChartView.data = data
+            self.labelCount = self.pointsViewModel.itemsCount
+            self.setLabelsCount(count: self.labelCount)
+            self.lineChartView.xAxis.valueFormatter = self.pointsViewModel.xValuesNumberFormatter!
+        }
+    }
 }
+
 extension ChartViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         xValueLabel.text = "\(dateFormatter.string(from: Date(timeIntervalSince1970: entry.x)))"

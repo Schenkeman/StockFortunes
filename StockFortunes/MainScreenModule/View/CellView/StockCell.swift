@@ -39,7 +39,7 @@ class StockCell: UICollectionViewCell {
         let logo = UIImageView()
         logo.contentMode = .scaleAspectFit
         logo.clipsToBounds = true
-        logo.backgroundColor = .purple
+        logo.backgroundColor = .white
         return logo
     }()
     
@@ -108,7 +108,7 @@ class StockCell: UICollectionViewCell {
         let diffPercent = String(format: stringFormat, stockViewModel.changePercent)
         diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
         let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
-        //        Nuke.loadImage(with: logoURL, into: logoImage)
+//                Nuke.loadImage(with: logoURL, into: logoImage)
     }
     
     func chooseColorTint(n: Int) {
@@ -159,10 +159,10 @@ class StockCell: UICollectionViewCell {
         leftStack.axis = .vertical
         rightStack.spacing = 2
         
-        leftStack.anchor(top: backgroundTintView.topAnchor, left: logoImage.rightAnchor, bottom: backgroundTintView.bottomAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 15, width: 150)
+        leftStack.anchor(top: backgroundTintView.topAnchor, left: logoImage.rightAnchor, bottom: backgroundTintView.bottomAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 15, width: 100)
         
-        rightStack.anchor(top: backgroundTintView.topAnchor, left: rightStack.leftAnchor, bottom: backgroundTintView.bottomAnchor, right: backgroundTintView.rightAnchor, paddingTop: 15, paddingBottom: 15, paddingRight: 15)
+        rightStack.anchor(top: backgroundTintView.topAnchor, left: leftStack.leftAnchor, bottom: backgroundTintView.bottomAnchor, right: backgroundTintView.rightAnchor, paddingTop: 15, paddingBottom: 15, paddingRight: 15)
         
-        favouriteIcon.anchor(top: topAnchor, left: leftStack.rightAnchor, paddingTop: 25, paddingLeft: -95, width: 15, height: 15)
+        favouriteIcon.anchor(top: topAnchor, left: leftStack.rightAnchor, paddingTop: 25, paddingLeft: 0, width: 15, height: 15)
     }
 }

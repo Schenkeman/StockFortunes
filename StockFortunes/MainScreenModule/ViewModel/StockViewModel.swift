@@ -15,8 +15,6 @@ protocol StocksListViewModelProtocol {
 }
 
 final class StocksListViewModel: StocksListViewModelProtocol {
-    
-    //    var manager: NetworkManager = NetworkManager()
     var listener: Listener?
     var stockModels: [StockModel] {
         didSet {

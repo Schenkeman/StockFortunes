@@ -4,23 +4,39 @@ PODS:
   - Charts/Core (3.6.0)
   - JGProgressHUD (2.0.4)
   - Nuke (9.2.4)
+  - Realm (10.7.2):
+    - Realm/Headers (= 10.7.2)
+  - Realm/Headers (10.7.2)
+  - RealmSwift (10.7.2):
+    - Realm (= 10.7.2)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
 
 DEPENDENCIES:
   - Charts
   - JGProgressHUD (~> 2.0.3)
   - Nuke (~> 9.0)
+  - RealmSwift
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - Charts
     - JGProgressHUD
     - Nuke
+    - Realm
+    - RealmSwift
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
   Nuke: 44439f7a92e665a4f927ecd73cb51f91d93b0e0c
+  Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
+  RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: 01dc8a20f77cd00db48e1314244a765e1f1a2c56
+PODFILE CHECKSUM: 5d6a1beeb950c03636ffc807642a07a8c68230a9
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

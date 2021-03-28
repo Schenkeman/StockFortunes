@@ -25,17 +25,18 @@ enum Result<String>{
 enum ServiceApiKey: String {
     case finhubSandbox = "sandbox_c0lsj8f48v6r1vcseilg"
     case finhubAPI = "c0lsj8f48v6r1vcseil0"
-    case mboubAPI = "TArxUzv0sspX2SgYxlMud5GWOVXg3cBUUSDCbtz3N7fICh9HihZtVJFBDU9o"
+    case mboubAPI = "spi6q9NqwVogp4v4TgDQ2Y33smspzi10YZtbylLN6VulvPM86cpJdQG1pMj1"
 }
 
 struct NetworkManager {
     static let environment : NetworkEnvironment = .production
     let mboumRouter = Router<MboumApi>()
-    let finhubRouter = Router<FinhubApi>()
+//    let finhubRouter = Router<FinhubApi>()
     
-    func getStockQuotes(symbols: [String], completion: @escaping (_ quote: [StockModel]?,_ error: String?)->()){
+    func fetchStocks(symbols: [String], completion: @escaping (_ stockModels: [StockModel]?, _ error: String?)->()){
+        
         let stringSymbols = symbols.joined(separator: ",")
-        mboumRouter.request(.quotes(symbols: stringSymbols)) { data, response, error in
+        mboumRouter.request(.stocks(tickers: stringSymbols)) { data, response, error in
             
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -55,7 +56,7 @@ struct NetworkManager {
                         print(jsonData)
                         let apiResponse = try JSONDecoder().decode([StockModel].self, from: responseData)
                         completion(apiResponse,nil)
-                    }catch {
+                    } catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
@@ -66,8 +67,9 @@ struct NetworkManager {
         }
     }
     
-    func getPeersQuotes(symbols: String, completion: @escaping (_ peers: [String]?,_ error: String?)->()){
-        finhubRouter.request(.peers(symbols: symbols)) { data, response, error in
+    func fetchChartData(ticker: String, epochType: EpochTypeRequest, completion: @escaping (_ pointsModel: PointsModel?, _ error: String?)->()){
+        
+        mboumRouter.request(.chartData(ticker: ticker, epochType: epochType)) { data, response, error in
             
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -85,9 +87,9 @@ struct NetworkManager {
                         print(responseData)
                         let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                         print(jsonData)
-                        let apiResponse = try JSONDecoder().decode(PeersList.PeersList.self, from: responseData)
+                        let apiResponse = try JSONDecoder().decode(PointsModel.self, from: responseData)
                         completion(apiResponse,nil)
-                    }catch {
+                    } catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
@@ -98,11 +100,6 @@ struct NetworkManager {
         }
     }
     
-//    func getFakeData<T:Decodable>(jsonName: String, decodableClass: T, completion: @escaping (Decodable) -> ()) {
-//        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: jsonName, ofType: "json")!), options: NSData.ReadingOptions.mappedIfSafe)
-//        let model = try! JSONDecoder().decode([decodableClass].self as! T.Type, from: data)
-//        completion(model)
-//    }
     
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
