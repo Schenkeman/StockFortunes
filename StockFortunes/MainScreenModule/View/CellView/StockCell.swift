@@ -108,7 +108,7 @@ class StockCell: UICollectionViewCell {
         let diffPercent = String(format: stringFormat, stockViewModel.changePercent)
         diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
         let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
-//                Nuke.loadImage(with: logoURL, into: logoImage)
+                Nuke.loadImage(with: logoURL, into: logoImage)
     }
     
     func chooseColorTint(n: Int) {
