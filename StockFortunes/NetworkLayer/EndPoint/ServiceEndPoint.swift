@@ -14,6 +14,7 @@ enum NetworkEnvironment {
     case staging
 }
 
+
 public enum MboumApi {
     case stocks(tickers: String)
     case chartData(ticker: String, epochType: EpochTypeRequest)

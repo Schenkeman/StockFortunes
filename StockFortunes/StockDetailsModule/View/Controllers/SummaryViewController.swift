@@ -182,6 +182,6 @@ class SummaryViewController: UIViewController {
     }
     
     private func configureLogo() {
-            self.logoImage.sd_setImage(with: URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: self.ticker!)))"), placeholderImage: nil)
+            self.logoImage.sd_setImage(with: URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: self.ticker!))"), placeholderImage: nil)
     }
 }
