@@ -15,7 +15,10 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
     var router: PresenterToRouterQuotesProtocol?
-    
+
+
+    var quoteResponseModel: QuoteListResponseModel?
+    var quotesList: [Quote]?
     var quotesStrings: [String]?
     
     func viewDidLoad() {
@@ -51,14 +54,14 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     func deselectRowAt(index: Int) {
 //        view?.deselectRowAt(row: index)
     }
-    
-    
 }
 
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
-    func fetchQuotesSuccess(quotes: [Quote]) {
-        self.quotesStrings = quotes.compactMap { $0.quote }
+    func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
+        self.quoteResponseModel = quoteResponseModel
+        self.quotesList = quoteResponseModel.quoteResponse.result
         view?.hideHUD()
+        print(quotesList![0].ticker)
         view?.onFetchQuotesSuccess()
     }
     

@@ -47,7 +47,7 @@ protocol PresenterToInteractorQuotesProtocol: AnyObject {
 
 //MARK:- Interactor Output
 protocol InteractorToPresenterQuotesProtocol: AnyObject {
-    func fetchQuotesSuccess(quotes: [Quote])
+    func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel)
     func fetchQuotesFailure(errorCode: Int)
 
     func getQuoteSuccess(_ quote: Quote)

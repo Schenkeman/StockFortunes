@@ -10,15 +10,13 @@ import Foundation
 class QuotesInteractor: PresenterToInteractorQuotesProtocol {
     
     weak var presenter: InteractorToPresenterQuotesProtocol?
-    var quotes: [String]?
+    var quotesResponseModel: QuoteListResponseModel?
     
     func loadQuotes() {
-//        QuoteService.shared.getQuotes(count: 6, success: { (code, quotes) in
-//            self.quotes = quotes
-//            self.presenter?.fetchQuotesSuccess(quotes: quotes)
-//        }) { (code) in
-//            self.presenter?.fetchQuotesFailure(errorCode: code)
-//        }
+        QuotesService.shared.getQuotes { quotesResponseModel in
+            self.quotesResponseModel = quotesResponseModel
+            self.presenter?.fetchQuotesSuccess(quoteResponseModel: quotesResponseModel)
+        }
     }
     
     func retrieveQuote(at index: Int) {

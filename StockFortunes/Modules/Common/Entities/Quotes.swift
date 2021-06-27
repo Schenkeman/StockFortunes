@@ -6,11 +6,11 @@
 //
 import Foundation
 
-struct QuoteResponseModel: Codable {
+struct QuoteListResponseModel: Codable {
     let quoteResponse: QuoteResponse
 }
 
-// MARK: - regularmarketopenQuoteResponse
+
 struct QuoteResponse: Codable {
     let result: [Quote]
     let error: JSONNull?
