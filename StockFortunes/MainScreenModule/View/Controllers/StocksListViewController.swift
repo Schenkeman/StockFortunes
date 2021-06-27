@@ -7,8 +7,7 @@
 
 import UIKit
 import Foundation
-import RealmSwift
-import JGProgressHUD
+
 
 
 private let reuseIdentifier = "StockCell"
@@ -18,17 +17,17 @@ class StocksListViewController: UICollectionViewController {
     
     //MARK:- Properties
     var tickers: [String]! = []
-    var items: Results<Stock>! {
-        didSet {
-            for item in items {
-                tickers.append(item.ticker)
-            }
-            guard let tickers = tickers else { return }
-            handleFetchStocks()
-        }
-    }
-    
-    var networkManager: NetworkManager!
+//    var items: Results<Stock>! {
+//        didSet {
+//            for item in items {
+//                tickers.append(item.ticker)
+//            }
+//            guard let tickers = tickers else { return }
+//            handleFetchStocks()
+//        }
+//    }
+//    
+//    var networkManager: NetworkManager!
     
     private var selectedFilter: MainHeaderViewOptions = .stocks {
         didSet {
@@ -69,7 +68,7 @@ class StocksListViewController: UICollectionViewController {
         setUpNavDate()
         configureUI()
         setupLongGestureRecognizerOnCollection()
-        favouriteStockCells = configureFavouriteCells()
+//        favouriteStockCells = configureFavouriteCells()
     }
 
     
@@ -129,79 +128,79 @@ class StocksListViewController: UICollectionViewController {
         mainStockCells = MockServer.fetchInitialStocks()
     }
     
-    fileprivate func handleFavouriteTap(cellItem: Int) {
-        
-        var stockDataCells: [StockModel]
-        // If you're filtering
-        if isFiltering {
-            stockDataCells = filteredStockCells
-            switch stockDataCells[cellItem].favourite {
-            // Stock is not favourite
-            case false:
-                // Stock is not in main list
-                if !mainStockCells.contains(where: { (mainCell) in
-                    return mainCell.ticker == stockDataCells[cellItem].ticker
-                }) {
-                    stockDataCells[cellItem].favourite = true
-                    stockDataCells[cellItem].timeAddedToFavourite = Date()
-                    mainStockCells.append(stockDataCells[cellItem])
-                    StocksDB.addStock(stockData: stockDataCells[cellItem], index: cellItem)
-                    print(StocksDB.realm.objects(Stock.self).count)
-                    // Stock is in main list
-                } else {
-                    let index = mainStockCells.firstIndex { (mainCell) in
-                        return mainCell.ticker == stockDataCells[cellItem].ticker
-                    }
-                    stockDataCells[cellItem].favourite = true
-                    mainStockCells[index!].favourite = true
-                }
-                filteredStockCells = stockDataCells
-            // Stock is favourite
-            case true:
-                let index = mainStockCells.firstIndex { (mainCell) in
-                    return mainCell.ticker == stockDataCells[cellItem].ticker
-                }
-                stockDataCells[cellItem].favourite = false
-                mainStockCells[index!].favourite = false
-                filteredStockCells = stockDataCells
-            }
-            // You're not filtering
-        } else {
-            switch selectedFilter {
-            case .stocks:
-                switch mainStockCells[cellItem].favourite {
-                case false:
-                    mainStockCells[cellItem].favourite = true
-                    mainStockCells[cellItem].timeAddedToFavourite = Date()
-//                    StocksDB.addStock(stockData: mainStockCells[cellItem], index: cellItem)
+//    fileprivate func handleFavouriteTap(cellItem: Int) {
+//
+//        var stockDataCells: [StockModel]
+//        // If you're filtering
+//        if isFiltering {
+//            stockDataCells = filteredStockCells
+//            switch stockDataCells[cellItem].favourite {
+//            // Stock is not favourite
+//            case false:
+//                // Stock is not in main list
+//                if !mainStockCells.contains(where: { (mainCell) in
+//                    return mainCell.ticker == stockDataCells[cellItem].ticker
+//                }) {
+//                    stockDataCells[cellItem].favourite = true
+//                    stockDataCells[cellItem].timeAddedToFavourite = Date()
+//                    mainStockCells.append(stockDataCells[cellItem])
+//                    StocksDB.addStock(stockData: stockDataCells[cellItem], index: cellItem)
 //                    print(StocksDB.realm.objects(Stock.self).count)
-                case true:
-                    mainStockCells[cellItem].favourite = false
-//                    StocksDB.removeStock(index: cellItem)
-                }
-            case .favourites:
-                let index = mainStockCells.firstIndex { (mainCell) in
-                    return mainCell.ticker == favouriteStockCells[cellItem].ticker
-                }
-                mainStockCells[index!].favourite = false
-            }
-        }
-        favouriteStockCells = configureFavouriteCells()
-    }
-    
-    func configureFavouriteCells() -> [StockModel] {
-        var favourites: [StockModel]
-        favourites = mainStockCells.filter { stockCell in
-            return stockCell.favourite == true
-        }
-        favourites.sort { (a, b) -> Bool in
-            guard let time1 = a.timeAddedToFavourite, let time2 = b.timeAddedToFavourite else { return false}
-            return time1 < time2
-        }
-        return favourites
-    }
+//                    // Stock is in main list
+//                } else {
+//                    let index = mainStockCells.firstIndex { (mainCell) in
+//                        return mainCell.ticker == stockDataCells[cellItem].ticker
+//                    }
+//                    stockDataCells[cellItem].favourite = true
+//                    mainStockCells[index!].favourite = true
+//                }
+//                filteredStockCells = stockDataCells
+//            // Stock is favourite
+//            case true:
+//                let index = mainStockCells.firstIndex { (mainCell) in
+//                    return mainCell.ticker == stockDataCells[cellItem].ticker
+//                }
+//                stockDataCells[cellItem].favourite = false
+//                mainStockCells[index!].favourite = false
+//                filteredStockCells = stockDataCells
+//            }
+//            // You're not filtering
+//        } else {
+//            switch selectedFilter {
+//            case .stocks:
+//                switch mainStockCells[cellItem].favourite {
+//                case false:
+//                    mainStockCells[cellItem].favourite = true
+//                    mainStockCells[cellItem].timeAddedToFavourite = Date()
+////                    StocksDB.addStock(stockData: mainStockCells[cellItem], index: cellItem)
+////                    print(StocksDB.realm.objects(Stock.self).count)
+//                case true:
+//                    mainStockCells[cellItem].favourite = false
+////                    StocksDB.removeStock(index: cellItem)
+//                }
+//            case .favourites:
+//                let index = mainStockCells.firstIndex { (mainCell) in
+//                    return mainCell.ticker == favouriteStockCells[cellItem].ticker
+//                }
+//                mainStockCells[index!].favourite = false
+//            }
+//        }
+//        favouriteStockCells = configureFavouriteCells()
+//    }
+//
+//    func configureFavouriteCells() -> [StockModel] {
+//        var favourites: [StockModel]
+//        favourites = mainStockCells.filter { stockCell in
+//            return stockCell.favourite == true
+//        }
+//        favourites.sort { (a, b) -> Bool in
+//            guard let time1 = a.timeAddedToFavourite, let time2 = b.timeAddedToFavourite else { return false}
+//            return time1 < time2
+//        }
+//        return favourites
+//    }
+//}
 }
-
 //MARK:- Collection Extensions
 
 extension StocksListViewController {
@@ -303,7 +302,7 @@ extension StocksListViewController: UIGestureRecognizerDelegate {
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             if (gestureRecognizer.state == .began) {
                 print("Long press at item: \(indexPath.row)")
-                handleFavouriteTap(cellItem: indexPath.row)
+//                handleFavouriteTap(cellItem: indexPath.row)
                 UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .beginFromCurrentState, animations: {
                     cell.transform = CGAffineTransform.init(scaleX: 1.1, y: 1.1)
                 }, completion: nil)
@@ -315,6 +314,7 @@ extension StocksListViewController: UIGestureRecognizerDelegate {
         }
     }
 }
+
 
 
 

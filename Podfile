@@ -9,8 +9,8 @@ target 'StockFortunes' do
 pod 'JGProgressHUD', '~>2.0.3'
 pod 'Nuke', '~> 9.0'
 pod 'Charts'
-pod 'RealmSwift'
 pod 'SDWebImage', '~> 5.0'
+pod 'PKHUD'
 
 end
 
