@@ -14,8 +14,8 @@ class QuotesViewController: UIViewController {
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        
+//        setupUI()
+        view.backgroundColor = .yellow
         presenter?.viewDidLoad()
     }
     
