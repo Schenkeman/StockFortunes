@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let vc = MainBuilder().build()
 //        window?.rootViewController = UINavigationController(rootViewController: vc)
 //        window?.makeKeyAndVisible()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = QuotesRouter.createModule()
+        window?.makeKeyAndVisible()
         return true
     }
 

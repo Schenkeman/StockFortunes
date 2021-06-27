@@ -11,7 +11,7 @@ import JGProgressHUD
 
 class ChartViewController: UIViewController {
     
-    let networkManager = NetworkManager()
+//    let networkManager = NetworkManager()
     var points: PointsModel! {
         didSet {
             setDataForPoints()
