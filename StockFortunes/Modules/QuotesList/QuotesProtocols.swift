@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 //MARK:- View Output
-protocol PresenterToViewQuotesProtocol: class {
+protocol PresenterToViewQuotesProtocol: AnyObject {
     func onFetchQuotesSuccess()
     func onFetchQuotesFailure(error: String)
 
@@ -20,7 +20,7 @@ protocol PresenterToViewQuotesProtocol: class {
 }
 
 //MARK:- View Input
-protocol ViewToPresenterQuotesProtocol: class {
+protocol ViewToPresenterQuotesProtocol: AnyObject {
     
     var view: PresenterToViewQuotesProtocol? { get set }
     var interactor: PresenterToInteractorQuotesProtocol? { get set }
@@ -38,7 +38,7 @@ protocol ViewToPresenterQuotesProtocol: class {
 }
 
 //MARK:- Interactor Input
-protocol PresenterToInteractorQuotesProtocol: class {
+protocol PresenterToInteractorQuotesProtocol: AnyObject {
     var presenter: InteractorToPresenterQuotesProtocol? { get set }
     
     func loadQuotes()
@@ -46,8 +46,8 @@ protocol PresenterToInteractorQuotesProtocol: class {
 }
 
 //MARK:- Interactor Output
-protocol InteractorToPresenterQuotesProtocol: class {
-    func fetchQuotesSuccess(quotes: [Quote])
+protocol InteractorToPresenterQuotesProtocol: AnyObject {
+    func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel)
     func fetchQuotesFailure(errorCode: Int)
 
     func getQuoteSuccess(_ quote: Quote)
@@ -55,7 +55,7 @@ protocol InteractorToPresenterQuotesProtocol: class {
 }
 
 //MARK:- Router Input
-protocol PresenterToRouterQuotesProtocol: class {
+protocol PresenterToRouterQuotesProtocol: AnyObject {
     static func createModule() -> UINavigationController
     
     func pushToQuoteDetail(on view: PresenterToViewQuotesProtocol, with quote: Quote)

@@ -90,7 +90,7 @@ class StocksListViewController: UICollectionViewController {
     func configureUI() {
         view.addSubview(headerFilterView)
         view.backgroundColor = .white
-        collectionView.register(StockCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(QuoteSnippet.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .clear
         
         headerFilterView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
@@ -214,15 +214,15 @@ extension StocksListViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StockCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
         var stockModel: StockModel
         if isFiltering {
             stockModel = filteredStockCells[indexPath.row]
         } else {
             stockModel = currentStockCells[indexPath.row]
         }
-        cell.stockViewModel = StockViewModel(stockModel: stockModel)
-        cell.chooseColorTint(n: indexPath.row)
+//        cell.stockViewModel = StockViewModel(stockModel: stockModel)
+//        cell.chooseColorTint(n: indexPath.row)
         return cell
     }
 }

@@ -15,7 +15,10 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
     var router: PresenterToRouterQuotesProtocol?
-    
+
+
+    var quoteResponseModel: QuoteListResponseModel?
+    var quotesList: [Quote]?
     var quotesStrings: [String]?
     
     func viewDidLoad() {
@@ -28,11 +31,11 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func numberOfRowsInSection() -> Int {
-        guard let quotesStrings = self.quotesStrings else {
+        guard let quotesList = self.quotesList else {
             return 0
         }
         
-        return quotesStrings.count
+        return quotesList.count
     }
     
     func textLabelText(indexPath: IndexPath) -> String? {
@@ -51,14 +54,14 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     func deselectRowAt(index: Int) {
 //        view?.deselectRowAt(row: index)
     }
-    
-    
 }
 
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
-    func fetchQuotesSuccess(quotes: [Quote]) {
-        self.quotesStrings = quotes.compactMap { $0.quote }
+    func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
+        self.quoteResponseModel = quoteResponseModel
+        self.quotesList = quoteResponseModel.quoteResponse.result
         view?.hideHUD()
+        print(quotesList![0].ticker)
         view?.onFetchQuotesSuccess()
     }
     

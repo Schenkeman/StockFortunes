@@ -8,16 +8,41 @@
 import UIKit
 import Nuke
 
+struct QuoteSnippetState {
+    struct QuoteData: Equatable {
+        var ticker: String
+        var title: String
 
-class StockCell: UICollectionViewCell {
+        var currentPrice: Double
+        var diffPrice: Double
+        var changePercent: Double
+
+        var favourite: Bool = false
+        var timeAddedToFavourite: Date?
+
+        static func ==(lhs: QuoteData, rhs: QuoteData) -> Bool {
+            return lhs.favourite == rhs.favourite
+        }
+    }
+}
+
+
+class QuoteSnippet: UICollectionViewCell {
     
     //MARK:- Properties
-    
-    var stockViewModel: StockViewModel! {
+    //
+    //    var stockViewModel: StockViewModel! {
+    //        didSet {
+    //            configure()
+    //            configureFavouriteIcon()
+    //            configureColorOfLabel()
+    //        }
+    //    }
+
+    var quoteData: QuoteSnippetState.QuoteData! {
         didSet {
-            configure()
-            configureFavouriteIcon()
-            configureColorOfLabel()
+            configure(quoteData: quoteData)
+            configureUI()
         }
     }
     
@@ -26,7 +51,12 @@ class StockCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        
+    }
+
+    convenience init(frame: CGRect, quoteData: QuoteSnippetState.QuoteData) {
+        self.init(frame: frame)
+        configure(quoteData: quoteData)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -99,41 +129,41 @@ class StockCell: UICollectionViewCell {
     
     //MARK:- Functions
     
-    private func configure() {
-        tickerLabel.text = stockViewModel.ticker
-        titleLabel.text = stockViewModel.title
-        let stringFormat = "%.2f"
-        currentPriceLabel.text = "$\(String(format: stringFormat, stockViewModel.currentPrice))"
-        let diffValue = String(format: stringFormat, stockViewModel.diffPrice)
-        let diffPercent = String(format: stringFormat, stockViewModel.changePercent)
-        diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
-        let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
-                Nuke.loadImage(with: logoURL, into: logoImage)
+    func configure(quoteData: QuoteSnippetState.QuoteData) {
+                tickerLabel.text = quoteData.ticker
+                titleLabel.text = quoteData.title
+                let stringFormat = "%.2f"
+                currentPriceLabel.text = "$\(String(format: stringFormat, quoteData.currentPrice))"
+                let diffValue = String(format: stringFormat, quoteData.diffPrice)
+                let diffPercent = String(format: stringFormat, quoteData.changePercent)
+                diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
+        //        let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
+        //                Nuke.loadImage(with: logoURL, into: logoImage)
     }
     
-    func chooseColorTint(n: Int) {
-        let n = Int(n)
-        backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
-    }
+    //    func chooseColorTint(n: Int) {
+    //        let n = Int(n)
+    //        backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
+    //    }
     
-    func configureFavouriteIcon() {
-        if stockViewModel.favourite == true {
-            self.favouriteIcon.tintColor = .orange
-        } else {
-            self.favouriteIcon.tintColor = .lightGray
-        }
-    }
-    
-    func configureColorOfLabel() {
-        if stockViewModel.diffPrice < 0 {
-            diffPriceLabel.textColor = .red
-        } else if stockViewModel.diffPrice == 0.0 {
-            diffPriceLabel.textColor = .black
-        } else {
-            diffPriceLabel.textColor = .systemGreen
-        }
-    }
-    
+    //    func configureFavouriteIcon() {
+    //        if stockViewModel.favourite == true {
+    //            self.favouriteIcon.tintColor = .orange
+    //        } else {
+    //            self.favouriteIcon.tintColor = .lightGray
+    //        }
+    //    }
+    //
+    //    func configureColorOfLabel() {
+    //        if stockViewModel.diffPrice < 0 {
+    //            diffPriceLabel.textColor = .red
+    //        } else if stockViewModel.diffPrice == 0.0 {
+    //            diffPriceLabel.textColor = .black
+    //        } else {
+    //            diffPriceLabel.textColor = .systemGreen
+    //        }
+    //    }
+    //
     private func configureUI() {
         addSubview(backgroundTintView)
         addSubview(logoImage)

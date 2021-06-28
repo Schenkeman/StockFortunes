@@ -50,11 +50,15 @@
 		F286CDFD25DBB4A900DC3DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F286CDFC25DBB4A900DC3DF9 /* Assets.xcassets */; };
 		F286CE0025DBB4A900DC3DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F286CDFE25DBB4A900DC3DF9 /* LaunchScreen.storyboard */; };
 		F2941CB626027F12007E4F0A /* PointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2941CB526027F12007E4F0A /* PointsViewModel.swift */; };
-		F29D073D2688929B008F8AAE /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D073C2688929B008F8AAE /* Quote.swift */; };
+		F29D073D2688929B008F8AAE /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D073C2688929B008F8AAE /* Quotes.swift */; };
+		F29D07402688A7AB008F8AAE /* get_quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = F29D073F2688A7AB008F8AAE /* get_quotes.json */; };
+		F29D07432688BF34008F8AAE /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D07422688BF34008F8AAE /* QuotesService.swift */; };
+		F29D07452688FB73008F8AAE /* QuotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D07442688FB73008F8AAE /* QuotesList.swift */; };
+		F29D0747268A2119008F8AAE /* QuotesListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D0746268A2119008F8AAE /* QuotesListLayout.swift */; };
 		F29DDD1025FA8CAF00A3796F /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DDD0F25FA8CAF00A3796F /* SummaryViewModel.swift */; };
 		F2B3215C25DC3A8E002CAA14 /* StockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3215B25DC3A8E002CAA14 /* StockViewModel.swift */; };
 		F2B3216125DC3EC9002CAA14 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3216025DC3EC9002CAA14 /* UIView+Extensions.swift */; };
-		F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217225DC5623002CAA14 /* StockCell.swift */; };
+		F2B3217325DC5623002CAA14 /* QuoteSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217225DC5623002CAA14 /* QuoteSnippet.swift */; };
 		F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217725DD315B002CAA14 /* MainBuilder.swift */; };
 		F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C9989A25E2579800810D2F /* Codable+Extensions.swift */; };
 		F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */; };
@@ -128,11 +132,15 @@
 		F286CDFF25DBB4A900DC3DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F286CE0125DBB4A900DC3DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2941CB526027F12007E4F0A /* PointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewModel.swift; sourceTree = "<group>"; };
-		F29D073C2688929B008F8AAE /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		F29D073C2688929B008F8AAE /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
+		F29D073F2688A7AB008F8AAE /* get_quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_quotes.json; sourceTree = "<group>"; };
+		F29D07422688BF34008F8AAE /* QuotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesService.swift; sourceTree = "<group>"; };
+		F29D07442688FB73008F8AAE /* QuotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesList.swift; sourceTree = "<group>"; };
+		F29D0746268A2119008F8AAE /* QuotesListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesListLayout.swift; sourceTree = "<group>"; };
 		F29DDD0F25FA8CAF00A3796F /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		F2B3215B25DC3A8E002CAA14 /* StockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewModel.swift; sourceTree = "<group>"; };
 		F2B3216025DC3EC9002CAA14 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		F2B3217225DC5623002CAA14 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		F2B3217225DC5623002CAA14 /* QuoteSnippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSnippet.swift; sourceTree = "<group>"; };
 		F2B3217725DD315B002CAA14 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		F2C9989A25E2579800810D2F /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderViewModel.swift; sourceTree = "<group>"; };
@@ -195,7 +203,6 @@
 				F27550D725E126AE00427C99 /* Builder */,
 				F2018AF125DBFDAF0018D973 /* Model */,
 				F2B3215A25DC3A79002CAA14 /* ViewModel */,
-				F2018AF025DBFDAA0018D973 /* View */,
 			);
 			path = MainScreenModule;
 			sourceTree = "<group>";
@@ -203,9 +210,12 @@
 		F2018AF025DBFDAA0018D973 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F2563F2E25FE5AC1008A34EA /* CellView */,
-				F2563F2D25FE5ABC008A34EA /* Controllers */,
+				F2B3217225DC5623002CAA14 /* QuoteSnippet.swift */,
+				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
 				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
+				F286CDF725DBB4A700DC3DF9 /* StocksListViewController.swift */,
+				F29D07442688FB73008F8AAE /* QuotesList.swift */,
+				F29D0746268A2119008F8AAE /* QuotesListLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,49 +229,27 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		F21EFD2B265C322F002EF58D /* Quotes */ = {
+		F21EFD2B265C322F002EF58D /* QuotesList */ = {
 			isa = PBXGroup;
 			children = (
+				F2018AF025DBFDAA0018D973 /* View */,
 				F26E0A51265C371000DBFCC2 /* QuotesProtocols.swift */,
 				F24B8E6E265D6E9000C661C0 /* QuotesPresenter.swift */,
 				F21EFD2D265C3310002EF58D /* QuotesViewController.swift */,
 				F2CC4F23266D283C005B966D /* QuotesInteractor.swift */,
 				F2CC4F26266D48CB005B966D /* QuotesRouter.swift */,
 			);
-			path = Quotes;
+			path = QuotesList;
 			sourceTree = "<group>";
 		};
 		F21EFD2C265C325A002EF58D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F29D07412688BF1B008F8AAE /* Services */,
 				F29D073A26889282008F8AAE /* Common */,
-				F21EFD2B265C322F002EF58D /* Quotes */,
+				F21EFD2B265C322F002EF58D /* QuotesList */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		F2563F2D25FE5ABC008A34EA /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				F286CDF725DBB4A700DC3DF9 /* StocksListViewController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		F2563F2E25FE5AC1008A34EA /* CellView */ = {
-			isa = PBXGroup;
-			children = (
-				F2B3217225DC5623002CAA14 /* StockCell.swift */,
-				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
-			);
-			path = CellView;
-			sourceTree = "<group>";
-		};
-		F268AEFE26388BE30077E7BF /* Rapid */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Rapid;
 			sourceTree = "<group>";
 		};
 		F2754F2D25DE890C00427C99 /* Constants */ = {
@@ -325,7 +313,7 @@
 		F27550A825DFC69F00427C99 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F268AEFE26388BE30077E7BF /* Rapid */,
+				F29D073E2688A776008F8AAE /* YFRapid */,
 				F27550AA25DFC6B400427C99 /* Mboum */,
 				F27550A925DFC6A700427C99 /* Finhub */,
 			);
@@ -420,9 +408,25 @@
 		F29D073B2688928A008F8AAE /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				F29D073C2688929B008F8AAE /* Quote.swift */,
+				F29D073C2688929B008F8AAE /* Quotes.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		F29D073E2688A776008F8AAE /* YFRapid */ = {
+			isa = PBXGroup;
+			children = (
+				F29D073F2688A7AB008F8AAE /* get_quotes.json */,
+			);
+			path = YFRapid;
+			sourceTree = "<group>";
+		};
+		F29D07412688BF1B008F8AAE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F29D07422688BF34008F8AAE /* QuotesService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		F2B3215A25DC3A79002CAA14 /* ViewModel */ = {
@@ -574,6 +578,7 @@
 				F27550D925E1273300427C99 /* QuoteList_testing.json in Resources */,
 				F262E2F02605415600FBFBAB /* AAPL_3mo.json in Resources */,
 				F286CE0025DBB4A900DC3DF9 /* LaunchScreen.storyboard in Resources */,
+				F29D07402688A7AB008F8AAE /* get_quotes.json in Resources */,
 				F27550BC25E017C500427C99 /* PeersList.json in Resources */,
 				F286CDFD25DBB4A900DC3DF9 /* Assets.xcassets in Resources */,
 				F27550B225DFC6D400427C99 /* MostWatched_2.json in Resources */,
@@ -643,7 +648,7 @@
 				F2754F4425DE936600427C99 /* String+Extensions.swift in Sources */,
 				F2C998B925E57D6E00810D2F /* HeaderFilterView.swift in Sources */,
 				F262E2FF2606835000FBFBAB /* PointsEnums.swift in Sources */,
-				F29D073D2688929B008F8AAE /* Quote.swift in Sources */,
+				F29D073D2688929B008F8AAE /* Quotes.swift in Sources */,
 				F2754F3425DE893700427C99 /* Constants.swift in Sources */,
 				F286CDF825DBB4A700DC3DF9 /* StocksListViewController.swift in Sources */,
 				F286CDF425DBB4A700DC3DF9 /* AppDelegate.swift in Sources */,
@@ -668,7 +673,7 @@
 				F275509725DFA3C700427C99 /* URLParameterEncoding.swift in Sources */,
 				F275508F25DF98D300427C99 /* HTTPTask.swift in Sources */,
 				F2FB4C9725F13BA3005027B2 /* NewsViewController.swift in Sources */,
-				F2B3217325DC5623002CAA14 /* StockCell.swift in Sources */,
+				F2B3217325DC5623002CAA14 /* QuoteSnippet.swift in Sources */,
 				F27550A125DFAA9700427C99 /* Router.swift in Sources */,
 				F2F6629D25F4DD1300B2F947 /* EpochButtonCell.swift in Sources */,
 				F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */,
@@ -679,8 +684,10 @@
 				F2754F4125DE90F300427C99 /* ErrorKey.swift in Sources */,
 				F275509325DFA39C00427C99 /* ParameterEncoding.swift in Sources */,
 				F2FCED75260116950051D077 /* CustomFlowLayout.swift in Sources */,
+				F29D0747268A2119008F8AAE /* QuotesListLayout.swift in Sources */,
 				F2CC4F27266D48CB005B966D /* QuotesRouter.swift in Sources */,
 				F21EFD2E265C3310002EF58D /* QuotesViewController.swift in Sources */,
+				F29D07452688FB73008F8AAE /* QuotesList.swift in Sources */,
 				F275508C25DF98B600427C99 /* HTTPMethod.swift in Sources */,
 				F2F4D03225F38A700033CBE3 /* CoordinateModel.swift in Sources */,
 				F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */,
@@ -691,6 +698,7 @@
 				F2754F2F25DE891A00427C99 /* ServiceConstants.swift in Sources */,
 				F27550B725DFD0B500427C99 /* PeersModel.swift in Sources */,
 				F2CC4F24266D283C005B966D /* QuotesInteractor.swift in Sources */,
+				F29D07432688BF34008F8AAE /* QuotesService.swift in Sources */,
 				F2F662A225F62DAA00B2F947 /* EpochCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
