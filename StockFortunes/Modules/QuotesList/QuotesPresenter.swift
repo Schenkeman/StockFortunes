@@ -31,11 +31,11 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func numberOfRowsInSection() -> Int {
-        guard let quotesStrings = self.quotesStrings else {
+        guard let quotesList = self.quotesList else {
             return 0
         }
         
-        return quotesStrings.count
+        return quotesList.count
     }
     
     func textLabelText(indexPath: IndexPath) -> String? {

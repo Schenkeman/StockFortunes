@@ -10,14 +10,12 @@ struct QuoteListResponseModel: Codable {
     let quoteResponse: QuoteResponse
 }
 
-
 struct QuoteResponse: Codable {
     let result: [Quote]
     let error: JSONNull?
 }
 
 struct Quote: Codable {
-
     var ticker: String
     var title: String
 
@@ -51,13 +49,12 @@ extension Quote {
 }
 
 class JSONNull: Codable, Hashable {
-
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
     }
 
-    public var hashValue: Int {
-        return 0
+    func hash(into hasher: inout Hasher) {
+        return
     }
 
     public init() {}

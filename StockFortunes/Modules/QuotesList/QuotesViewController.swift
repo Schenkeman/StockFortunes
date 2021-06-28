@@ -9,13 +9,21 @@ import Foundation
 import UIKit
 import PKHUD
 
+private let reuseIdentifier = "QuoteCell"
+private let headerIdentidier = "HeaderQuotesList"
+
 class QuotesViewController: UIViewController {
 
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setupUI()
-        view.backgroundColor = .yellow
+        view.addSubview(collectionView)
+//        collectionView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        collectionView.register(QuoteSnippet.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = .green
+        collectionView.delegate = self
+        collectionView.dataSource = self
         presenter?.viewDidLoad()
     }
     
@@ -26,12 +34,19 @@ class QuotesViewController: UIViewController {
     
     //MARK: - Properties
     var presenter: ViewToPresenterQuotesProtocol?
+
+
+    private lazy var selectedFilter: MainHeaderViewOptions = .stocks
+//    private lazy var currentQuoteList: [Quote]
+//    private lazy var searchController: UISearchController!
+
+    lazy var collectionView: UICollectionView = QuotesList(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 90
-        tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.rowHeight = 90
+//        tableView.dataSource = self
+//        tableView.delegate = self
         return tableView
     }()
     
@@ -66,29 +81,53 @@ extension QuotesViewController: PresenterToViewQuotesProtocol {
     }
 }
 
-
-// MARK: - UITableView Delegate & Data Source
-extension QuotesViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfRowsInSection() ?? 0
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-//        cell.textLabel?.text = presenter?.textLabelText(indexPath: indexPath)
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let quoteData = QuoteSnippetState.QuoteData(ticker: "test", title: "test", currentPrice: 123, diffPrice: 123, changePercent: 123)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
+        cell.quoteData = quoteData
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectRowAt(index: indexPath.row)
-        presenter?.deselectRowAt(index: indexPath.row)
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
 }
+
+extension QuotesViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 90)
+    }
+}
+
+// MARK: - UITableView Delegate & Data Source
+//extension QuotesViewController: UITableViewDelegate, UITableViewDataSource {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return presenter?.numberOfRowsInSection() ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = UITableViewCell()
+////        cell.textLabel?.text = presenter?.textLabelText(indexPath: indexPath)
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        presenter?.didSelectRowAt(index: indexPath.row)
+//        presenter?.deselectRowAt(index: indexPath.row)
+//    }
+//}
 
 // MARK:- Setup UI
 extension QuotesViewController {
     func setupUI() {
-        
+
+
     }
+
 }
