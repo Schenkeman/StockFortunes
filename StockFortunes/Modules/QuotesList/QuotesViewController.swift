@@ -63,6 +63,7 @@ class QuotesViewController: UIViewController {
 }
 
 extension QuotesViewController: PresenterToViewQuotesProtocol {
+
     func onFetchQuotesSuccess() {
         self.tableView.reloadData()
         self.refreshControl.endRefreshing()
@@ -87,14 +88,9 @@ extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let quoteData = QuoteSnippetState.QuoteData(ticker: "test", title: "test", currentPrice: 123, diffPrice: 123, changePercent: 123)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
-        cell.quoteData = quoteData
+        cell.quoteData = presenter?.configureQuoteSnippet(indexPath: indexPath)
         return cell
-    }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
 }
 

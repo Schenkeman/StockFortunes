@@ -16,7 +16,6 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     var interactor: PresenterToInteractorQuotesProtocol?
     var router: PresenterToRouterQuotesProtocol?
 
-
     var quoteResponseModel: QuoteListResponseModel?
     var quotesList: [Quote]?
     var quotesStrings: [String]?
@@ -31,11 +30,20 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func numberOfRowsInSection() -> Int {
-        guard let quotesList = self.quotesList else {
+        guard let quoteResponseModel = self.quoteResponseModel else {
             return 0
         }
-        
-        return quotesList.count
+
+        return quoteResponseModel.quoteResponse.result.count
+    }
+
+    func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData? {
+        guard let quoteResponseModel = self.quoteResponseModel else {
+            return nil
+        }
+        let quoteData = quoteResponseModel.quoteResponse.result[indexPath.row]
+        let quoteDataModel = QuoteSnippetState.QuoteData(quote: quoteData)
+        return quoteDataModel
     }
     
     func textLabelText(indexPath: IndexPath) -> String? {
@@ -59,9 +67,8 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
         self.quoteResponseModel = quoteResponseModel
-        self.quotesList = quoteResponseModel.quoteResponse.result
+//        self.quotesList = quoteResponseModel.quoteResponse.result
         view?.hideHUD()
-        print(quotesList![0].ticker)
         view?.onFetchQuotesSuccess()
     }
     

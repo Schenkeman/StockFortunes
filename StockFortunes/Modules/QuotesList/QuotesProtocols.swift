@@ -15,7 +15,7 @@ protocol PresenterToViewQuotesProtocol: AnyObject {
 
     func showHUD()
     func hideHUD()
-
+    
     func deselectRowAt(row: Int)
 }
 
@@ -32,6 +32,7 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func refresh()
     
     func numberOfRowsInSection() -> Int
+    func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData?
     
     func didSelectRowAt(index: Int)
     func deselectRowAt(index: Int)

@@ -23,22 +23,19 @@ struct QuoteSnippetState {
         static func ==(lhs: QuoteData, rhs: QuoteData) -> Bool {
             return lhs.favourite == rhs.favourite
         }
+
+        init(quote: Quote) {
+            self.ticker = quote.ticker
+            self.title = quote.title
+            self.currentPrice = quote.currentPrice
+            self.diffPrice = quote.diffPrice
+            self.changePercent = quote.changePercent
+        }
     }
 }
 
 
 class QuoteSnippet: UICollectionViewCell {
-    
-    //MARK:- Properties
-    //
-    //    var stockViewModel: StockViewModel! {
-    //        didSet {
-    //            configure()
-    //            configureFavouriteIcon()
-    //            configureColorOfLabel()
-    //        }
-    //    }
-
     var quoteData: QuoteSnippetState.QuoteData! {
         didSet {
             configure(quoteData: quoteData)
@@ -61,6 +58,11 @@ class QuoteSnippet: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        configureForPrepare()
     }
     
     //MARK:- UI Properties
@@ -139,6 +141,13 @@ class QuoteSnippet: UICollectionViewCell {
                 diffPriceLabel.text = "\(diffValue)$ (\(diffPercent)%)"
         //        let logoURL = URL(string: "https://finnhub.io/api/logo?symbol=\(String(describing: stockViewModel.ticker))")!
         //                Nuke.loadImage(with: logoURL, into: logoImage)
+    }
+
+    func configureForPrepare() {
+        tickerLabel.text = nil
+        titleLabel.text = nil
+        currentPriceLabel.text = nil
+        diffPriceLabel.text = nil
     }
     
     //    func chooseColorTint(n: Int) {
