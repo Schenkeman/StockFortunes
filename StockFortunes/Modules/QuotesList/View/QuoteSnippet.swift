@@ -150,10 +150,10 @@ class QuoteSnippet: UICollectionViewCell {
         diffPriceLabel.text = nil
     }
     
-    //    func chooseColorTint(n: Int) {
-    //        let n = Int(n)
-    //        backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
-    //    }
+        func chooseColorTint(n: Int) {
+            let n = Int(n)
+            backgroundTintView.backgroundColor = n % 2 == 0 ? backgroundTintColor : .white
+        }
     
     //    func configureFavouriteIcon() {
     //        if stockViewModel.favourite == true {

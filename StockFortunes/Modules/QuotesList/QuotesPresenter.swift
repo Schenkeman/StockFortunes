@@ -67,7 +67,6 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
         self.quoteResponseModel = quoteResponseModel
-//        self.quotesList = quoteResponseModel.quoteResponse.result
         view?.hideHUD()
         view?.onFetchQuotesSuccess()
     }

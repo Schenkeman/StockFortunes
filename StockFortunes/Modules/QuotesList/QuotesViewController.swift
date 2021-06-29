@@ -19,9 +19,8 @@ class QuotesViewController: UIViewController {
         super.viewDidLoad()
 //        setupUI()
         view.addSubview(collectionView)
-//        collectionView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         collectionView.register(QuoteSnippet.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.backgroundColor = .green
+        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         presenter?.viewDidLoad()
@@ -89,6 +88,7 @@ extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
+        cell.chooseColorTint(n: indexPath.row)
         cell.quoteData = presenter?.configureQuoteSnippet(indexPath: indexPath)
         return cell
     }
