@@ -82,6 +82,6 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
 
     func getQuoteFailure() {
         view?.hideHUD()
-        print("Couldn't retrieve quote by index")
+        print("Couldn't retrieve quote by indexxx")
     }
 }
