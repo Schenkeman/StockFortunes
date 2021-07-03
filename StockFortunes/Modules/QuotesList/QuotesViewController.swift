@@ -23,6 +23,7 @@ class QuotesViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
+        presenter?.chooseTypeOfListing(option: selectedOption)
         presenter?.viewDidLoad()
     }
     
@@ -32,22 +33,17 @@ class QuotesViewController: UIViewController {
     }
     
     //MARK: - Properties
+    
     var presenter: ViewToPresenterQuotesProtocol?
-
-
-    private lazy var selectedFilter: MainHeaderViewOptions = .stocks
-//    private lazy var currentQuoteList: [Quote]
+    private lazy var selectedOption: MainHeaderViewOptions = .quotes {
+        didSet {
+            presenter?.chooseTypeOfListing(option: selectedOption)
+        }
+    }
+    
 //    private lazy var searchController: UISearchController!
 
     lazy var collectionView: UICollectionView = QuotesList(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
-    
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-//        tableView.rowHeight = 90
-//        tableView.dataSource = self
-//        tableView.delegate = self
-        return tableView
-    }()
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -56,15 +52,14 @@ class QuotesViewController: UIViewController {
         return refreshControl
     }()
     
-    func deselectRowAt(row: Int) {
-        self.tableView.deselectRow(at: IndexPath(row: row, section: 0), animated: true)
+    func deselectItem(indexPath: IndexPath) {
+        self.collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
 extension QuotesViewController: PresenterToViewQuotesProtocol {
-
     func onFetchQuotesSuccess() {
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         self.refreshControl.endRefreshing()
     }
     
@@ -79,6 +74,11 @@ extension QuotesViewController: PresenterToViewQuotesProtocol {
     func hideHUD() {
         HUD.hide()
     }
+    
+    func refreshCellsState() {
+        self.collectionView.reloadData()
+        self.refreshControl.endRefreshing()
+    }
 }
 
 extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -92,6 +92,11 @@ extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.quoteData = presenter?.configureQuoteSnippet(indexPath: indexPath)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.didSelectItemAt(index: indexPath.row)
+        presenter?.deselectItem(indexPath: indexPath)
+    }
 }
 
 extension QuotesViewController: UICollectionViewDelegateFlowLayout {
@@ -99,25 +104,6 @@ extension QuotesViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: 90)
     }
 }
-
-// MARK: - UITableView Delegate & Data Source
-//extension QuotesViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return presenter?.numberOfRowsInSection() ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-////        cell.textLabel?.text = presenter?.textLabelText(indexPath: indexPath)
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        presenter?.didSelectRowAt(index: indexPath.row)
-//        presenter?.deselectRowAt(index: indexPath.row)
-//    }
-//}
 
 // MARK:- Setup UI
 extension QuotesViewController {

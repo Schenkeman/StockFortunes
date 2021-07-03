@@ -9,20 +9,25 @@ import Foundation
 import PKHUD
 
 class QuotesPresenter: ViewToPresenterQuotesProtocol {
-    
     //MARK:- Properties
-    
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
     var router: PresenterToRouterQuotesProtocol?
-
+    
     var quoteResponseModel: QuoteListResponseModel?
-    var quotesList: [Quote]?
-    var quotesStrings: [String]?
+    var quoteListResponse: [Quote]?
+    var quotesListing: QuotesProtocol?
+
+    var option: MainHeaderViewOptions = .quotes
     
     func viewDidLoad() {
         view?.showHUD()
         interactor?.loadQuotes()
+    }
+    
+    func chooseTypeOfListing(option: MainHeaderViewOptions) {
+        self.option = option
+        createList()
     }
     
     func refresh() {
@@ -30,43 +35,59 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func numberOfRowsInSection() -> Int {
-        guard let quoteResponseModel = self.quoteResponseModel else {
+        guard let quotesMainList = self.quotesListing, let quotesCount = quotesMainList.quotes?.count else {
             return 0
         }
-
-        return quoteResponseModel.quoteResponse.result.count
+        return quotesCount
     }
-
+    
     func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData? {
-        guard let quoteResponseModel = self.quoteResponseModel else {
-            return nil
+        switch self.option {
+        case .quotes:
+            return quotesListing?.quotes?[indexPath.row]
+        case .favourites:
+            return quotesListing?.quotes?[indexPath.row]
         }
-        let quoteData = quoteResponseModel.quoteResponse.result[indexPath.row]
-        let quoteDataModel = QuoteSnippetState.QuoteData(quote: quoteData)
-        return quoteDataModel
-    }
-    
-    func textLabelText(indexPath: IndexPath) -> String? {
-        guard let quotesStrings = self.quotesStrings else {
-            return nil
-        }
-        
-        return quotesStrings[indexPath.row]
     }
 
-    
-    func didSelectRowAt(index: Int) {
+    func didSelectItemAt(index: Int) {
         interactor?.retrieveQuote(at: index)
     }
     
-    func deselectRowAt(index: Int) {
-//        view?.deselectRowAt(row: index)
+    func deselectItem(indexPath: IndexPath) {
+        view?.deselectItem(indexPath: indexPath)
+    }
+    
+    func didTapFavourite(ticker: String) {
+        return
+    }
+    
+    func createList() {
+        guard var quoteListResponse = quoteListResponse else {
+            return
+        }
+        quoteListResponse[3].favourite = true
+        quoteListResponse[5].favourite = true
+        switch self.option {
+        case .quotes:
+            quotesListing = QuotesMainListing(quotes: quoteListResponse.compactMap { quote in
+                QuoteSnippetState.QuoteData(quote: quote)
+            })
+        case .favourites:
+            quotesListing = QuotesFavouriteListing(quotes: quoteListResponse.compactMap { quote in
+                if quote.favourite {
+                    return QuoteSnippetState.QuoteData(quote: quote)
+                } else { return nil }
+            })
+        }
     }
 }
 
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
         self.quoteResponseModel = quoteResponseModel
+        self.quoteListResponse = quoteResponseModel.quoteResponse.result
+        createList()
         view?.hideHUD()
         view?.onFetchQuotesSuccess()
     }
@@ -75,13 +96,13 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
         view?.hideHUD()
         view?.onFetchQuotesFailure(error: "Couldn't fetch quotes: \(errorCode)")
     }
-
+    
     func getQuoteSuccess(_ quote: Quote) {
         router?.pushToQuoteDetail(on: view!, with: quote)
     }
-
+    
     func getQuoteFailure() {
         view?.hideHUD()
-        print("Couldn't retrieve quote by indexxx")
+        print("Couldn't retrieve quote by index")
     }
 }

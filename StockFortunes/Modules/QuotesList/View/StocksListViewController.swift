@@ -29,14 +29,14 @@ class StocksListViewController: UICollectionViewController {
 //    
 //    var networkManager: NetworkManager!
     
-    private var selectedFilter: MainHeaderViewOptions = .stocks {
+    private var selectedFilter: MainHeaderViewOptions = .quotes {
         didSet {
             collectionView.reloadData()
         }
     }
     private var currentStockCells: [StockModel] {
         switch selectedFilter {
-        case .stocks: return mainStockCells
+        case .quotes: return mainStockCells
         case .favourites: return favouriteStockCells
         }
     }

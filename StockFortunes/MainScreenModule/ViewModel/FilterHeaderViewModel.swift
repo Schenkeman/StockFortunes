@@ -13,12 +13,12 @@ enum HeaderType: String {
 }
 
 enum MainHeaderViewOptions: Int, CaseIterable {
-    case stocks
+    case quotes
     case favourites
     
     var description: String {
         switch self {
-        case .stocks: return "Stocks"
+        case .quotes: return "Quotes"
         case .favourites: return "Favourites"
         }
     }

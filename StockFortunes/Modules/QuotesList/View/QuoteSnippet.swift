@@ -36,8 +36,11 @@ struct QuoteSnippetState {
 
 
 class QuoteSnippet: UICollectionViewCell {
-    var quoteData: QuoteSnippetState.QuoteData! {
+    var quoteData: QuoteSnippetState.QuoteData? {
         didSet {
+            guard let quoteData = quoteData else {
+                return
+            }
             configure(quoteData: quoteData)
             configureUI()
         }

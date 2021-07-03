@@ -10,13 +10,15 @@ import UIKit
 
 //MARK:- View Output
 protocol PresenterToViewQuotesProtocol: AnyObject {
+    
     func onFetchQuotesSuccess()
     func onFetchQuotesFailure(error: String)
 
     func showHUD()
     func hideHUD()
     
-    func deselectRowAt(row: Int)
+    func deselectItem(indexPath: IndexPath)
+    func refreshCellsState()
 }
 
 //MARK:- View Input
@@ -26,16 +28,17 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     var interactor: PresenterToInteractorQuotesProtocol? { get set }
     var router: PresenterToRouterQuotesProtocol? { get set }
     
-    var quotesStrings: [String]? { get set }
-    
     func viewDidLoad()
     func refresh()
     
     func numberOfRowsInSection() -> Int
     func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData?
     
-    func didSelectRowAt(index: Int)
-    func deselectRowAt(index: Int)
+    func didSelectItemAt(index: Int)
+    func deselectItem(indexPath: IndexPath)
+    
+    func didTapFavourite(ticker: String)
+    func chooseTypeOfListing(option: MainHeaderViewOptions) 
 }
 
 //MARK:- Interactor Input

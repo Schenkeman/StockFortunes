@@ -10,6 +10,7 @@
 		0134E761C1BE49DF4E83A308 /* Pods_StockFortunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F77CCED8EF7DC568CC8C0701 /* Pods_StockFortunes.framework */; };
 		F2018AF325DBFF180018D973 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2018AF225DBFF180018D973 /* StockModel.swift */; };
 		F210E7F52609186E000B615A /* SaveLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210E7F42609186E000B615A /* SaveLoadData.swift */; };
+		F2191007268FACF200838B5D /* QuotesDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2191006268FACF200838B5D /* QuotesDictionary.swift */; };
 		F21EFD2E265C3310002EF58D /* QuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21EFD2D265C3310002EF58D /* QuotesViewController.swift */; };
 		F2489EEA260A68A800E2C1AB /* StocksDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2489EE9260A68A800E2C1AB /* StocksDB.swift */; };
 		F24B8E6F265D6E9000C661C0 /* QuotesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B8E6E265D6E9000C661C0 /* QuotesPresenter.swift */; };
@@ -90,6 +91,7 @@
 		A820EB83294F09D31BEC1B36 /* Pods-StockFortunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockFortunes.debug.xcconfig"; path = "Target Support Files/Pods-StockFortunes/Pods-StockFortunes.debug.xcconfig"; sourceTree = "<group>"; };
 		F2018AF225DBFF180018D973 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
 		F210E7F42609186E000B615A /* SaveLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadData.swift; sourceTree = "<group>"; };
+		F2191006268FACF200838B5D /* QuotesDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesDictionary.swift; sourceTree = "<group>"; };
 		F21EFD2D265C3310002EF58D /* QuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewController.swift; sourceTree = "<group>"; };
 		F2489EE9260A68A800E2C1AB /* StocksDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksDB.swift; sourceTree = "<group>"; };
 		F24B8E6E265D6E9000C661C0 /* QuotesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesPresenter.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				F29D073C2688929B008F8AAE /* Quotes.swift */,
+				F2191006268FACF200838B5D /* QuotesDictionary.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				F29D0747268A2119008F8AAE /* QuotesListLayout.swift in Sources */,
 				F2CC4F27266D48CB005B966D /* QuotesRouter.swift in Sources */,
 				F21EFD2E265C3310002EF58D /* QuotesViewController.swift in Sources */,
+				F2191007268FACF200838B5D /* QuotesDictionary.swift in Sources */,
 				F29D07452688FB73008F8AAE /* QuotesList.swift in Sources */,
 				F275508C25DF98B600427C99 /* HTTPMethod.swift in Sources */,
 				F2F4D03225F38A700033CBE3 /* CoordinateModel.swift in Sources */,
