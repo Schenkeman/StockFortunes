@@ -41,9 +41,16 @@ class QuotesViewController: UIViewController {
         }
     }
     
-//    private lazy var searchController: UISearchController!
+    private var searchController: UISearchController!
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
 
-    lazy var collectionView: UICollectionView = QuotesList(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
+    lazy var collectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()

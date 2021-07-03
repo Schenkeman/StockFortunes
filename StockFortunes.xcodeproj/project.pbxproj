@@ -54,8 +54,6 @@
 		F29D073D2688929B008F8AAE /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D073C2688929B008F8AAE /* Quotes.swift */; };
 		F29D07402688A7AB008F8AAE /* get_quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = F29D073F2688A7AB008F8AAE /* get_quotes.json */; };
 		F29D07432688BF34008F8AAE /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D07422688BF34008F8AAE /* QuotesService.swift */; };
-		F29D07452688FB73008F8AAE /* QuotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D07442688FB73008F8AAE /* QuotesList.swift */; };
-		F29D0747268A2119008F8AAE /* QuotesListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29D0746268A2119008F8AAE /* QuotesListLayout.swift */; };
 		F29DDD1025FA8CAF00A3796F /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DDD0F25FA8CAF00A3796F /* SummaryViewModel.swift */; };
 		F2B3215C25DC3A8E002CAA14 /* StockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3215B25DC3A8E002CAA14 /* StockViewModel.swift */; };
 		F2B3216125DC3EC9002CAA14 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3216025DC3EC9002CAA14 /* UIView+Extensions.swift */; };
@@ -137,8 +135,6 @@
 		F29D073C2688929B008F8AAE /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		F29D073F2688A7AB008F8AAE /* get_quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = get_quotes.json; sourceTree = "<group>"; };
 		F29D07422688BF34008F8AAE /* QuotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesService.swift; sourceTree = "<group>"; };
-		F29D07442688FB73008F8AAE /* QuotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesList.swift; sourceTree = "<group>"; };
-		F29D0746268A2119008F8AAE /* QuotesListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesListLayout.swift; sourceTree = "<group>"; };
 		F29DDD0F25FA8CAF00A3796F /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		F2B3215B25DC3A8E002CAA14 /* StockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewModel.swift; sourceTree = "<group>"; };
 		F2B3216025DC3EC9002CAA14 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -216,8 +212,6 @@
 				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
 				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
 				F286CDF725DBB4A700DC3DF9 /* StocksListViewController.swift */,
-				F29D07442688FB73008F8AAE /* QuotesList.swift */,
-				F29D0746268A2119008F8AAE /* QuotesListLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -687,11 +681,9 @@
 				F2754F4125DE90F300427C99 /* ErrorKey.swift in Sources */,
 				F275509325DFA39C00427C99 /* ParameterEncoding.swift in Sources */,
 				F2FCED75260116950051D077 /* CustomFlowLayout.swift in Sources */,
-				F29D0747268A2119008F8AAE /* QuotesListLayout.swift in Sources */,
 				F2CC4F27266D48CB005B966D /* QuotesRouter.swift in Sources */,
 				F21EFD2E265C3310002EF58D /* QuotesViewController.swift in Sources */,
 				F2191007268FACF200838B5D /* QuotesDictionary.swift in Sources */,
-				F29D07452688FB73008F8AAE /* QuotesList.swift in Sources */,
 				F275508C25DF98B600427C99 /* HTTPMethod.swift in Sources */,
 				F2F4D03225F38A700033CBE3 /* CoordinateModel.swift in Sources */,
 				F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */,
