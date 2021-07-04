@@ -34,7 +34,6 @@ struct QuoteSnippetState {
     }
 }
 
-
 class QuoteSnippet: UICollectionViewCell {
     var quoteData: QuoteSnippetState.QuoteData? {
         didSet {

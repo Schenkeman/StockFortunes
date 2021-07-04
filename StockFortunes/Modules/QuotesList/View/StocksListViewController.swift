@@ -29,7 +29,7 @@ class StocksListViewController: UICollectionViewController {
 //    
 //    var networkManager: NetworkManager!
     
-    private var selectedFilter: MainHeaderViewOptions = .quotes {
+    private var selectedFilter: QuoteListingOptions = .quotes {
         didSet {
             collectionView.reloadData()
         }
@@ -279,7 +279,7 @@ extension StocksListViewController: UISearchResultsUpdating {
 
 extension StocksListViewController: HeaderFilterViewDelegate {
     func filterView(_ view: UIView, didSelect indexPath: IndexPath) {
-        guard let filter = MainHeaderViewOptions(rawValue: indexPath.row) else { return }
+        guard let filter = QuoteListingOptions(rawValue: indexPath.row) else { return }
         self.selectedFilter = filter
     }
     

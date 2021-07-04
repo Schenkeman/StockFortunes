@@ -61,7 +61,6 @@
 		F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B3217725DD315B002CAA14 /* MainBuilder.swift */; };
 		F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C9989A25E2579800810D2F /* Codable+Extensions.swift */; };
 		F2C998B325E57BB600810D2F /* FilterHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */; };
-		F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */; };
 		F2C998B925E57D6E00810D2F /* HeaderFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */; };
 		F2CC4F24266D283C005B966D /* QuotesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CC4F23266D283C005B966D /* QuotesInteractor.swift */; };
 		F2CC4F27266D48CB005B966D /* QuotesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CC4F26266D48CB005B966D /* QuotesRouter.swift */; };
@@ -142,7 +141,6 @@
 		F2B3217725DD315B002CAA14 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		F2C9989A25E2579800810D2F /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		F2C998B225E57BB600810D2F /* FilterHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderViewModel.swift; sourceTree = "<group>"; };
-		F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFilterCell.swift; sourceTree = "<group>"; };
 		F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFilterView.swift; sourceTree = "<group>"; };
 		F2CC4F23266D283C005B966D /* QuotesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesInteractor.swift; sourceTree = "<group>"; };
 		F2CC4F26266D48CB005B966D /* QuotesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesRouter.swift; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				F2B3217225DC5623002CAA14 /* QuoteSnippet.swift */,
-				F2C998B525E57CC600810D2F /* HeaderFilterCell.swift */,
 				F2C998B825E57D6E00810D2F /* HeaderFilterView.swift */,
 				F286CDF725DBB4A700DC3DF9 /* StocksListViewController.swift */,
 			);
@@ -686,7 +683,6 @@
 				F2191007268FACF200838B5D /* QuotesDictionary.swift in Sources */,
 				F275508C25DF98B600427C99 /* HTTPMethod.swift in Sources */,
 				F2F4D03225F38A700033CBE3 /* CoordinateModel.swift in Sources */,
-				F2C998B625E57CC600810D2F /* HeaderFilterCell.swift in Sources */,
 				F2EB70D525FD27D40032550E /* NewsViewModel.swift in Sources */,
 				F2C9989B25E2579800810D2F /* Codable+Extensions.swift in Sources */,
 				F2B3216125DC3EC9002CAA14 /* UIView+Extensions.swift in Sources */,

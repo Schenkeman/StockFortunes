@@ -24,6 +24,8 @@ class QuotesRouter: PresenterToRouterQuotesProtocol {
         viewController.presenter?.interactor = QuotesInteractor()
         viewController.presenter?.interactor?.presenter = presenter
         
+        viewController.presenter?.selectedOption = .quotes
+        
         return navigationController
     }
 

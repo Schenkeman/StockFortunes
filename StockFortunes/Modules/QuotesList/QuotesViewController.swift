@@ -39,13 +39,7 @@ class QuotesViewController: UIViewController {
     }
     
     //MARK: - Properties
-    
     var presenter: ViewToPresenterQuotesProtocol?
-    var selectedOption: MainHeaderViewOptions = .quotes {
-        didSet {
-            presenter?.chooseTypeOfListing(option: selectedOption)
-        }
-    }
     
     let headerFilterView: HeaderFilterView = {
         let hfv = HeaderFilterView()
@@ -77,6 +71,7 @@ class QuotesViewController: UIViewController {
 
 extension QuotesViewController: PresenterToViewQuotesProtocol {
     func onFetchQuotesSuccess() {
+//        presenter?.chooseTypeOfListing(option: selectedOption)
         self.collectionView.reloadData()
         self.refreshControl.endRefreshing()
     }
@@ -142,9 +137,8 @@ extension QuotesViewController {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        presenter?.chooseTypeOfListing(option: selectedOption)
-        presenter?.viewDidLoad()
         definesPresentationContext = true
+        presenter?.viewDidLoad()
     }
     
     func setUpNavDate() {
@@ -163,5 +157,4 @@ extension QuotesViewController {
         searchController.searchBar.returnKeyType = .search
         searchController.searchBar.delegate = self
     }
-    
 }

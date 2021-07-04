@@ -9,25 +9,27 @@ import Foundation
 import PKHUD
 
 class QuotesPresenter: ViewToPresenterQuotesProtocol {
+    
     //MARK:- Properties
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
     var router: PresenterToRouterQuotesProtocol?
     
+    var selectedOption: QuoteListingOptions!
+    
     var quoteResponseModel: QuoteListResponseModel?
     var quoteListResponse: [Quote]?
     var quotesListing: QuotesProtocol?
-
-    var option: MainHeaderViewOptions = .quotes
     
     func viewDidLoad() {
         view?.showHUD()
         interactor?.loadQuotes()
     }
     
-    func chooseTypeOfListing(option: MainHeaderViewOptions) {
-        self.option = option
-        createList()
+    func chooseTypeOfListing(option: QuoteListingOptions) {
+        selectedOption = option
+        self.quotesListing = QuotesService.shared.createQuoteList(quoteListResponse: quoteListResponse,
+                                                                  option: selectedOption)
         view?.refreshCellsState()
     }
     
@@ -43,11 +45,13 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData? {
-        switch self.option {
+        switch self.selectedOption {
         case .quotes:
             return quotesListing?.quotes?[indexPath.row]
         case .favourites:
             return quotesListing?.quotes?[indexPath.row]
+        case .none:
+            return nil
         }
     }
 
@@ -64,29 +68,8 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     }
     
     func didSelectOption(index: Int) {
-        guard let option = MainHeaderViewOptions(rawValue: index) else { return }
+        guard let option = QuoteListingOptions(rawValue: index) else { return }
         chooseTypeOfListing(option: option)
-    }
-    
-    func createList() {
-        print("creating list")
-        guard var quoteListResponse = quoteListResponse else {
-            return
-        }
-        quoteListResponse[3].favourite = true
-        quoteListResponse[5].favourite = true
-        switch self.option {
-        case .quotes:
-            quotesListing = QuotesMainListing(quotes: quoteListResponse.compactMap { quote in
-                QuoteSnippetState.QuoteData(quote: quote)
-            })
-        case .favourites:
-            quotesListing = QuotesFavouriteListing(quotes: quoteListResponse.compactMap { quote in
-                if quote.favourite {
-                    return QuoteSnippetState.QuoteData(quote: quote)
-                } else { return nil }
-            })
-        }
     }
 }
 
@@ -94,7 +77,8 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
         self.quoteResponseModel = quoteResponseModel
         self.quoteListResponse = quoteResponseModel.quoteResponse.result
-        createList()
+        self.quotesListing = QuotesService.shared.createQuoteList(quoteListResponse: quoteListResponse,
+                                                                  option: selectedOption)
         view?.hideHUD()
         view?.onFetchQuotesSuccess()
     }

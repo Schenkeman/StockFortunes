@@ -10,9 +10,48 @@ import UIKit
 
 private let reuseIdentifier = "MainViewHeaderCell"
 
-protocol HeaderFilterViewDelegate: class {
+protocol HeaderFilterViewDelegate: AnyObject {
     func filterView(_ view: UIView, didSelect indexPath: IndexPath)
 }
+
+class HeaderFilterCell: UICollectionViewCell {
+    
+    //MARK:- Properties
+    var option: QuoteListingOptions! {
+        didSet {
+            titleLabel.text = option.description
+        }
+    }
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "Test Filter"
+        return label
+    }()
+    
+    override var isSelected: Bool {
+        didSet {
+            titleLabel.font = isSelected ?
+                UIFont.boldSystemFont(ofSize: 16) : UIFont.systemFont(ofSize: 14)
+            titleLabel.textColor = isSelected ?
+                .black : .lightGray
+        }
+    }
+    
+    //MARK:- Lifecycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        addSubview(titleLabel)
+        titleLabel.center(inView: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
 class HeaderFilterView: UIView {
     
@@ -59,12 +98,12 @@ class HeaderFilterView: UIView {
 
 extension HeaderFilterView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MainHeaderViewOptions.allCases.count
+        return QuoteListingOptions.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HeaderFilterCell
-        let option = MainHeaderViewOptions(rawValue: indexPath.row)
+        let option = QuoteListingOptions(rawValue: indexPath.row)
         cell.option = option
         return cell
     }
@@ -82,7 +121,7 @@ extension HeaderFilterView: UICollectionViewDelegate {
 
 extension HeaderFilterView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = CGFloat(MainHeaderViewOptions.allCases.count)
+        let count = CGFloat(QuoteListingOptions.allCases.count)
         return CGSize(width: frame.width / count, height: frame.height)
     }
     

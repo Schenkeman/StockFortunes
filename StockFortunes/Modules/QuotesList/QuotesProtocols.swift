@@ -28,6 +28,8 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     var interactor: PresenterToInteractorQuotesProtocol? { get set }
     var router: PresenterToRouterQuotesProtocol? { get set }
     
+    var selectedOption: QuoteListingOptions! { get set }
+    
     func viewDidLoad()
     func refresh()
     
@@ -38,7 +40,7 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func deselectItem(indexPath: IndexPath)
     
     func didTapFavourite(ticker: String)
-    func chooseTypeOfListing(option: MainHeaderViewOptions)
+    func chooseTypeOfListing(option: QuoteListingOptions)
     func didSelectOption(index: Int)
 }
 

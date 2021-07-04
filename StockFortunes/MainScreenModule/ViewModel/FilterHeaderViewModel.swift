@@ -12,7 +12,7 @@ enum HeaderType: String {
     case quoteViewHeader
 }
 
-enum MainHeaderViewOptions: Int, CaseIterable {
+enum QuoteListingOptions: Int, CaseIterable {
     case quotes
     case favourites
     
