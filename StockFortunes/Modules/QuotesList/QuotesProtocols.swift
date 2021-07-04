@@ -38,7 +38,8 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func deselectItem(indexPath: IndexPath)
     
     func didTapFavourite(ticker: String)
-    func chooseTypeOfListing(option: MainHeaderViewOptions) 
+    func chooseTypeOfListing(option: MainHeaderViewOptions)
+    func didSelectOption(index: Int)
 }
 
 //MARK:- Interactor Input

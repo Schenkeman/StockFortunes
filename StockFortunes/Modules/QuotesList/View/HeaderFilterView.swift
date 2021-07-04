@@ -17,7 +17,8 @@ protocol HeaderFilterViewDelegate: class {
 class HeaderFilterView: UIView {
     
     //MARK:- Properties
-    weak var delegate: HeaderFilterViewDelegate?
+//    weak var delegate: HeaderFilterViewDelegate?
+    weak var presenter: ViewToPresenterQuotesProtocol?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -75,8 +76,7 @@ extension HeaderFilterView: UICollectionViewDelegate {
         UIView.animate(withDuration: 0.2 ) {
             self.underlineView.frame.origin.x = xPosition
         }
-        delegate?.filterView(self, didSelect: indexPath)
-        
+        presenter?.didSelectOption(index: indexPath.row)
     }
 }
 

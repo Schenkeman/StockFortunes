@@ -13,20 +13,26 @@ private let reuseIdentifier = "QuoteCell"
 private let headerIdentidier = "HeaderQuotesList"
 
 class QuotesViewController: UIViewController {
-
+    
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupUI()
-        view.addSubview(collectionView)
-        collectionView.register(QuoteSnippet.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        presenter?.chooseTypeOfListing(option: selectedOption)
-        presenter?.viewDidLoad()
+        setupUI()
+        setUpNavDate()
+        configureSearchController()
+        headerFilterView.presenter = presenter
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController!.navigationBar.barTintColor = .white
+        navigationController!.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
     //MARK:- Actions
     @objc func refresh() {
         presenter?.refresh()
@@ -35,13 +41,18 @@ class QuotesViewController: UIViewController {
     //MARK: - Properties
     
     var presenter: ViewToPresenterQuotesProtocol?
-    private lazy var selectedOption: MainHeaderViewOptions = .quotes {
+    var selectedOption: MainHeaderViewOptions = .quotes {
         didSet {
             presenter?.chooseTypeOfListing(option: selectedOption)
         }
     }
     
-    private var searchController: UISearchController!
+    let headerFilterView: HeaderFilterView = {
+        let hfv = HeaderFilterView()
+        return hfv
+    }()
+    
+    private var searchController: UISearchController! = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -49,7 +60,7 @@ class QuotesViewController: UIViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-
+    
     lazy var collectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     lazy var refreshControl: UIRefreshControl = {
@@ -73,11 +84,11 @@ extension QuotesViewController: PresenterToViewQuotesProtocol {
     func onFetchQuotesFailure(error: String) {
         self.refreshControl.endRefreshing()
     }
-
+    
     func showHUD() {
         HUD.show(.progress, onView: self.view)
     }
-
+    
     func hideHUD() {
         HUD.hide()
     }
@@ -92,7 +103,7 @@ extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfRowsInSection() ?? 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
         cell.chooseColorTint(n: indexPath.row)
@@ -112,11 +123,45 @@ extension QuotesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension QuotesViewController: UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        return
+    }
+}
+
 // MARK:- Setup UI
 extension QuotesViewController {
     func setupUI() {
-
-
+        view.backgroundColor = .white
+        view.addSubview(collectionView)
+        view.addSubview(headerFilterView)
+        self.navigationItem.largeTitleDisplayMode = .always
+        collectionView.register(QuoteSnippet.self, forCellWithReuseIdentifier: reuseIdentifier)
+        headerFilterView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 52)
+        collectionView.anchor(top: headerFilterView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        presenter?.chooseTypeOfListing(option: selectedOption)
+        presenter?.viewDidLoad()
+        definesPresentationContext = true
     }
-
+    
+    func setUpNavDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd"
+        let navTime = dateFormatter.string(from: Date())
+        navigationItem.title = "\(navTime.uppercased())"
+    }
+    
+    func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        searchController.searchBar.placeholder = "Find company or ticker"
+        definesPresentationContext = true
+        searchController.searchBar.returnKeyType = .search
+        searchController.searchBar.delegate = self
+    }
+    
 }

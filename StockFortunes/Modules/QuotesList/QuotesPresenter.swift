@@ -28,6 +28,7 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     func chooseTypeOfListing(option: MainHeaderViewOptions) {
         self.option = option
         createList()
+        view?.refreshCellsState()
     }
     
     func refresh() {
@@ -62,7 +63,13 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
         return
     }
     
+    func didSelectOption(index: Int) {
+        guard let option = MainHeaderViewOptions(rawValue: index) else { return }
+        chooseTypeOfListing(option: option)
+    }
+    
     func createList() {
+        print("creating list")
         guard var quoteListResponse = quoteListResponse else {
             return
         }

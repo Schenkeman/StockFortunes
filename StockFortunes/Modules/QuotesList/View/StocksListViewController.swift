@@ -64,7 +64,7 @@ class StocksListViewController: UICollectionViewController {
         super.viewDidLoad()
         self.searchController = UISearchController(searchResultsController: nil)
         configureSearchController()
-        headerFilterView.delegate = self
+//        headerFilterView.delegate = self
         setUpNavDate()
         configureUI()
         setupLongGestureRecognizerOnCollection()
