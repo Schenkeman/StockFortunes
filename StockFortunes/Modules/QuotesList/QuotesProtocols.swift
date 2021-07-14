@@ -33,8 +33,8 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func viewDidLoad()
     func refresh()
     
-    func numberOfRowsInSection() -> Int
-    func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData?
+    func numberOfRowsInSection(isFiltering: Bool) -> Int
+    func configureQuoteSnippet(indexPath: IndexPath, isFiltering: Bool) -> QuoteSnippetState.QuoteData?
     
     func didSelectItemAt(index: Int)
     func deselectItem(indexPath: IndexPath)

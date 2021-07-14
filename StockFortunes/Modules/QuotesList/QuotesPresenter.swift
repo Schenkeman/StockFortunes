@@ -40,14 +40,22 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
         interactor?.loadQuotes()
     }
     
-    func numberOfRowsInSection() -> Int {
+    func numberOfRowsInSection(isFiltering: Bool) -> Int {
+        if isFiltering {
+            guard let filteredQuotes = filteredQuotes else { return 0 }
+            return filteredQuotes.count
+        }
         guard let quotesMainList = self.quotesListing, let quotesCount = quotesMainList.quotes?.count else {
             return 0
         }
         return quotesCount
     }
     
-    func configureQuoteSnippet(indexPath: IndexPath) -> QuoteSnippetState.QuoteData? {
+    func configureQuoteSnippet(indexPath: IndexPath, isFiltering: Bool) -> QuoteSnippetState.QuoteData? {
+        if isFiltering {
+            guard let filteredQuotes = filteredQuotes else { return nil }
+            return QuoteSnippetState.QuoteData(quote: filteredQuotes[indexPath.row])
+        }
         switch self.selectedOption {
         case .quotes:
             return quotesListing?.quotes?[indexPath.row]

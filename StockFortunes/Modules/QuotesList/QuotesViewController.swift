@@ -95,13 +95,13 @@ extension QuotesViewController: PresenterToViewQuotesProtocol {
 
 extension QuotesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.numberOfRowsInSection() ?? 0
+        return presenter?.numberOfRowsInSection(isFiltering: isFiltering) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! QuoteSnippet
         cell.chooseColorTint(n: indexPath.row)
-        cell.quoteData = presenter?.configureQuoteSnippet(indexPath: indexPath)
+        cell.quoteData = presenter?.configureQuoteSnippet(indexPath: indexPath, isFiltering: isFiltering)
         return cell
     }
     
@@ -122,8 +122,6 @@ extension QuotesViewController: UISearchBarDelegate, UISearchResultsUpdating {
         let searchBar = searchController.searchBar
         presenter?.filterContentForSearchText(searchBar.text!)
     }
-    
-    
 }
 
 // MARK:- Setup UI
