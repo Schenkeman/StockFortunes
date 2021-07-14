@@ -10,6 +10,7 @@ import PKHUD
 
 class QuotesPresenter: ViewToPresenterQuotesProtocol {
     
+    
     //MARK:- Properties
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
@@ -20,6 +21,8 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     var quoteResponseModel: QuoteListResponseModel?
     var quoteListResponse: [Quote]?
     var quotesListing: QuotesProtocol?
+    
+    var filteredQuotes: [Quote]?
     
     func viewDidLoad() {
         view?.showHUD()
@@ -71,6 +74,14 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
         guard let option = QuoteListingOptions(rawValue: index) else { return }
         chooseTypeOfListing(option: option)
     }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        guard let quoteListResponse = quoteListResponse else { return }
+        filteredQuotes = quoteListResponse.filter { quote in
+            return quote.ticker.lowercased().contains(searchText.lowercased())
+        }
+        view?.refreshCellsState()
+    }
 }
 
 extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
@@ -85,7 +96,7 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     
     func fetchQuotesFailure(errorCode: Int) {
         view?.hideHUD()
-        view?.onFetchQuotesFailure(error: "Couldn't fetch quotesss: \(errorCode)")
+        view?.onFetchQuotesFailure(error: "Couldn't fetch quotes: \(errorCode)")
     }
     
     func getQuoteSuccess(_ quote: Quote) {

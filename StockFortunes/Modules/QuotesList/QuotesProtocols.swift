@@ -42,6 +42,9 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func didTapFavourite(ticker: String)
     func chooseTypeOfListing(option: QuoteListingOptions)
     func didSelectOption(index: Int)
+    
+    
+    func filterContentForSearchText(_ searchText: String)
 }
 
 //MARK:- Interactor Input

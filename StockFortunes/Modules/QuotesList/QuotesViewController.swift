@@ -48,11 +48,10 @@ class QuotesViewController: UIViewController {
     
     private var searchController: UISearchController! = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
-        guard let text = searchController.searchBar.text else { return false }
-        return text.isEmpty
+        searchController.searchBar.text?.isEmpty ?? true
     }
     private var isFiltering: Bool {
-        return searchController.isActive && !searchBarIsEmpty
+        searchController.isActive && !searchBarIsEmpty
     }
     
     lazy var collectionView: UICollectionView = UICollectionView(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -120,8 +119,11 @@ extension QuotesViewController: UICollectionViewDelegateFlowLayout {
 
 extension QuotesViewController: UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        return
+        let searchBar = searchController.searchBar
+        presenter?.filterContentForSearchText(searchBar.text!)
     }
+    
+    
 }
 
 // MARK:- Setup UI
@@ -151,8 +153,8 @@ extension QuotesViewController {
     func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
         searchController.searchBar.placeholder = "Find company or ticker"
+        navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.returnKeyType = .search
         searchController.searchBar.delegate = self
