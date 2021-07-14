@@ -85,7 +85,7 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     
     func fetchQuotesFailure(errorCode: Int) {
         view?.hideHUD()
-        view?.onFetchQuotesFailure(error: "Couldn't fetch quotes: \(errorCode)")
+        view?.onFetchQuotesFailure(error: "Couldn't fetch quotesss: \(errorCode)")
     }
     
     func getQuoteSuccess(_ quote: Quote) {
