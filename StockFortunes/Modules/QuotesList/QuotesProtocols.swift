@@ -40,7 +40,7 @@ protocol ViewToPresenterQuotesProtocol: AnyObject {
     func deselectItem(indexPath: IndexPath)
     
     func didTapFavourite(ticker: String)
-    func chooseTypeOfListing(option: QuoteListingOptions)
+    func selectTypeOfListing(option: QuoteListingOptions)
     func didSelectOption(index: Int)
     
     

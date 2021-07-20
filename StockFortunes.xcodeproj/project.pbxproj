@@ -11,6 +11,11 @@
 		F2018AF325DBFF180018D973 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2018AF225DBFF180018D973 /* StockModel.swift */; };
 		F210E7F52609186E000B615A /* SaveLoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210E7F42609186E000B615A /* SaveLoadData.swift */; };
 		F2191007268FACF200838B5D /* QuotesDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2191006268FACF200838B5D /* QuotesDictionary.swift */; };
+		F21B020F26A189E900BCC103 /* QDContainerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B020E26A189E900BCC103 /* QDContainerProtocols.swift */; };
+		F21B021126A189FB00BCC103 /* QDContainerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B021026A189FB00BCC103 /* QDContainerPresenter.swift */; };
+		F21B021326A18A0C00BCC103 /* QDContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B021226A18A0C00BCC103 /* QDContainerViewController.swift */; };
+		F21B021526A18A1D00BCC103 /* QDContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B021426A18A1D00BCC103 /* QDContainerInteractor.swift */; };
+		F21B021726A18A2800BCC103 /* QDContainerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B021626A18A2800BCC103 /* QDContainerRouter.swift */; };
 		F21EFD2E265C3310002EF58D /* QuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21EFD2D265C3310002EF58D /* QuotesViewController.swift */; };
 		F2489EEA260A68A800E2C1AB /* StocksDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2489EE9260A68A800E2C1AB /* StocksDB.swift */; };
 		F24B8E6F265D6E9000C661C0 /* QuotesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B8E6E265D6E9000C661C0 /* QuotesPresenter.swift */; };
@@ -89,6 +94,11 @@
 		F2018AF225DBFF180018D973 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
 		F210E7F42609186E000B615A /* SaveLoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadData.swift; sourceTree = "<group>"; };
 		F2191006268FACF200838B5D /* QuotesDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesDictionary.swift; sourceTree = "<group>"; };
+		F21B020E26A189E900BCC103 /* QDContainerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDContainerProtocols.swift; sourceTree = "<group>"; };
+		F21B021026A189FB00BCC103 /* QDContainerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDContainerPresenter.swift; sourceTree = "<group>"; };
+		F21B021226A18A0C00BCC103 /* QDContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDContainerViewController.swift; sourceTree = "<group>"; };
+		F21B021426A18A1D00BCC103 /* QDContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDContainerInteractor.swift; sourceTree = "<group>"; };
+		F21B021626A18A2800BCC103 /* QDContainerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDContainerRouter.swift; sourceTree = "<group>"; };
 		F21EFD2D265C3310002EF58D /* QuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewController.swift; sourceTree = "<group>"; };
 		F2489EE9260A68A800E2C1AB /* StocksDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksDB.swift; sourceTree = "<group>"; };
 		F24B8E6E265D6E9000C661C0 /* QuotesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesPresenter.swift; sourceTree = "<group>"; };
@@ -222,6 +232,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F21B020D26A1892800BCC103 /* QuoteDetailContainer */ = {
+			isa = PBXGroup;
+			children = (
+				F21B020E26A189E900BCC103 /* QDContainerProtocols.swift */,
+				F21B021026A189FB00BCC103 /* QDContainerPresenter.swift */,
+				F21B021226A18A0C00BCC103 /* QDContainerViewController.swift */,
+				F21B021426A18A1D00BCC103 /* QDContainerInteractor.swift */,
+				F21B021626A18A2800BCC103 /* QDContainerRouter.swift */,
+			);
+			path = QuoteDetailContainer;
+			sourceTree = "<group>";
+		};
 		F21EFD2B265C322F002EF58D /* QuotesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,9 +260,11 @@
 		F21EFD2C265C325A002EF58D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F2E64A7126A753380071C7B5 /* QuoteContainerController */,
+				F21EFD2B265C322F002EF58D /* QuotesList */,
+				F21B020D26A1892800BCC103 /* QuoteDetailContainer */,
 				F29D07412688BF1B008F8AAE /* Services */,
 				F29D073A26889282008F8AAE /* Common */,
-				F21EFD2B265C322F002EF58D /* QuotesList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -466,6 +490,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F2E64A7126A753380071C7B5 /* QuoteContainerController */ = {
+			isa = PBXGroup;
+			children = (
+				F2FB4C9225F13B69005027B2 /* StockContainerViewController.swift */,
+			);
+			path = QuoteContainerController;
+			sourceTree = "<group>";
+		};
 		F2F4D02F25F389BE0033CBE3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,7 +532,6 @@
 		F2FCED6F260115060051D077 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F2FB4C9225F13B69005027B2 /* StockContainerViewController.swift */,
 				F2E9FF7F25F00B9100531AD5 /* ChartViewController.swift */,
 				F2E9FF8225F00BD300531AD5 /* SummaryViewController.swift */,
 				F2FB4C9625F13BA3005027B2 /* NewsViewController.swift */,
@@ -641,6 +672,8 @@
 				F2EB70D225FD26B50032550E /* NewsModel.swift in Sources */,
 				F2754F4425DE936600427C99 /* String+Extensions.swift in Sources */,
 				F2C998B925E57D6E00810D2F /* HeaderFilterView.swift in Sources */,
+				F21B021326A18A0C00BCC103 /* QDContainerViewController.swift in Sources */,
+				F21B021726A18A2800BCC103 /* QDContainerRouter.swift in Sources */,
 				F262E2FF2606835000FBFBAB /* PointsEnums.swift in Sources */,
 				F29D073D2688929B008F8AAE /* Quotes.swift in Sources */,
 				F2754F3425DE893700427C99 /* Constants.swift in Sources */,
@@ -653,6 +686,7 @@
 				F2B3217825DD315B002CAA14 /* MainBuilder.swift in Sources */,
 				F275509A25DFA41000427C99 /* JSONParameterEncoder.swift in Sources */,
 				F2FF3D1525ED6D2F00300286 /* StockHeaderCell.swift in Sources */,
+				F21B021526A18A1D00BCC103 /* QDContainerInteractor.swift in Sources */,
 				F286CDF625DBB4A700DC3DF9 /* SceneDelegate.swift in Sources */,
 				F275509E25DFA48F00427C99 /* NetworkManager.swift in Sources */,
 				F2FB4C9325F13B69005027B2 /* StockContainerViewController.swift in Sources */,
@@ -692,6 +726,8 @@
 				F2CC4F24266D283C005B966D /* QuotesInteractor.swift in Sources */,
 				F29D07432688BF34008F8AAE /* QuotesService.swift in Sources */,
 				F2F662A225F62DAA00B2F947 /* EpochCollectionView.swift in Sources */,
+				F21B021126A189FB00BCC103 /* QDContainerPresenter.swift in Sources */,
+				F21B020F26A189E900BCC103 /* QDContainerProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

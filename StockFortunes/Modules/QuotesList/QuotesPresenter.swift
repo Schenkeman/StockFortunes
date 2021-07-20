@@ -10,7 +10,6 @@ import PKHUD
 
 class QuotesPresenter: ViewToPresenterQuotesProtocol {
     
-    
     //MARK:- Properties
     weak var view: PresenterToViewQuotesProtocol?
     var interactor: PresenterToInteractorQuotesProtocol?
@@ -29,9 +28,9 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
         interactor?.loadQuotes()
     }
     
-    func chooseTypeOfListing(option: QuoteListingOptions) {
+    func selectTypeOfListing(option: QuoteListingOptions) {
         selectedOption = option
-        self.quotesListing = QuotesService.shared.createQuoteList(quoteListResponse: quoteListResponse,
+        self.quotesListing = QuotesService.shared.createQuoteListByOption(quoteListResponse: quoteListResponse,
                                                                   option: selectedOption)
         view?.refreshCellsState()
     }
@@ -80,7 +79,7 @@ class QuotesPresenter: ViewToPresenterQuotesProtocol {
     
     func didSelectOption(index: Int) {
         guard let option = QuoteListingOptions(rawValue: index) else { return }
-        chooseTypeOfListing(option: option)
+        selectTypeOfListing(option: option)
     }
     
     func filterContentForSearchText(_ searchText: String) {
@@ -96,7 +95,7 @@ extension QuotesPresenter: InteractorToPresenterQuotesProtocol {
     func fetchQuotesSuccess(quoteResponseModel: QuoteListResponseModel) {
         self.quoteResponseModel = quoteResponseModel
         self.quoteListResponse = quoteResponseModel.quoteResponse.result
-        self.quotesListing = QuotesService.shared.createQuoteList(quoteListResponse: quoteListResponse,
+        self.quotesListing = QuotesService.shared.createQuoteListByOption(quoteListResponse: quoteListResponse,
                                                                   option: selectedOption)
         view?.hideHUD()
         view?.onFetchQuotesSuccess()

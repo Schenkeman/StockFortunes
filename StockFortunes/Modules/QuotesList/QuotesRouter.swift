@@ -31,10 +31,10 @@ class QuotesRouter: PresenterToRouterQuotesProtocol {
 
     // MARK: - Navigation
     func pushToQuoteDetail(on view: PresenterToViewQuotesProtocol, with quote: Quote) {
-//        let quoteDetailViewController = QuoteDetailRouter.createModule(with: quote)
+        let quoteDetailContainerViewController = QuoteDetailContainerRouter.createModule(with: quote)
 
-//        let viewController = view as! QuotesViewController
-//        viewController.navigationController?
-//            .pushViewController(quoteDetailViewController, animated: true)
+        let viewController = view as! QuotesViewController
+        viewController.navigationController?
+            .pushViewController(quoteDetailContainerViewController, animated: true)
     }
 }

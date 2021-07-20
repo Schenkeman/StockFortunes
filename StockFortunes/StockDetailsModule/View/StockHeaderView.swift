@@ -66,12 +66,12 @@ class StockHeaderView: UIView {
 
 extension StockHeaderView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return StockHeaderViewOptions.allCases.count
+        return StockControllerOption.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StockHeaderCell
-        let option = StockHeaderViewOptions(rawValue: indexPath.row)
+        let option = StockControllerOption(rawValue: indexPath.row)
         cell.option = option
         return cell
     }
@@ -89,7 +89,7 @@ extension StockHeaderView: UICollectionViewDelegate {
 
 extension StockHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = CGFloat(StockHeaderViewOptions.allCases.count)
+        let count = CGFloat(StockControllerOption.allCases.count)
         return CGSize(width: frame.width / count, height: frame.height)
     }
     

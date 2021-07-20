@@ -17,7 +17,7 @@ class QuotesService {
         completion(quotesModel)
     }
     
-    func createQuoteList(quoteListResponse: [Quote]?, option: QuoteListingOptions) -> QuotesProtocol? {
+    func createQuoteListByOption(quoteListResponse: [Quote]?, option: QuoteListingOptions) -> QuotesProtocol? {
         print("creating quotelist")
         guard var quoteListResponse = quoteListResponse else {
             return nil
