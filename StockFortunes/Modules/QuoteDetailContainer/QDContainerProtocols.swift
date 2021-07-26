@@ -12,18 +12,20 @@ import UIKit
 protocol PresenterToViewQuoteDetailProtocol: AnyObject {
 //    func onGetImageFromURLSuccess(_ quote: String, character: String, image: UIImage)
 //    func onGetImageFromURLFailure(_ quote: String, character: String)
-    func removeInactiveViewController(inactiveViewController: UIViewController?)
-    func updateActiveViewController()
+//    func removeInactiveViewController(inactiveViewController: UIViewController?)
+//    func updateActiveViewController()
+    
+    func selectViewController(option: DetailViewControllerOption)
 }
 
 // MARK: View Input (View -> Presenter)
 protocol ViewToPresenterQuoteDetailProtocol: AnyObject {
-//    var view: PresenterToViewQuoteDetailProtocol? { get set }
+    var view: PresenterToViewQuoteDetailProtocol? { get set }
 //    var interactor: PresenterToInteractorQuoteDetailProtocol? { get set }
     var router: PresenterToRouterQuoteDetailContainerProtocol? { get set }
 
     func viewDidLoad()
-    func selectViewController(_ option: StockControllerOption)
+    func selectViewController(index: Int)
     
     
 }

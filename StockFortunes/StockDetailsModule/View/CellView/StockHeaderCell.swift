@@ -11,7 +11,7 @@ import UIKit
 class StockHeaderCell: UICollectionViewCell {
     //MARK:- Properties
 
-    var option: StockControllerOption! {
+    var option: DetailViewControllerOption! {
         didSet {
             titleLabel.text = option.description
         }

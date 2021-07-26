@@ -40,6 +40,7 @@ class SummaryViewController: UIViewController {
         configure()
         configureUI()
         configureTextView()
+        view.backgroundColor = .blue
     }
     
     private lazy var scrollView: UIScrollView = {

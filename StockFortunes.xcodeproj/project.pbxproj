@@ -235,6 +235,7 @@
 		F21B020D26A1892800BCC103 /* QuoteDetailContainer */ = {
 			isa = PBXGroup;
 			children = (
+				F21BFF7E26AC9EA400616E15 /* View */,
 				F21B020E26A189E900BCC103 /* QDContainerProtocols.swift */,
 				F21B021026A189FB00BCC103 /* QDContainerPresenter.swift */,
 				F21B021226A18A0C00BCC103 /* QDContainerViewController.swift */,
@@ -242,6 +243,14 @@
 				F21B021626A18A2800BCC103 /* QDContainerRouter.swift */,
 			);
 			path = QuoteDetailContainer;
+			sourceTree = "<group>";
+		};
+		F21BFF7E26AC9EA400616E15 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F2FF3D1025ED6BF800300286 /* StockHeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F21EFD2B265C322F002EF58D /* QuotesList */ = {
@@ -483,7 +492,6 @@
 			children = (
 				F2FCED6F260115060051D077 /* Controllers */,
 				F2FCED6E260114E30051D077 /* CellView */,
-				F2FF3D1025ED6BF800300286 /* StockHeaderView.swift */,
 				F2F662A125F62DAA00B2F947 /* EpochCollectionView.swift */,
 				F2FCED74260116950051D077 /* CustomFlowLayout.swift */,
 			);

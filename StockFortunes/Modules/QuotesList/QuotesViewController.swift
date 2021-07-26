@@ -17,10 +17,12 @@ class QuotesViewController: UIViewController {
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.selectedOption = .quotes
         setupUI()
         setUpNavDate()
         configureSearchController()
         headerFilterView.presenter = presenter
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

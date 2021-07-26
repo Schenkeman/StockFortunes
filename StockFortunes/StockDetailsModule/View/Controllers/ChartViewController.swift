@@ -44,12 +44,13 @@ class ChartViewController: UIViewController {
         
         super.viewDidLoad()
         
-        handleFetchPoints(ticker: ticker, epochType: .day)
+//        handleFetchPoints(ticker: ticker, epochType: .day)
         lineChartView.delegate = self
-        configureLineChartView()
-        configureButtonsCollection()
-        setDateFormatter()
-        buttonsCollection.delegate = self
+//        configureLineChartView()
+//        configureButtonsCollection()
+//        setDateFormatter()
+//        buttonsCollection.delegate = self
+        view.backgroundColor = .red
     }
     
     var selectedEpochType: EpochType! = .day {

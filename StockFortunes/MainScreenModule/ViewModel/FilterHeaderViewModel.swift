@@ -24,7 +24,7 @@ enum QuoteListingOptions: Int, CaseIterable {
     }
 }
 
-enum StockControllerOption: Int, CaseIterable {
+enum DetailViewControllerOption: Int, CaseIterable {
     case chart
     case summary
     case news

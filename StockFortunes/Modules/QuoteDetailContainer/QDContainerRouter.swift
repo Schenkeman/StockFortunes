@@ -15,11 +15,13 @@ class QuoteDetailContainerRouter: PresenterToRouterQuoteDetailContainerProtocol 
         print("QuoteDetailRouter creates the QuoteDetail module.")
         let viewController = QuoteDetailContainerViewController(with: quote)
         
-//        let presenter: ViewToPresenterQuoteDetailProtocol & InteractorToPresenterQuoteDetailProtocol = QuoteDetailPresenter()
+        let presenter: ViewToPresenterQuoteDetailProtocol = QuoteDetailContainerPresenter()
         
-//        viewController.presenter = presenter
+//        let presenter: ViewToPresenterQuoteDetailProtocol & InteractorToPresenterQuoteDetailProtocol = QuoteDetailContainerPresenter()
+        
+        viewController.presenter = presenter
 //        viewController.presenter?.router = QuoteDetailRouter()
-//        viewController.presenter?.view = viewController
+        viewController.presenter?.view = viewController
 //        viewController.presenter?.interactor = QuoteDetailInteractor()
 //        viewController.presenter?.interactor?.quote = quote
 //        viewController.presenter?.interactor?.presenter = presenter

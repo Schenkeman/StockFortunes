@@ -9,13 +9,17 @@ import Foundation
 
 class QuoteDetailContainerPresenter: ViewToPresenterQuoteDetailProtocol {
     
+    var view: PresenterToViewQuoteDetailProtocol? 
     var router: PresenterToRouterQuoteDetailContainerProtocol?
     
     func viewDidLoad() {
         return
     }
     
-    func selectViewController(_ option: StockControllerOption) {
+    func selectViewController(index: Int) {
+        guard let option = DetailViewControllerOption(rawValue: index) else { return }
+        view?.selectViewController(option: option)
+        print(index)
         return
     }
     

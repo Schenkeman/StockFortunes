@@ -17,7 +17,7 @@ class StockContainerViewController: UIViewController {
     private var newsViewController: UIViewController!
     private var activeVC: UIViewController!
     
-    private var selectedViewController: StockControllerOption = .chart {
+    private var selectedViewController: DetailViewControllerOption = .chart {
         didSet {
             selectViewController(selectedViewController)
         }
@@ -35,7 +35,7 @@ class StockContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView.delegate = self
+//        headerView.delegate = self
         chartViewController = ChartViewController(ticker: ticker)
         activeVC = chartViewController
         configureUI()
@@ -43,7 +43,7 @@ class StockContainerViewController: UIViewController {
         updateActiveViewController()
     }
     
-    private func selectViewController(_ option: StockControllerOption) {
+    private func selectViewController(_ option: DetailViewControllerOption) {
         switch option {
         case .chart:
             removeInactiveViewController(inactiveViewController: activeVC)
@@ -102,7 +102,7 @@ class StockContainerViewController: UIViewController {
 
 extension StockContainerViewController: StockHeaderViewDelegate {
     func filterView(_ view: StockHeaderView, didSelect indexPath: IndexPath) {
-        guard let filter = StockControllerOption(rawValue: indexPath.row) else { return }
+        guard let filter = DetailViewControllerOption(rawValue: indexPath.row) else { return }
         self.selectedViewController = filter
     }
 }

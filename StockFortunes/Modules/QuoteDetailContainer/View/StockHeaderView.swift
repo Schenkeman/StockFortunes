@@ -16,8 +16,10 @@ protocol StockHeaderViewDelegate: class {
 
 class StockHeaderView: UIView {
     
+    weak var presenter: ViewToPresenterQuoteDetailProtocol?
+    
     //MARK:- Properties
-    weak var delegate: StockHeaderViewDelegate?
+//    weak var delegate: StockHeaderViewDelegate?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -66,12 +68,12 @@ class StockHeaderView: UIView {
 
 extension StockHeaderView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return StockControllerOption.allCases.count
+        return DetailViewControllerOption.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StockHeaderCell
-        let option = StockControllerOption(rawValue: indexPath.row)
+        let option = DetailViewControllerOption(rawValue: indexPath.row)
         cell.option = option
         return cell
     }
@@ -83,13 +85,13 @@ extension StockHeaderView: UICollectionViewDelegate {
         UIView.animate(withDuration: 0.2 ) {
             self.underlineView.frame.origin.x = xPosition
         }
-        delegate?.filterView(self, didSelect: indexPath)
+        presenter?.selectViewController(index: indexPath.row)
     }
 }
 
 extension StockHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = CGFloat(StockControllerOption.allCases.count)
+        let count = CGFloat(DetailViewControllerOption.allCases.count)
         return CGSize(width: frame.width / count, height: frame.height)
     }
     

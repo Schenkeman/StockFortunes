@@ -18,17 +18,7 @@ class QuoteDetailContainerViewController: UIViewController {
     private var newsViewController: UIViewController!
     private var activeVC: UIViewController!
     
-    private var selectedViewController: StockControllerOption = .chart {
-        didSet {
-            selectViewController(selectedViewController)
-        }
-    }
-    
-//    init(ticker: String, companyName: String) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.ticker = ticker
-//        self.companyName = companyName
-//    }
+    var presenter: ViewToPresenterQuoteDetailProtocol?
     
     init(with quote: Quote) {
         super.init(nibName: nil, bundle: nil)
@@ -42,38 +32,14 @@ class QuoteDetailContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        headerView.delegate = self
         chartViewController = ChartViewController(ticker: ticker)
         activeVC = chartViewController
         configureUI()
         configureHeaderView()
         updateActiveViewController()
+        headerView.presenter = presenter
     }
     
-    private func selectViewController(_ option: StockControllerOption) {
-        switch option {
-        case .chart:
-            removeInactiveViewController(inactiveViewController: activeVC)
-            activeVC = chartViewController
-            updateActiveViewController()
-        case .summary:
-            removeInactiveViewController(inactiveViewController: activeVC)
-            if summaryViewController == nil {
-                summaryViewController = SummaryViewController(ticker: ticker, companyName: companyName)
-            }
-            activeVC = summaryViewController
-            updateActiveViewController()
-        case .news:
-            removeInactiveViewController(inactiveViewController: activeVC)
-            if newsViewController == nil {
-                let layout = CustomFlowLayout()
-                newsViewController = NewsViewController(ticker: ticker, collectionViewLayout: layout)
-            }
-            activeVC = newsViewController
-            updateActiveViewController()
-        }
-    }
-        
     private let headerView: StockHeaderView = {
         let hv = StockHeaderView()
         return hv
@@ -107,30 +73,28 @@ class QuoteDetailContainerViewController: UIViewController {
     }
 }
 
-//extension StockContainerViewController: StockHeaderViewDelegate {
-//    func filterView(_ view: StockHeaderView, didSelect indexPath: IndexPath) {
-//        guard let filter = StockControllerOption(rawValue: indexPath.row) else { return }
-//        self.selectedViewController = filter
-//    }
-//}
-
-
-class QuoteDetailViewController: UIViewController {
-    
-    // MARK: - Lifecycle Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        setupUI()
-        presenter?.viewDidLoad()
+extension QuoteDetailContainerViewController: PresenterToViewQuoteDetailProtocol {
+    func selectViewController(option: DetailViewControllerOption) {
+        switch option {
+        case .chart:
+            removeInactiveViewController(inactiveViewController: activeVC)
+            activeVC = chartViewController
+            updateActiveViewController()
+        case .summary:
+            removeInactiveViewController(inactiveViewController: activeVC)
+            if summaryViewController == nil {
+                summaryViewController = SummaryViewController(ticker: ticker, companyName: companyName)
+            }
+            activeVC = summaryViewController
+            updateActiveViewController()
+        case .news:
+            removeInactiveViewController(inactiveViewController: activeVC)
+            if newsViewController == nil {
+                let layout = CustomFlowLayout()
+                newsViewController = NewsViewController(ticker: ticker, collectionViewLayout: layout)
+            }
+            activeVC = newsViewController
+            updateActiveViewController()
+        }
     }
-    
-    // MARK: - Properties
-    var presenter: ViewToPresenterQuoteDetailProtocol?
-    
-    private var chartViewController: UIViewController!
-    private var summaryViewController: UIViewController!
-    private var newsViewController: UIViewController!
-    private var activeVC: UIViewController!
 }
-
-

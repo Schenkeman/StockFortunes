@@ -19,6 +19,7 @@ class NewsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        view.backgroundColor = .systemPink
     }
     
     init(ticker: String, collectionViewLayout layout: UICollectionViewLayout) {
